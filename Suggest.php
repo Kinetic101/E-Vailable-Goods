@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<?php
+
+	//Connect to SQL database
+
+	session_start();
+	if($_SESSION["usern"] == ''){
+		header("Location: SignUp.php");
+	}
+	$server = "localhost";
+	$usname = "root";
+	$pass = "";
+	$dbname = "user";
+	$conn = new mysqli($server, $usname, $pass, $dbname);
+	if($conn -> connect_error){
+		die("Connection Failed: ".$conn -> connect_error);
+	}
+
+	$_SESSION["market"] = "";
+	$_SESSION["product"] = "";
+
+	//Function to trim unnecessary characters from input
+
+	function test_input($data){
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	}
+
+
+	//Update database in `suggestions` table
+
+	$suggErr = "";
+	$sugg = "";
+	$error = $input = False;
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		$input = True;
+		if(empty($_POST["sugg"])){
+		    $suggErr = "Username is required";
+		    $error = True;
+		} 
+		else{
+		    $sugg = test_input($_POST["sugg"]);
+		}
+		if($input){
+			if(!$error){
+				$insert = "INSERT INTO `suggestions` ";	
+			}
+			else{
+				echo("<script type = 'text/javascript'> alert('"."Empty suggestions are not considered suggestions"."'); </script>");
+			}
+		}
+	}
+?>
+
+<html>
+<head>
+
+	<meta charset = "utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<link rel = "stylesheet" href = "SuggestCSS.css"> 
+	<title>Suggest</title>
+
+</head>
+<body>
+	<header>
+		<nav>
+			<ul class="links">
+				<li><a href="Research.php">Buy</a></li>
+				<li><a href="Talk.php">Talk</a></li>
+				<li><a href="Edit.php">Edit</a></li>
+				<li><a href="Suggest.php" id = "press">Suggest</a></li>
+				<li><a href="About.php">About</a></li>
+			</ul>
+		</nav>
+		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
+		<ul>
+		<li class = "dropdown"><a href = "Profile.php" class="pic">
+			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
+			</div>
+		</a>
+		<div class="dlinks">
+      			<a href="Profile.php">Profile</a>
+      			<a href="#">Help & Support</a>
+      			<a href="Logout.php">Logout</a>
+    	</div>
+    	</li>
+		</ul>
+
+	</header>
+
+	<div class = "suggest">
+		<h2 class = "pgag">
+			We are currently improving the platform to give our users the top-notch user-friendly experience we want them to have since we, as regular
+			users of the World Wide Web, also know the struggles of having to deal with sluggish internet and unresponsive websites. 
+			<br>
+			In turn, we would like
+			to ask for your feedback and any suggestions that you may have in mind, these will be used in the betterment for us, the website developers, you, the users, and the website itself.
+			<br>
+			Thank you and let us make the world a better place for everyone!
+		</h2>
+		<div class = "box">
+		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+			<br> 
+			<h4 class = "comm">Suggest here</h4>
+			<textarea type = "text" name = "sugg" class = "field" placeholder="Write your comment.."></textarea><span class = "error">* <?php echo $suggErr;?></span> <br>
+			<br>
+			<input type = "submit" value = "Suggest" class = "button">
+		</form>
+	</div>
+	</div>
+
+</body>
+</html>

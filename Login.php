@@ -1,0 +1,128 @@
+<?php
+
+	//Connect to SQL database
+	session_start();
+
+	$server = "localhost";
+	$usname = "root";
+	$pass = "";
+	$dbname = "user";
+	$conn = new mysqli($server,$usname,$pass,$dbname);
+	if($conn -> connect_error){
+		die("Connection Failed: ".$conn->connect_error);
+	}
+	
+	if(isset($_SESSION["usern"])){
+		$update = "UPDATE `credentials` SET online = 0 WHERE `username` = '$_SESSION[usern]'";
+		$conn -> query($update);
+		unset($_SESSION["usern"]);
+		unset($_SESSION["market"]);
+		unset($_SESSION["visit_user"]);
+		unset($_SESSION["product"]);
+		unset($_SESSION["prof_pic"]);
+	}
+
+	//Function to trim unnecessary characters from input
+
+	function test_input($data){
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	}
+
+	//Input user credentials 
+
+	$emailErr = $pwordErr = "";
+	$email = $pword = "";
+	$error = $input = False;
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		$input = True;
+		if(empty($_POST["email"])){
+		    $emailErr = "Email is required";
+		    $error = True;
+		} 
+		else{
+		    $email = test_input($_POST["email"]);
+		}
+		if(empty($_POST["pword"])){
+		    $pwordErr = "Password is required";
+		    $error = True;
+		} 
+		else{
+		    $pword = test_input($_POST["pword"]);
+		}
+		if($input){
+			if(!$error){
+				$check = "SELECT * FROM `credentials` WHERE `email` = '$email'";
+				$res = $conn->query($check);
+				if($res -> num_rows > 0){
+					$find = "SELECT `pass` FROM `credentials` WHERE `email` = '$email'";
+				  	$query = $conn -> query($find);
+				  	$fin = "";
+				  	while($res = $query -> fetch_assoc()){
+				  		$fin = $res["pass"];
+				  	}
+					if($fin == $pword){
+						$find = "SELECT `username`, `pic` FROM `credentials` WHERE `email` = '$email'";
+						$query = $conn -> query($find);
+					  	$uname = "";
+					  	$ppic = "";
+					  	while($res = $query -> fetch_assoc()){
+					  		$uname = $res["username"];
+					  		$ppic = $res["pic"];
+					  	}
+					  	$_SESSION["prof_pic"] = $ppic;
+						$_SESSION["usern"] = $uname;
+						$_SESSION["market"] = "";
+						$_SESSION["visit_user"] = "";
+						$_SESSION["buy_arr"] = array();
+						$update = "UPDATE `credentials` SET `online` = 1 WHERE `email` = '$email'";
+				  		$conn -> query($update);
+						header("Location: Research.php");
+					}
+					else{
+						$pwordErr = "Incorrect Password!";
+					}
+				}
+				else{
+					$emailErr = "Email does not exist!";
+				}
+			}
+		}
+	}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<link rel = "stylesheet" href = "LoginCSS.css"> 
+	<title>Log In</title>
+</head>
+<body>
+<header>
+	<nav>
+	<ul class = "links">
+		<li><a href="Login.php" id = "press">Login</a></li>
+		<li><a href="Signup.php" class = "inactive">Signup</a></li>
+	</ul>
+	</nav>
+</header>
+
+
+	<div class = "header">
+		<h1 id = "evg">E-Vailable <br> Goods</h1>
+	</div>
+	<div class = "login">
+		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+			E-Mail: <br> <input type = "text" name = "email" class = "field" value = "<?php echo $email;?>"> <span class = "error">* <?php echo $emailErr;?></span> <br>
+			Password: <br> <input type = "password" name = "pword" class = "field"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
+			<br>
+			<input type = "submit" value = "Log In" class = "button">
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+/*
+	insert ncessary design here
+*/
+
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.error{
+	color: red;
+}
+
+#product_table{
+	text-align: center;
+	margin-left: 2.5%;
+}
+
+.pname{
+	position: absolute;
+	width: 15.5%;
+	height: 100%;
+	border: solid;
+}
+
+.quantity{
+	position: absolute;
+	margin-left: 15.5%;
+	width: 15.5%;
+	height: 100%;
+	border: solid;
+}
+
+.unit{
+	position: absolute;
+	margin-left: 31%;
+	width: 15.5%;
+	height: 100%;
+	border: solid;
+}
+
+.price{
+	position: absolute;
+	margin-left: 46.5%;
+	width: 15.5%;
+	height: 100%;
+	border: solid;
+}
+
+.editp{
+	position: absolute;
+	margin-left: 62%;
+	width: 15.5%;
+	height: 100%;
+	border: solid;
+}
+
+.editq{
+	position: absolute;
+	margin-left: 77.5%;
+	width: 15.5%;
+	height: 100%;
+	border: solid;
+}
+
+.filler{
+	height: 25px;
+}
+
+#float_form{
+	width:  30%;
+	height:  50%;
+	margin-left: 30%;
+	background-color: white;
+	position: fixed;
+	top:  100px;
+	border:  solid;
+}
+
+#prodname{
+	margin-top: 10%;
+}
+
+#save{
+	z-index: 5;
+	top:  94%;
+	overflow: hidden;
+	margin-left: 94%;
+	position: fixed;
+	display: block;
+}
+
+#show{
+	display: block;
+	z-index: 5;
+	top:  85%;
+	overflow: hidden;
+	margin-left: 94%;
+	position: fixed;
+	display: block;
+}

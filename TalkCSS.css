@@ -1,0 +1,45 @@
+#contacts{
+	position: absolute;
+	width: 30%;
+	height:  97%;
+	border: solid;
+}
+
+#chatbox{
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: absolute;
+	text-align: justify;
+	margin-left: 31%;
+	width: 65%;
+	height: 97%;
+	border:  solid;
+}
+
+.name{
+	background-color: yellow;
+}
+
+.ol{
+	color: green;
+}
+
+.notol{
+	color: red;
+}
+
+.to{
+	left: 0;
+	position: absolute;
+}
+
+.from{
+	position: absolute;
+	right:  0;
+}
+
+#send{
+	position: fixed;
+	right:  3%;
+	bottom:  10px;
+}

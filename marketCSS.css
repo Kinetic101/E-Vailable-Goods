@@ -1,0 +1,64 @@
+/*
+	insert ncessary design here
+*/
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+#product_table{
+	text-align: center;
+	margin-left: 1.4%;
+}
+
+.pname{
+	position: absolute;
+	width: 19.5%;
+	height: 100%;
+	border: solid;
+}
+
+.quantity{
+	position: absolute;
+	margin-left: 19.5%;
+	width: 19%;
+	height: 100%;
+	border: solid;
+}
+
+.unit{
+	position: absolute;
+	margin-left: 38.5%;
+	width: 19%;
+	height: 100%;
+	border: solid;
+}
+
+.price{
+	position: absolute;
+	margin-left: 57.5%;
+	width: 19%;
+	height: 100%;
+	border: solid;
+}
+
+.buy{
+	position: absolute;
+	margin-left: 76.5%;
+	width: 19%;
+	height: 100%;
+	border: solid;
+}
+
+.filler{
+	height: 25px;
+}
+
+.addtocart{
+
+}

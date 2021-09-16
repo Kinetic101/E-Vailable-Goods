@@ -1,0 +1,129 @@
+body{
+	font-family: "Verdana";
+	background-color: #171614;
+	color: black;
+	margin: 0;
+}
+
+.header{
+	font-family: "Verdana";
+	font-size: 3em;
+	height: 11%;
+	text-align: left;
+	color: white;
+	margin-top: 12vh;
+	margin-left: 6vw;
+	position: absolute;
+}
+
+.error{
+	color: #FF0000;
+}
+
+form{
+	margin-left: 55%;
+	margin-top: 12vh;
+	text-align: left;
+	color: white;
+	width: 40%;
+	font-family: "Verdana";
+	font-size: 15px;
+	box-shadow: 20px;
+	padding: 20px; 
+}
+
+input{
+	padding: 2px;
+	margin-bottom: 15px;
+}
+
+.field{
+	padding: 5px;
+	width: 17.5vw;
+	outline: none;
+	border-radius: 7.5px;
+	border: none;
+}
+
+.field:focus{
+	border: 2px solid #4A7C59;
+}
+
+.button{
+	font-size: 20px;
+	font-family: "Verdana";
+	padding: 10px;
+	background-color: #4A7C59;
+	outline: none;
+	border: none;
+	border-radius: 7.5px;
+	opacity: 0.7;
+}
+
+.button:hover{
+	opacity: 1;
+}
+
+header{
+	background-color: #4A7C59;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	color: white;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	width: 100%;
+	height: 55px;
+}
+
+li, a{
+	text-decoration: none;
+	font-family: "Verdana", sans-serif;
+}
+
+ul {
+	list-style-type: none;
+ }
+
+.links{
+	list-style: none;
+	color: white;
+}
+
+.links li{
+	display: inline-block;
+	margin-left: 4vw;
+}
+
+.links a{
+	font-size: 1em;
+	color: #f1f1f1;
+	transition: all 0.4s ease 0s;
+}
+
+.links a:hover{
+	color: #171614;
+}
+
+#press{
+	border-bottom: 2px solid #171614;
+	padding: 10%;
+}
+
+#press:hover{
+	border: none;
+	color: #171614;
+}
+
+nav{
+	margin-right: 5%;
+}
+
+.page{
+	border-bottom: 2px solid #171614;
+}
+
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
