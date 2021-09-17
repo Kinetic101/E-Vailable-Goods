@@ -179,7 +179,7 @@ hr{
 	right: 1%;
 	padding: 1%;
 	overflow: auto;
-	background-color: #74AA8A;
+	background-color: #FFFCF2;
 	border-radius: 4px;
 	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
 }
@@ -187,21 +187,23 @@ hr{
 .now{
 	font-family: "Verdana";
 	font-size: 1.25em;
-	color: #f1f1f1;
+	color: #171614;
 	padding: 1%;
+	text-align: center;
 }
 
 
 h5{
 	display: block;
-	margin-top: 7.50%; 
+	margin-top: 10%; 
 	padding: 5% 0 5% 1%;
 	font-size: 0.9em;
-	text-align: left;
-	color: #f1f1f1;
+	text-align: center;
+	color: #171614;
 	font-family: "Verdana", sans-serif;
 	font-weight: 100;
-	border-bottom: 1px solid #f1f1f1;
+	border-bottom: 1.5px solid #4A7C59;
+	border-radius: 10px;
 }
 
 
