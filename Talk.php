@@ -43,30 +43,30 @@
 ?>
 
 <script type = "text/javascript">
-function go(){
-	setInterval(function req(){
-					var obj = document.getElementById("chatbox");
-					var oldS = obj.scrollHeight-20;
-					if(window.XMLHttpRequest){
-						xmlhttp = new XMLHttpRequest();
-					}
-					else{
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					xmlhttp.onreadystatechange = function(){
-						if(this.readyState == 4 && this.status == 200){
-							var newS = obj.scrollHeight-20;
-							if(newS > oldS) {
-								obj.scrollTop = newS;
-							}
-							var xmlhttp;
-							document.getElementById("chatbox").innerHTML = this.responseText;
+	function go(){
+		setInterval(function req(){
+						var obj = document.getElementById("chatbox");
+						var oldS = obj.scrollHeight-20;
+						var xmlhttp;
+						if(window.XMLHttpRequest){
+							xmlhttp = new XMLHttpRequest();
 						}
-					}
-					xmlhttp.open("GET", "GetMsgData.php?us=<?php echo $_SESSION["visit_user"];?>", true);
-					xmlhttp.send();
-				}, 10);
-}
+						else{
+							xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+						}
+						xmlhttp.onreadystatechange = function(){
+							if(this.readyState == 4 && this.status == 200){
+								var newS = obj.scrollHeight-20;
+								if(newS > oldS) {
+									obj.scrollTop = newS;
+								}
+								document.getElementById("chatbox").innerHTML = this.responseText;
+							}
+						}
+						xmlhttp.open("GET", "GetMsgData.php?us=<?php echo $_SESSION["visit_user"];?>", true);
+						xmlhttp.send();
+					}, 10);
+	}
 </script>	
 
 <html>
@@ -83,8 +83,8 @@ function go(){
 	<header>
 		<nav>
 			<ul class="links">
-				<li><a href="Research.php" id = "press">Buy</a></li>
-				<li><a href="Talk.php">Talk</a></li>
+				<li><a href="Research.php">Buy</a></li>
+				<li><a href="Talk.php" id = "press">Talk</a></li>
 				<li><a href="Edit.php">Edit</a></li>
 				<li><a href="Suggest.php">Suggest</a></li>
 				<li><a href="About.php">About</a></li>
