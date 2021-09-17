@@ -21,37 +21,15 @@
 	}
 ?>
 
-<script type="text/javascript">
-	var cnt = 0;
-	function go(){
-		setInterval(function req(){
-						var obj = document.getElementById("active");
-						var oldS = obj.scrollHeight-20;
-						var xmlhttp;
-						if(window.XMLHttpRequest){
-							xmlhttp = new XMLHttpRequest();
-						}
-						else{
-							xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-						}
-						xmlhttp.onreadystatechange = function(){
-							if(this.readyState == 4 && this.status == 200){
-								document.getElementById("do_not_edit").innerHTML = this.responseText;
-								if(document.getElementById("active").innerHTML !== document.getElementById("do_not_edit").innerHTML){
-									if(cnt == 0){
-										obj.scrollTop = 0;
-									}
-									cnt++;
-									document.getElementById("active").innerHTML = document.getElementById("do_not_edit").innerHTML;
-								}
-							}
-						}
-						xmlhttp.open("SERVER", "GetOnlineData.php", true);
-						xmlhttp.send();
-					}, 250);
-	}
-	
-</script>
+<!--
+	kailangan natin ng dropdown para dun sa (id = "dp")
+	dropdown items:
+		*Profile
+		*Help & Support
+		*Settings
+		*Log Out
+	Lagay na lang ng dummy links tas ako na bahala sa backend 
+-->
 
 <html>
 <head>
@@ -89,7 +67,7 @@
     	</div>
     	</li>
 		</ul>
-		<!-- Kailangan natins ng cart tas bell icons as links sa navbar for cart and notifications respectively-->
+
 	</header>
 
 	<div class = "market">
@@ -140,12 +118,15 @@
 
 	</div>
 	
-	<div id = "active">
-		<script type = "text/javascript"> go(); </script>
-	</div>
-
-	<div id = "do_not_edit" style = "display: none;">
-		
+	<div class = "active">
+		<h1 class = "now">Active Now</h1>
+		<?php
+			$select = "SELECT `username`, `fname`, `lname` FROM `credentials` WHERE `online` = 1 AND `username` != '$_SESSION[usern]'";
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()) {
+				echo "<a href = Reroute(Dashboard_to_VisitUser).php?user=$row[username]>"."<h5>".$row["fname"]." ".$row["lname"]."</h5>"."</a>";
+			}
+		?>
 	</div>
 </body>
 </html>

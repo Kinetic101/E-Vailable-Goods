@@ -1,6 +1,140 @@
-/*
-	insert ncessary design here
-*/
+body{
+	background-color: #f1f1f1;
+	color: white;
+	font-family: "Verdana";
+	margin: 0;
+	color: black;
+}
+
+/* Start of Navigation Bar */
+
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+li, a{
+	font-family: "Verdana", sans-serif;
+	text-decoration: none;
+}
+
+header{
+	background-color: #171614;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	color: white;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.links{
+	list-style: none;
+	color: white;	
+}
+
+.links li{
+	display: inline-block;
+	margin-left: 4vw;
+}
+
+.links a{
+	font-size: 1em;
+	color: #f1f1f1;
+	transition: all 0.4s ease 0s;
+}
+
+.links a:hover{
+	color: #4A7C59;
+}
+
+.prof{
+	width: 55px;
+	height: 55px;
+	overflow: hidden;
+	border-radius: 50%;
+	margin-right: 10vw;
+	margin: 0vw 5vw 0vw 3vw; 
+}
+
+.dp{
+	height: 100%;
+	width: auto;
+}
+
+nav{
+	margin-right: auto;
+}
+
+.evg{
+	opacity: 1;
+	border-radius: 50px;	
+	color: #f1f1f1;
+	font-size: 1.5em;
+	font-weight: 1000;
+	transition: all 0.4s ease 0s;
+	cursor: default;
+}
+
+ul{
+	list-style-type: none;
+}
+
+.dlinks{
+	display: none;
+	position: absolute;
+	background-color: #f9f9f9;
+  	min-width: 12vw;
+  	height: auto;
+  	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  	z-index: 1;
+} 
+
+.dlinks a{
+	color: black;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+	padding: 1vw 2vw; 
+}
+
+.dlinks a:hover{
+	background-color: #171614;
+	color: #f9f9f9; 
+}
+
+.dropdown:hover .dlinks{
+	display: block;
+}
+
+#press{
+	border-bottom: 2px solid #4A7C59;
+	padding: 10%;
+}
+
+#press:hover{
+	border: none;
+}
+
+/* End of Navigation Bar */
+
+.buyp{
+	color: black;
+	margin: 3% 10%;
+}
+
+#buy{
+	font-family: "Verdana";
+	font-size: 3em;
+	font-weight: 1000;
+}
+
+#fr{
+	margin: 0.5% 0%;
+	width: 13%;
+	border: 2px solid #4A7C59;
+	border-radius: 50px;
+}
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -9,54 +143,63 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+  text-align: center;
 }
 
-#product_table{
+.product_table{
+	position: absolute;
 	text-align: center;
-	margin-left: 1.4%;
+	margin-left: 5%;
+	width: 90%;
+	height: 60vh;
+	background-color: #FFFCF2;
+	overflow: auto;
+	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+
 }
 
 .pname{
 	position: absolute;
-	width: 19.5%;
-	height: 100%;
-	border: solid;
+	width: 30%;
+	height: auto;
+	border: none;
 }
 
 .quantity{
 	position: absolute;
-	margin-left: 19.5%;
-	width: 19%;
-	height: 100%;
-	border: solid;
+	margin-left: 30%;
+	width: 10%;
+	height: auto;
+	border: none;
 }
 
 .unit{
 	position: absolute;
-	margin-left: 38.5%;
-	width: 19%;
-	height: 100%;
-	border: solid;
+	margin-left: 40%;
+	width: 17.5%;
+	height: auto;
+	border: none;
 }
 
 .price{
 	position: absolute;
 	margin-left: 57.5%;
-	width: 19%;
-	height: 100%;
-	border: solid;
+	width: 20%;
+	height: auto;
+	border: none;
 }
 
 .buy{
 	position: absolute;
-	margin-left: 76.5%;
-	width: 19%;
-	height: 100%;
-	border: solid;
+	margin-left: 77.5%;
+	width: 22.5%;
+	height: auto;
+	border: none;
 }
 
 .filler{
-	height: 25px;
+	vertical-align:center;
+	height:40px;
 }
 
 .addtocart{

@@ -127,7 +127,7 @@ ul{
 	border-radius: 5px;
 }
 
-#chatbox{
+.chatbox{
 	overflow-x: hidden;
 	overflow-y: auto;
 	text-align: justify;
@@ -139,6 +139,7 @@ ul{
 	color: black;
 	border-radius: 3px;
 }
+
 
 .name{
 	background-color: #4A7C59;

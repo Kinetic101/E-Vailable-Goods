@@ -95,14 +95,45 @@
 <head>
 
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="MarketCSS.css">
 	<title><?php echo $_SESSION["market"]?></title>
 
 </head>	
 <body>
-	<h4>Insert "EVailable Goods header here (same nung sa Research.php)"</h4>
-	<h1>Buy</h1>
-	<div id = "product_table">
+	
+	<header>
+		<nav>
+			<ul class="links">
+				<li><a href="Research.php">Buy</a></li>
+				<li><a href="Talk.php">Talk</a></li>
+				<li><a href="Edit.php">Edit</a></li>
+				<li><a href="Suggest.php">Suggest</a></li>
+				<li><a href="About.php">About</a></li>
+			</ul>
+		</nav>
+		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
+		<ul>
+		<li class = "dropdown"><a href = "Profile.php" class="pic">
+			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
+			</div>
+		</a>
+		<div class="dlinks">
+      			<a href="Profile.php">Profile</a>
+      			<a href="#">Help & Support</a>
+      			<a href="Logout.php">Logout</a>
+    	</div>
+    	</li>
+		</ul>
+
+	</header>
+	<div class = "buyp">
+	<h1 id = "buy">Buy</h1>
+	<hr id = "fr">
+	</div>
+	<div class = "product_table">
 		<div class = "pname">
 			<h3>Product Name</h3>
 			<hr>
@@ -191,10 +222,6 @@
 			</form>
 		</div>
 	</div>
-
-	<!--
-		Insert nav sht here, yung may Buy Edit Talk (same sa lahat ng page)
-	-->
 
 </body>
 </html>

@@ -43,30 +43,31 @@
 ?>
 
 <script type = "text/javascript">
-	function go(){
-		setInterval(function req(){
-						var obj = document.getElementById("chatbox");
-						var oldS = obj.scrollHeight-20;
-						var xmlhttp;
-						if(window.XMLHttpRequest){
-							xmlhttp = new XMLHttpRequest();
-						}
-						else{
-							xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-						}
-						xmlhttp.onreadystatechange = function(){
-							if(this.readyState == 4 && this.status == 200){
-								var newS = obj.scrollHeight-20;
-								if(newS > oldS) {
-									obj.scrollTop = newS;
-								}
-								document.getElementById("chatbox").innerHTML = this.responseText;
+function go(){
+	setInterval(function req(){
+					var obj = document.getElementById("chatbox");
+					var oldS = obj.scrollHeight-20;
+					obj.style.marginLeft = "50vw";
+					if(window.XMLHttpRequest){
+						xmlhttp = new XMLHttpRequest();
+					}
+					else{
+						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					xmlhttp.onreadystatechange = function(){
+						if(this.readyState == 4 && this.status == 200){
+							var newS = obj.scrollHeight-20;
+							if(newS > oldS) {
+								obj.scrollTop = newS;
 							}
+							var xmlhttp;
+							document.getElementById("chatbox").innerHTML = this.responseText;
 						}
-						xmlhttp.open("GET", "GetMsgData.php?us=<?php echo $_SESSION["visit_user"];?>", true);
-						xmlhttp.send();
-					}, 10);
-	}
+					}
+					xmlhttp.open("GET", "GetMsgData.php?us=<?php echo $_SESSION["visit_user"];?>", true);
+					xmlhttp.send();
+				}, 10);
+}
 </script>	
 
 <html>
@@ -84,7 +85,7 @@
 		<nav>
 			<ul class="links">
 				<li><a href="Research.php">Buy</a></li>
-				<li><a href="Talk.php" id = "press">Talk</a></li>
+				<li><a href="Talk.php"  id = "press">Talk</a></li>
 				<li><a href="Edit.php">Edit</a></li>
 				<li><a href="Suggest.php">Suggest</a></li>
 				<li><a href="About.php">About</a></li>
@@ -130,7 +131,9 @@
 		?>
 	</div>
 
-	<div id = "chatbox">
+	<div class = "chatbox">
+		
+		<div id = "chatbox">
 		<?php
 			if($_SESSION["visit_user"] == ""){
 				echo "Please select a chat.";
@@ -139,12 +142,15 @@
 				echo "<script type = text/javascript>go();</script>";
 			}
 		?>
-	</div>
-	<div id = "send">
+		</div>
+
+		<div id = "send">
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?user=".$_SESSION["visit_user"]);?>">
 			<input type = "text" name = "msg" placeholder = "Type your message here." size = "100%">
 			<input type = "submit" name = "send" value = "Send"  >
 		</form>
+		</div>
+
 	</div>
-</body>
+	</body>
 </html>
