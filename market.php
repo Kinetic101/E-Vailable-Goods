@@ -136,7 +136,7 @@
 	<div class = "product_table">
 		<div class = "pname">
 			<h3>Product Name</h3>
-			<hr>
+			<hr id="fhr">
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
@@ -148,7 +148,7 @@
 
 		<div class = "quantity">
 			<h3>Quantity</h3>
-			<hr>
+			<hr id="fhr">
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
@@ -160,7 +160,7 @@
 
 		<div class = "unit">
 			<h3>Unit</h3>
-			<hr>
+			<hr id="fhr">
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
@@ -172,7 +172,7 @@
 
 		<div class = "price">
 			<h3>Price</h3>
-			<hr>
+			<hr id="fhr">
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
@@ -183,7 +183,7 @@
 		</div>
 		<div class = "buy">
 			<h3>Add to Cart</h3>
-			<hr>
+			<hr id="fhr">
 			<form method = post action = <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>>
 				<?php
 					$i  = 0;
@@ -198,12 +198,12 @@
 							$idname = "num".strval($i);
 							$temp_var = $row["productname"];
 							echo "<div class = filler>\n\t\t\t\t\t"."<input id = $idname type = number name = $row[productname] value = $arr[$temp_var] min = 0 max = $row[quantity]>
-							<button type = button onclick = \"
+							<button id = minus type = button onclick = \"
 								function dec(){
 									document.getElementById('$idname').stepDown();
 								} 
 								dec();\" >-</button>
-							<button type = button onclick = \"
+							<button id = plus type = button onclick = \"
 								function inc(){
 									document.getElementById('$idname').stepUp();
 								} 
@@ -218,7 +218,7 @@
 				<!--
 					Kailangang nakafix position netong Add to Cart sa lower right ng page 
 				-->
-				<input type = "submit" value = "Add to Cart" id = "addtocart">
+				<input type = "submit" value = "Add to Cart" class = "addtocart">
 			</form>
 		</div>
 	</div>

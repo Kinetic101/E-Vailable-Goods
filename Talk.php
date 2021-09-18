@@ -43,6 +43,7 @@
 ?>
 
 <script type = "text/javascript">
+
 function go(){
 	setInterval(function req(){
 					var obj = document.getElementById("chatbox");
@@ -60,14 +61,12 @@ function go(){
 							if(newS > oldS) {
 								obj.scrollTop = newS;
 							}
-							var xmlhttp;
-							document.getElementById("chatbox").innerHTML = this.responseText;
 						}
-					}
-					xmlhttp.open("GET", "GetMsgData.php?us=<?php echo $_SESSION["visit_user"];?>", true);
-					xmlhttp.send();
-				}, 10);
-}
+						xmlhttp.open("GET", "GetMsgData.php?us=<?php echo $_SESSION["visit_user"];?>", true);
+						xmlhttp.send();
+					}, 10);
+	}}
+
 </script>	
 
 <html>
