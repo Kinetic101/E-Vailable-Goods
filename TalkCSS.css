@@ -86,7 +86,7 @@ ul{
   	min-width: 12vw;
   	height: auto;
   	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  	z-index: 1;
+  	z-index: 3;
 } 
 
 .dlinks a{
@@ -127,10 +127,11 @@ ul{
 	border-radius: 5px;
 }
 
-.chatbox{
+#chat{
+	position: static;
+	text-align: justify;
 	overflow-x: hidden;
 	overflow-y: auto;
-	text-align: justify;
 	float: right;
 	width: 65vw;
 	height: 86vh;
@@ -141,9 +142,23 @@ ul{
 }
 
 
-.name{
+#msg{
+	width: 40vw;
+}
+
+#name{
 	background-color: #4A7C59;
 	color: black;
+	position: fixed;
+	width:  65vw;
+	z-index: 2;
+}
+
+#msgss{
+	position: relative;
+	top:  5vh;
+	height:  86vh;
+	z-index: 1;
 }
 
 .ol{

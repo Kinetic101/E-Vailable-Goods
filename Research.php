@@ -21,38 +21,6 @@
 	}
 ?>
 
-<script type="text/javascript">
-	var cnt = 0;
-	function go(){
-		setInterval(function req(){
-						var obj = document.getElementById("active");
-						var oldS = obj.scrollHeight-20;
-						var xmlhttp;
-						if(window.XMLHttpRequest){
-							xmlhttp = new XMLHttpRequest();
-						}
-						else{
-							xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-						}
-						xmlhttp.onreadystatechange = function(){
-							if(this.readyState == 4 && this.status == 200){
-								document.getElementById("do_not_edit").innerHTML = this.responseText;
-								if(document.getElementById("active").innerHTML !== document.getElementById("do_not_edit").innerHTML){
-									if(cnt == 0){
-										obj.scrollTop = 0;
-									}
-									cnt++;
-									document.getElementById("active").innerHTML = document.getElementById("do_not_edit").innerHTML;
-								}
-							}
-						}
-						xmlhttp.open("SERVER", "GetOnlineData.php", true);
-						xmlhttp.send();
-					}, 250);
-	}
-	
-</script>
-
 <html>
 <head>
 
@@ -61,9 +29,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel = "stylesheet" href = "ResearchCSS.css"> 
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="ResearchJS.js"></script>
 	<title>E-Vailable Goods</title>
 
 </head>
+
 <body>
 
 	<header>
@@ -140,12 +111,7 @@
 
 	</div>
 	
-	<div id = "active">
-		<script type = "text/javascript"> go(); </script>
-	</div>
+	<div id = "active"></div>
 
-	<div id = "do_not_edit" style = "display: none;">
-		
-	</div>
 </body>
 </html>

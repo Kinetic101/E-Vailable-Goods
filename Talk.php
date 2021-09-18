@@ -25,49 +25,7 @@
 	if(isset($_GET["user"])){
 		$_SESSION["visit_user"] = $_GET["user"];
 	}
-	else{
-		$_SESSION["visit_user"] = "";
-	}
-
-	$msg = "";
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		if(!empty($_POST["msg"])){
-			$date = date("Y-m-d H:i:s");
-			$insert = "INSERT INTO `messages`
-						(`from_user`, `to_user`, `message`, `time`)
-						VALUES('$_SESSION[usern]', '$_SESSION[visit_user]', '$_POST[msg]', '$date')";
-			$conn -> query($insert);
-			header("Location: Talk.php?user=$_SESSION[visit_user]");
-	}
-		}
 ?>
-
-<script type = "text/javascript">
-
-function go(){
-	setInterval(function req(){
-					var obj = document.getElementById("chatbox");
-					var oldS = obj.scrollHeight-20;
-					obj.style.marginLeft = "50vw";
-					if(window.XMLHttpRequest){
-						xmlhttp = new XMLHttpRequest();
-					}
-					else{
-						xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-					}
-					xmlhttp.onreadystatechange = function(){
-						if(this.readyState == 4 && this.status == 200){
-							var newS = obj.scrollHeight-20;
-							if(newS > oldS) {
-								obj.scrollTop = newS;
-							}
-						}
-						xmlhttp.open("GET", "GetMsgData.php?us=<?php echo $_SESSION["visit_user"];?>", true);
-						xmlhttp.send();
-					}, 10);
-	}}
-
-</script>	
 
 <html>
 <head>
@@ -76,6 +34,8 @@ function go(){
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="TalkCSS.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="TalkJS.js"></script>
 	<title>Talk</title>
 </head>
 <body>
@@ -92,8 +52,10 @@ function go(){
 		</nav>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
-		<li class = "dropdown"><a href = "Profile.php" class="pic">
-			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
+		<li class = "dropdown">
+			<a href = "Profile.php" class="pic">
+			<div class="prof">
+				<img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
 			</div>
 		</a>
 		<div class="dlinks">
@@ -106,50 +68,19 @@ function go(){
 
 	</header>
 
-	<div id = "contacts">
-		<?php
-			$check = array();
-			$select = "SELECT *
-						FROM `messages`
-						WHERE `from_user` = '$_SESSION[usern]' OR `to_user` = '$_SESSION[usern]' ORDER BY `time` DESC";
-			$res = $conn -> query($select);
-			while($row = $res -> fetch_assoc()){
-				if($row["from_user"] == $_SESSION["usern"]){
-					if(!array_key_exists($row["to_user"], $check)){
-						echo "<a href = Talk.php?user=$row[to_user]>".$row["to_user"]."<br></a>";
-					}
-					$check[$row["to_user"]] = True;
-				}
-				else{
-					if(!array_key_exists($row["from_user"], $check)){
-						echo "<a href = Talk.php?user=$row[from_user]>".$row["from_user"]."<br></a>";
-					}
-					$check[$row["from_user"]] = True;
-				}
-			}
-		?>
-	</div>
+	<div id = "contacts"></div>
 
-	<div class = "chatbox">
+	<div id = "chat">
 		
-		<div id = "chatbox">
-		<?php
-			if($_SESSION["visit_user"] == ""){
-				echo "Please select a chat.";
-			}
-			else{
-				echo "<script type = text/javascript>go();</script>";
-			}
-		?>
-		</div>
-
-		<div id = "send">
-		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]."?user=".$_SESSION["visit_user"]);?>">
-			<input type = "text" name = "msg" placeholder = "Type your message here." size = "100%">
-			<input type = "submit" name = "send" value = "Send"  >
-		</form>
-		</div>
+		<div id = "chatbox"></div>
 
 	</div>
-	</body>
+
+	<div id = "send">
+			<form action = "">
+				<input type = "text" name = "msg" placeholder = "Type your message here." id = "msg" />
+				<input type = "submit" name = "sendm" value = "Send" id = "sendm" />
+			</form>
+		</div>
+</body>
 </html>
