@@ -136,17 +136,12 @@ ul{
 
 /* End of Navigation Bar */
 
-#formID{
-	height: 17px;
-	width: 17px;
-}
-
 #items{
-	text-align: center;
 	color: black;
 }
 
 .ioyc{
+	text-align: center;
 	margin: 3vh 2vw;
 	width: 96%;
 	font-family: "Verdana", sans-serif;
@@ -159,24 +154,185 @@ hr{
 }
 
 .itemsa{
-	margin: 0 0 3% 2.5%;
+	margin: 0 0 3% 6.25%;
 	border: 1px solid #ccc;
 	float: left;
-	width: 30%;
+	width: 25%;
+	height: 20vh;
 	box-shadow: 8px 16px 32px -8px rgba(0,0,0,0.2);
 	transition: all 0.4s ease 0s;
 	background-color: #FFFCF2;
+	display: block;
+}
+
+.itemsa:hover{
+	box-shadow: 8px 16px 32px -8px rgba(0,0,0,0);	
 }
 
 p{
 	display: inline;
+	order: 2;
+}
+
+.checkbox{
+	display: block;
+  	position: relative;
+  	padding-left: 0;
+  	padding-bottom: 0;
+  	cursor: pointer;
+}
+
+input[type=checkbox]{
+	position: absolute;
+	height: 0;
+	width: 0;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.checkmark {
+ 	position: absolute;
+  	top: 0px;
+  	left: 15px;
+  	height: 20px;
+  	width: 20px;
+  	background-color: #FFFCF2;
+  	border: 3px solid #aaa; 
+}
+
+.checkbox:hover input[type=checkbox] ~ .checkmark{
+	background-color: #f1f1f1;
+}
+
+.checkbox input[type=checkbox]:checked ~ .checkmark {
+  	background-color: #FFFCF2;
+  	border: none;	
+}
+
+.checkmark:after {
+ 	content: "";
+  	position: absolute;
+  	display: none;
+}
+
+.checkbox input[type=checkbox]:checked ~ .checkmark:after {
+  	display: block;
+}
+
+.checkbox .checkmark:after {
+  	left: 6px;
+  	top: 0px;
+  	width: 7px;
+  	height: 14px;
+  	border: solid #4A7C59;
+  	border-width: 0 3px 3px 0;
+  	-webkit-transform: rotate(45deg);
+  	-ms-transform: rotate(45deg);
+  	transform: rotate(45deg);
+}
+
+.eman{
+	text-align: center;
+	margin-top: 10px;
+	font-family: "Arial", sans-serif;
+	font-weight: 500;
+	font-size: 20px;
+	padding-bottom: 8px;
+}
+
+.orderq{
+	text-align: center;
+	margin: 3px;
+	font-size: 0.9em;
+	color: #766A56;
+	font-family: "Arial";
+}
+
+#plus{
+	color: #171614;
+	padding: 0px 0;
+	width: 15px;
+	margin-left: 3px;	
+	background-color: #f1f1f1;
+	border: 1.5px solid gray;		
+	transition: all 0.3s ease 0s;
+}
+
+#plus:hover{
+	background-color: #ccc;
+}
+
+#minus{
+	color: #171614;
+	padding: 0px 0;
+	width: 15px;
+	margin-right: 3px;	
+	background-color: #f1f1f1;
+	border: 1.5px solid gray;
+	transition: all 0.3s ease 0s;
+}
+
+#minus:hover{
+	background-color: #ccc;
+}
+
+.priceid{
+	text-align: center;
+	margin: 3px;
+	font-size: 0.95em;
+	color: #766A56;
+	font-family: "Arial";
+}
+
+.fmarket{
+	text-align: center;
+	margin-top: 15px;
+	font-size: 0.9em;
+	color: black;
+	font-family: "Arial";
 }
 
 footer {
 	background-color: #4A7C59;
 	width: 100%;
-	height: 2vw;
+	height: 60px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
 	text-align: center;
 	position: fixed;
-	bottom: 2.5vh;	
+	bottom: 0;
+	box-shadow: 0px -8px 16px -8px rgba(0,0,0,0.2);	
+}
+
+input[type=submit]{
+	outline: none;
+	color: white;
+	margin-right: 3vw;
+	padding: 7px 15px;
+	border: none;
+	font-size: 13px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-family: "Verdana";
+}
+
+input[type=submit]:hover{
+	box-shadow: 8px 16px 32px -8px rgba(0,0,0,0.2);
+	opacity: 0.8;
+}
+
+#remove{
+	background-color: #4A7C59;
+	border: 1px solid #ccc;
+}
+
+#save{
+	background-color: #BF2722;
+
+}
+
+#buynow{
+	background-color: #FFFCF2;
+	color: black;
 }

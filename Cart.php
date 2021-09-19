@@ -226,10 +226,12 @@
 					}
 					$arr_max[$i] = $maxi;
 					echo "\n\t\t\t";
-					echo "<div class = itemsa >"."<input type = checkbox id = formID name = $idn>\n\t\t\t\t".
-							"<label for = $idn>".$row["productname"]."</label>\n\t\t\t\t".
+					echo "<div class = itemsa >"."<label class = checkbox>"."<div class = eman>"."<label for = $idn>".$row["productname"].
+					"</label>\n\t\t\t\t"."</div>".
+					"<input type = checkbox id = formID name = $idn>\n\t\t\t\t"."<span class = checkmark>".
+					"</span>"."</label>".
 							"<div class = orderq>"."Quantity: "."<p id = $uni>$row[order_quantity]</p>"." ".$row["unit"]." ".
-							"<button type = button onclick = \"
+							"<button id = minus type = button onclick = \"
 								function dec(){
 									if(arr['$temp'] > 0){
 										document.getElementById('$num').value = document.getElementById('$uni').innerHTML = --arr['$temp'];
@@ -237,7 +239,7 @@
 								}	
 								dec();
 							\">-</button>
-							<button type = button onclick = \"
+							<button id = plus type = button onclick = \"
 								function inc(){
 									if(arr['$temp'] < '$arr_max[$i]'){
 										document.getElementById('$num').value = document.getElementById('$uni').innerHTML = ++arr['$temp'];
