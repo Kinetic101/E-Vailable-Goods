@@ -158,12 +158,46 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="CartCSS.css">
-	<title></title>
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<title>Cart</title>
 </head>
 <body>
-	<h4>Insert "EVailable Goods header here (same nung sa Research.php)"</h4>
+	<header>
+		<nav>
+			<ul class="links">
+				<li><a href="Research.php">Buy</a></li>
+				<li><a href="Talk.php">Talk</a></li>
+				<li><a href="Edit.php">Edit</a></li>
+				<li><a href="Suggest.php">Suggest</a></li>
+				<li><a href="About.php">About</a></li>
+			</ul>
+		</nav>
+		<ul class="icons">
+			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id = "press"></i></a></li>
+			<li><a href="#"><i class="fas fa-bell"></i></a></li>
+		</ul>
+		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
+		<ul>
+		<li class = "dropdown"><a href = "Profile.php" class="pic">
+			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
+			</div>
+		</a>
+		<div class="dlinks">
+      			<a href="Profile.php">Profile</a>
+      			<a href="#">Help & Support</a>
+      			<a href="Logout.php">Logout</a>
+    	</div>
+    	</li>
+		</ul>
+		
+	</header>
 	<div id = "items">
+		<h1 class = "ioyc">ITEMS ON YOUR CART</h1>
+		<hr>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			<?php
 				$res = $conn -> query($select);
@@ -192,7 +226,7 @@
 					}
 					$arr_max[$i] = $maxi;
 					echo "\n\t\t\t";
-					echo "<input type = checkbox id = formID name = $idn>\n\t\t\t\t".
+					echo "<div class = itemsa >"."<input type = checkbox id = formID name = $idn>\n\t\t\t\t".
 							"<label for = $idn>".$row["productname"]."</label>\n\t\t\t\t".
 							"<div class = orderq>"."Quantity: "."<p id = $uni>$row[order_quantity]</p>"." ".$row["unit"]." ".
 							"<button type = button onclick = \"
@@ -219,19 +253,18 @@
 							"<input type = hidden name = $un value = $row[unit]>\n\t\t\t\t".
 							"<div class = priceid>"."Price: ".$row["price"]."</div>\n\t\t\t\t".
 							"<div class = fmarket>"."From: ".$row["market"]."</div>".
-						"\n\t\t\t";
+						"\n\t\t\t"."</div>";
 					$i++;
 				}
 				echo "\n";
 			?>
+
+			<footer>
 			<input type = "submit" value = "Remove" id = "remove" name = "remove">
 			<input type = "submit" value = "Save" id = "save" name = "save">
 			<input type = "submit" value = "Buy Now" id = "buynow" name = "buy">
-			
+			</footer>
 		</form>
 	</div>
-	<!--
-		Insert nav sht here, yung may Buy Edit Talk (same sa lahat ng page)
-	-->
 </body>
 </html>
