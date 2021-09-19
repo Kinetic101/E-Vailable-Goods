@@ -47,6 +47,30 @@ header{
 	color: #4A7C59;
 }
 
+.icons{
+	list-style: none;
+	color: white;	
+}
+
+.icons li{
+	display: inline-block;
+	margin: 0 2vw 0 0;
+}
+
+#cart{
+	margin: 0;
+}
+
+.icons i{
+	font-size: 23px;
+	color: #f1f1f1;
+	transition: all 0.4s ease 0s;
+}
+
+.icons i:hover{
+	color: #4A7C59;
+}
+
 .prof{
 	width: 55px;
 	height: 55px;

@@ -130,6 +130,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="MarketEditCSS.css">
+		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<title><?php echo $_SESSION["market"]?> Edit</title>
 
 </head>	
@@ -144,6 +145,11 @@
 				<li><a href="About.php">About</a></li>
 			</ul>
 		</nav>
+		<ul class="icons">
+			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
+			<li><a href="#"><i class="fas fa-bell"></i></a></li>
+		</ul>
+		
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
 		<li class = "dropdown"><a href = "Profile.php" class="pic">
@@ -267,8 +273,8 @@
 				?>
 				
 		</div>
-		<div id = "float_form" style = "display: block;">
-			<label id = "prodname">Product Name:</label> <input id = "prodname" type = "text" name = "prodname" value = <?php echo $prodname;?> > <span class = "error">* <?php echo $err;?> </span> <br>
+		<div id = "float_form" style = "display: none;">
+			<label id = "prodname">Product Name:</label><input id = "prodname" type = "text" name = "prodname" value = <?php echo $prodname;?> > <span class = "error">* <?php echo $err;?> </span> <br>
 			<label id = "quan">Quantity:</label> <input id = "quan" type = "number" name = "quan" min = 0 value = <?php echo $quan;?>> <span class = "error">* <?php echo $err;?> </span> <br>
 			<label id = "unit">Unit:</label> <input id = "unit" type = "text" name = "unit" value = <?php echo $unit;?>> <span class = "error">* <?php echo $err;?> </span> <br>
 			<label id = "price">Price:</label>  <input id = "price" type = "number" name = "price" min = 0 value = <?php echo $price;?>> <span class = "error">* <?php echo $err;?> </span> <br>

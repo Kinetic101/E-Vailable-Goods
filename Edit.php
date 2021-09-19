@@ -50,6 +50,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel = "stylesheet" href = "EditCSS.css"> 
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<title>E-Vailable Goods</title>
 
 </head>
@@ -65,6 +66,10 @@
 				<li><a href="About.php">About</a></li>
 			</ul>
 		</nav>
+		<ul class="icons">
+			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
+			<li><a href="#"><i class="fas fa-bell"></i></a></li>
+		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
 		<li class = "dropdown"><a href = "Profile.php" class="pic">
