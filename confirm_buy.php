@@ -113,21 +113,67 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="Confirm_BuyCSS.css">
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<title>Transaction Confirmation</title>
 </head>
 <body>
-	<h4>Insert "EVailable Goods header here (same nung sa Research.php)"</h4>
-	<div id = "prod">
-		<h3>You are about to make a legitimate transaction. An order will be made once you click the order button. All orders that have been already confirmed cannot be cancelled anymore. <br> For problems that may arise with regards to your order, the admins of this website are not liable for it, except in cases due to problems caused by our servers. <br> Below are the products you ordered:</h3>
-		<?php
-			$tot = 0;
+	<header>
+		<nav>
+			<ul class="links">
+				<li><a href="Research.php">Buy</a></li>
+				<li><a href="Talk.php">Talk</a></li>
+				<li><a href="Edit.php">Edit</a></li>
+				<li><a href="Suggest.php">Suggest</a></li>
+				<li><a href="About.php">About</a></li>
+			</ul>
+		</nav>
+		<ul class="icons">
+			<li><a href="Cart.php"><i class="fas fa-shopping-cart"></i></a></li>
+			<li><a href="#"><i class="fas fa-bell"></i></a></li>
+		</ul>
+		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
+		<ul>
+		<li class = "dropdown"><a href = "Profile.php" class="pic">
+			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
+			</div>
+		</a>
+		<div class="dlinks">
+      			<a href="Profile.php">Profile</a>
+      			<a href="#">Help & Support</a>
+      			<a href="Logout.php">Logout</a>
+    	</div>
+    	</li>
+		</ul>
+		
+	</header>
+		<div id = "prod">
+		<h3 class = "disc">You are about to make a legitimate transaction. An order will be made once you click the order button. 
+			All orders that have been already confirmed <span style = "color:#BF2722; font-weight:1000">CANNOT</span> be cancelled anymore. <br> 
+			For problems that may arise with regards to your order, the admins of this website are not liable for it, 
+			except in cases due to problems caused by our servers. <br><br> Below are the products you ordered:</h3>
+			<hr>
+		<div class = "items">
+			<div class = "title">
+			<h4 id = "eman">Product</h4>
+			<h4 id = "quan">Quantity</h4>
+			<h4 id = "price">Price</h4>
+			<h4 id = "tprice">Total Price</h4>
+		</div>
+		<?php			
+			$tot = 0;		
 			foreach ($_SESSION["buy_arr"] as $key => $value) {
-				echo $value[1]."<br>Quantity: ".$value[0]." ".$value[4]."<br>Price: ".$value[3]."<br>Total Price: Php ".$value[3]*$value[0]."<br>From Market: ".$value[2]."<br><br>";
+				echo "<div class = uni>"."<div class = eman>".$value[1]."</div>"."<div class = unit>x</div>"."<span class = quan>".$value[0]." ".$value[4]."</span>"."<div class = unit>x</div>".
+				"<span class = price>"."Php ".$value[3]."</span>"."<div class = unit>=</div>"."<span class = tprice>"."Php ".$value[3]*$value[0]."</span>"."</div>"."<span id = market>".
+				"From Market: ".$value[2]."</span>"."<br><br>";
 				$tot += $value[3]*$value[0];
 			}
-			echo "Total Amount to Pay: Php ".$tot;
+			echo "<div class = tamount><span id = tamount>Total Amount to Pay:</span> <span id = tantamount>Php ".$tot."</span>"."</div>";
 		?>
+		</div>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			Contact Number: <input type = "text" name = "contact" class = "field" value = "<?php echo $contact;?>"> <span class = "error">* <?php echo $contactErr;?></span> <br>
 			Address/Location: <input type = "text" name = "add" class = "field" value = "<?php echo $add;?>"> <span class = "error">* <?php echo $addErr;?></span> <br>
