@@ -177,11 +177,11 @@
 				<div class = "uni">
 					<div class = "eman"> <?php echo $value[1]; ?></div>
 					<div class = "unit">x</div>
-					<span class = "quan"> <?php echo $value[0]." ".$value[4]; ?></span>
+					<div class = "quan"> <?php echo $value[0]." ".$value[4]; ?></div>
 					<div class = "unit">x</div>
-					<span class = "price">Php <?php echo $value[3]; ?></span>
+					<div class = "price">Php <?php echo $value[3]; ?></div>
 					<div class = "unit">=</div>
-					<span class = "tprice">Php <?php echo $value[3]*$value[0]; ?></span>
+					<div class = "tprice">Php <?php echo $value[3]*$value[0]; ?></div>
 				</div>
 				<span id = "market">From Market: <?php echo $value[2]; ?></span>
 				<br>
@@ -198,10 +198,18 @@
 		?>
 		</div>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			Contact Number: <input type = "text" name = "contact" class = "field" value = "<?php echo $contact;?>"> <span class = "error">* <?php echo $contactErr;?></span> <br>
-			Address/Location: <input type = "text" name = "add" class = "field" value = "<?php echo $add;?>"> <span class = "error">* <?php echo $addErr;?></span> <br>
+			<div class = "cins">
+			<label id = "contact">Contact Number: </label>
+			<input type = "text" name = "contact" class = "field" id = "cn" value = "<?php echo $contact;?>"> <span class = "error">* <?php echo $contactErr;?></span>
+			<label id = "add">Address/Location: </label>
+			<input type = "text" name = "add" class = "field" id = "al" value = "<?php echo $add;?>"> <span class = "error">* <?php echo $addErr;?></span><br> 
+			</div>
+
+			
 			<input type = "submit" value = "Cancel" id = "cancel" name = "cancel">
 			<input type = "submit" value = "Order" id = "order" name = "order">
+			<div class = "butts">
+			</div>
 		</form>
 	</div>
 </body>
