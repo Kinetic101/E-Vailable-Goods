@@ -22,9 +22,7 @@
 		unset($_SESSION["product"]);
 	}
 
-	
-
-	//JS function to trim unnecessary characters from input
+	//Function to trim unnecessary characters from input
 
 	function test_input($data){
 		$data = trim($data);
@@ -159,7 +157,8 @@
 			First Name: <br> <input type = "text" name = "fname" class = "field" value = "<?php echo $fname?>"> <span class = "error">* <?php echo $fnameErr;?></span> <br>
 			Last Name: <br> <input type = "text" name = "lname" class = "field" value = "<?php echo $lname?>"> <span class = "error">* <?php echo $lnameErr;?></span> <br>
 			<input type = "radio" id = "admin" name = "user_type"  value = "admin" <?php if($admin != ""){echo "checked";}?>> Market Admin <span class = "error"> * <?php echo $adminErr; ?> </span> <br>
-			<input type = "radio" id = "cust" name = "user_type" value = "cust" <?php if($cust != ""){echo "checked";}?>> Customer <span class = "error"> * <?php echo $custErr; ?> </span> <br>
+			<input type = "radio" id = "cust" name = "user_type" value = "cust" <?php if($cust != ""){echo "checked";}?>> Customer <span class = "error"> * <?php echo $custErr; ?> </span> 
+			<br>
 			<br>
 			<input type = "submit" value = "Sign Up" class = "button">
 		</form>

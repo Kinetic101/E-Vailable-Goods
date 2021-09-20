@@ -77,16 +77,20 @@
 		}
 
 		if($cnt > 0){
-			echo "<script type = text/javascript>
-					alert('All selected products have been added to cart.'); 
-					location.href = 'Market.php';
-				</script>";
+			?>
+			<script type = "text/javascript">
+				alert('All selected products have been added to cart.'); 
+				location.href = 'Market.php';
+			</script>
+			<?php
 		}
 		else{
-			echo "<script type = text/javascript>
-					alert('No products have been selected!'); 
-					location.href = 'Market.php';
-				</script>";
+			?>
+			<script type = "text/javascript">
+				alert('No products have been selected!'); 
+				location.href = 'Market.php';
+			</script>
+			<?php
 		}
 	}
 ?>
@@ -146,9 +150,11 @@
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
-					echo "<div class = filler>".$row["productname"]."</div>\n\t\t\t"."<hr>\n\t\t\t";
+					?>
+					<div class = "filler"><?php echo $row["productname"]; ?></div>
+					<hr>
+					<?php
 				}
-				echo"\n";
 			?>
 		</div>
 
@@ -158,9 +164,11 @@
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
-					echo "<div class = filler>".$row["quantity"]."</div>\n\t\t\t"."<hr>\n\t\t\t";
+					?>
+					<div class = "filler"><?php echo $row["quantity"]; ?></div>
+					<hr>
+					<?php
 				}
-				echo"\n";
 			?>
 		</div>
 
@@ -170,9 +178,11 @@
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
-					echo "<div class = filler>".$row["unit"]."</div>\n\t\t\t"."<hr>\n\t\t\t";
+					?>
+					<div class = "filler"><?php echo $row["unit"]; ?></div>
+					<hr>
+					<?php
 				}
-				echo"\n";
 			?>
 		</div>
 
@@ -182,48 +192,54 @@
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
-					echo "<div class = filler>".$row["price"]."</div>\n\t\t\t"."<hr>\n\t\t\t";
+					?>
+					<div class = "filler"><?php echo $row["price"]; ?></div>
+					<hr>
+					<?php
 				}
-				echo"\n";
 			?>
 		</div>
 		<div class = "buy">
 			<h3>Add to Cart</h3>
 			<hr id="fhr">
-			<form method = post action = <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>>
+			<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<?php
 					$i  = 0;
 					$res = $conn -> query($select);
 					while($row = $res -> fetch_assoc()) {
 						array_push($arr, $row["productname"]);
 						if($row["quantity"] == 0){
-							echo "<div class = filler>\n\t\t\t\t\t"
-							."Out of Stock\n\t\t\t\t"."</div>\n\t\t\t\t"."<hr>\n\t\t\t\t";
+						?>
+							<div class = "filler">Out of Stock</div>
+							<hr>
+						<?php
 						}
 						else{
 							$idname = "num".strval($i);
 							$temp_var = $row["productname"];
-							echo "<div class = filler>\n\t\t\t\t\t"."<input id = $idname type = number name = $row[productname] value = $arr[$temp_var] min = 0 max = $row[quantity]>
-							<button id = minus type = button onclick = \"
-								function dec(){
-									document.getElementById('$idname').stepDown();
-								} 
-								dec();\" >-</button>
-							<button id = plus type = button onclick = \"
-								function inc(){
-									document.getElementById('$idname').stepUp();
-								} 
-								inc();\">+</button>\n\t\t\t\t"
-							."</div>\n\t\t\t\t"
-							."<hr>\n\t\t\t\t";
+							?>
+							<div class = filler>
+								<input id = "<?php echo $idname; ?>" type = "number" name = "<?php echo $row["productname"]; ?>" 
+									value = "<?php echo $arr[$temp_var]; ?>" min = 0 max = "<?php echo $row["quantity"]; ?>" />
+								<button id = "minus" type = "button" 
+									onclick = "function dec(){
+													document.getElementById('<?php echo $idname; ?>').stepDown();
+												} 
+												dec();" >-
+								</button>
+								<button id = "plus" type = "button" 
+									onclick = "function inc(){
+													document.getElementById('<?php echo $idname; ?>').stepUp();
+												} 
+												inc();">+
+								</button>
+							</div>
+							<hr>
+							<?php
 						}
 						$i++;
 					}
-					echo "\n";
 				?>
-				<!--
-					Kailangang nakafix position netong Add to Cart sa lower right ng page 
-				-->
 				<input type = "submit" value = "Add to Cart" class = "addtocart">
 			</form>
 		</div>

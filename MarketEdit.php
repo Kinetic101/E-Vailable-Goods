@@ -97,31 +97,25 @@
 			}
 
 			if($cnt > 0){
-				echo "<script type = text/javascript>
-						alert('All changes have been saved.'); 
-						location.href = 'MarketEdit.php';
-					</script>";
+				?>
+				<script type = "text/javascript">
+					alert('All changes have been saved.'); 
+					location.href = 'MarketEdit.php';
+				</script>
+				<?php
 			}
 			else{
-				echo "<script type = text/javascript>
-						alert('No products have been changed.'); 
-						location.href = 'MarketEdit.php';
-					</script>";
+				?>
+				<script type = "text/javascript">
+					alert('No products have been changed.'); 
+					location.href = 'MarketEdit.php';
+				</script>
+				<?php
 			}
+
 		}
 	}
 ?>
-<script type="text/javascript">
-	function magic(){
-		var x = document.getElementById('float_form');
-		if(x.style.display == 'none'){
-			x.style.display = 'block';
-		}
-		else{
-			x.style.display = 'none';
-		}
-	}
-</script>
 <html>
 <head>
 
@@ -130,7 +124,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="MarketEditCSS.css">
-		<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="MarketEditJS.js"></script>
 	<title><?php echo $_SESSION["market"]?> Edit</title>
 
 </head>	
@@ -176,9 +172,11 @@
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
-					echo "<div class = filler>".$row["productname"]."</div>\n\t\t\t"."<hr>\n\t\t\t";
+					?>
+					<div class = "filler"><?php echo $row["productname"]; ?></div>
+					<hr>
+					<?php
 				}
-				echo"\n";
 			?>
 		</div>
 
@@ -188,9 +186,11 @@
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
-					echo "<div class = filler>".$row["quantity"]."</div>\n\t\t\t"."<hr>\n\t\t\t";
+					?>
+					<div class = "filler"><?php echo $row["quantity"]; ?></div>
+					<hr>
+					<?php
 				}
-				echo"\n";
 			?>
 		</div>
 
@@ -200,9 +200,11 @@
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
-					echo "<div class = filler>".$row["unit"]."</div>\n\t\t\t"."<hr>\n\t\t\t";
+					?>
+					<div class = "filler"><?php echo $row["unit"]; ?></div>
+					<hr>
+					<?php
 				}
-				echo"\n";
 			?>
 		</div>
 
@@ -212,9 +214,11 @@
 			<?php
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
-					echo "<div class = filler>".$row["price"]."</div>\n\t\t\t"."<hr>\n\t\t\t";
+					?>
+					<div class = "filler"><?php echo $row["price"]; ?></div>
+					<hr>
+					<?php
 				}
-				echo"\n";
 			?>
 		</div>
 		<div class = "editp">
@@ -227,22 +231,25 @@
 					while($row = $res -> fetch_assoc()){
 						$idname1 = "num1".strval($i);
 						$temp_var1 = "a".$row["productname"];
-						echo "<div class = filler>\n\t\t\t\t\t"."<input id = $idname1 type = number name = $temp_var1 value = $row[quantity] min = 0>
-						<button id = minus type = button onclick = \"
-							function dec(){
-								document.getElementById('$idname1').stepDown();
-							} 
-							dec();\" >-</button>
-						<button id = plus type = button onclick = \"
-							function inc(){
-								document.getElementById('$idname1').stepUp();
-							} 
-							inc();\">+</button>\n\t\t\t\t"
-						."</div>\n\t\t\t\t"
-						."<hr>\n\t\t\t\t";
+						?>
+						<div class = "filler">
+							<input id = "<?php echo $idname1; ?>" type = "number"  name = "<?php echo $temp_var1; ?>" value = "<?php echo $row["quantity"]; ?>" min = 0>
+							<button class = "minus" id = "minus1" type = "button" 
+								onclick = "function inc(){
+												document.getElementById('<?php echo $idname1; ?>').stepDown();
+											}
+											inc();"
+											>-</button>
+							<button class = "plus" id = "plus1" type = "button"
+								onclick = "function dec(){
+												document.getElementById('<?php echo $idname1; ?>').stepUp();
+											}
+											dec();">+</button>
+						</div>
+						<hr>
+						<?php
 						$i++;
 					}
-					echo "\n";
 				?>
 		</div>
 		<div class = "editq">
@@ -254,35 +261,42 @@
 					while($row = $res -> fetch_assoc()){
 						$idname2 = "num2".strval($i);
 						$temp_var2 = "b".$row["productname"];
-						echo "<div class = filler>\n\t\t\t\t\t"."<input id = $idname2 type = number name = $temp_var2 value = $row[price] min = 0>
-						<button id = minus type = button onclick = \"
-							function dec(){
-								document.getElementById('$idname2').stepDown();
-							} 
-							dec();\" >-</button>
-						<button id = plus type = button onclick = \"
-							function inc(){
-								document.getElementById('$idname2').stepUp();
-							} 
-							inc();\">+</button>\n\t\t\t\t"
-						."</div>\n\t\t\t\t"
-						."<hr>\n\t\t\t\t";
+						?>
+						<div class = "filler">
+							<input id = "<?php echo $idname2; ?>" type = "number"  name = "<?php echo $temp_var2; ?>" value = "<?php echo $row["price"]; ?>" min = 0>
+							<button class = "minus" id = "minus2" type = "button"
+								onclick = "function inc(){
+												document.getElementById('<?php echo $idname2; ?>').stepDown();
+											}
+											inc();">-
+							</button>
+							<button class = "plus" id = "plus2" type = "button"
+								onclick = "function dec(){
+												document.getElementById('<?php echo $idname2; ?>').stepUp();
+											}
+											dec();">+
+							</button>
+						</div>
+						<hr>
+						<?php
 						$i++;
 					}
-					echo "\n";
 				?>
 				
 		</div>
 		<div id = "float_form" style = "display: none;">
-			<label id = "prodname">Product Name:</label><input id = "prodname" type = "text" name = "prodname" value = <?php echo $prodname;?> > <span class = "error">* <?php echo $err;?> </span> <br>
-			<label id = "quan">Quantity:</label> <input id = "quan" type = "number" name = "quan" min = 0 value = <?php echo $quan;?>> <span class = "error">* <?php echo $err;?> </span> <br>
-			<label id = "unit">Unit:</label> <input id = "unit" type = "text" name = "unit" value = <?php echo $unit;?>> <span class = "error">* <?php echo $err;?> </span> <br>
-			<label id = "price">Price:</label>  <input id = "price" type = "number" name = "price" min = 0 value = <?php echo $price;?>> <span class = "error">* <?php echo $err;?> </span> <br>
-			
+			<label id = "prodname">Product Name:</label>
+			<input id = "prodname" type = "text" name = "prodname" value = <?php echo $prodname;?> > <span class = "error">* <?php echo $err;?> </span> <br>
+			<label id = "quan">Quantity:</label> 
+			<input id = "quan" type = "number" name = "quan" min = 0 value = <?php echo $quan;?>> <span class = "error">* <?php echo $err;?> </span> <br>
+			<label id = "unit">Unit:</label> 
+			<input id = "unit" type = "text" name = "unit" value = <?php echo $unit;?>> <span class = "error">* <?php echo $err;?> </span> <br>
+			<label id = "price">Price:</label>  
+			<input id = "price" type = "number" name = "price" min = 0 value = <?php echo $price;?>> <span class = "error">* <?php echo $err;?> </span> <br>
 		</div>
 		<input type = "submit" value = "Save" class = "save">
 		</form>
 	</div>
-	<button type = "button" onclick="magic()" class = "show">Add Products</button>
+	<button type = "button" id = "show">Add Products</button>
 </body>
 </html>

@@ -74,11 +74,16 @@
 				  	if($npw == $rnpw){
 				  		$update = "UPDATE `credentials` SET pass = '$npw' WHERE `username` = '$_SESSION[usern]'";
 				  		if($conn->query($update) == True){
-				  			echo("<script type='text/javascript'> alert('"."Password successfully changed"."'); </script>");
+				  			?>
+				  			<script type='text/javascript'> 
+				  				alert("Password successfully changed"); 
+				  				location.href = "Profile.php";
+				  			</script>
+				  			<?php
 				  		}
 				  	}
 				  	else{
-				  		$rnpwErr = $npwErr = "New Password does not match";
+				  		$rnpwErr = $npwErr = "New Passwords do not match";
 				  	}
 				}
 				else{
@@ -108,25 +113,22 @@
 				}
 			}
 			else{
-				echo "<script type=text/javascript> alert('Maximum file size exceeded!'); </script>";
+				?>
+				<script type="text/javascript"> 
+					alert('Maximum file size exceeded!'); 
+				</script>
+				<?php
 			}
 		}
 		else{
-			echo "<script type=text/javascript> alert('Invalid file format!'); </script>";
+			?>
+			<script type="text/javascript"> 
+				alert('Invalid file format!'); 
+			</script>
+			<?php
 		}
 	}
 ?>
-<script type="text/javascript">
-	function magic(){
-		var x = document.getElementById('upload_pic');
-		if(x.style.display == 'none'){
-			x.style.display = 'block';
-		}
-		else{
-			x.style.display = 'none';
-		}
-	}
-</script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -136,6 +138,8 @@
 	<meta name="description" content="">
 	<link rel = "stylesheet" href = "ProfileCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="ProfileJS.js"></script>
 	<title>Profile</title>
 </head>
 <body>
@@ -171,7 +175,7 @@
 
 	<div class = "info">
 		<div class="mprof">
-			<a onclick = "magic()">
+			<a id = "magic1">
 				<img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "mdp">
 			</a>
 		</div>
@@ -200,7 +204,7 @@
 			<input type = "file" name = "upload">
 			<input type = "submit" name = "up" value = "Upload">
 		</form>
-		<button onclick = "magic()">
+		<button id = "magic2">
 			<h6>Cancel</h6>
 		</button>
 	</div>
@@ -214,7 +218,7 @@
 			<br> 
 			<input type = "text" name = "rnpw" placeholder = "Re-enter New Password"> <span class = "error">* <?php echo $rnpwErr;?></span>
 			<br>
-			<input type = "submit" value = "Change Password" class = "button">
+			<input type = "submit" value = "Change Password" class = "button" name = "submit">
 		</form>
 	</div>
 	<div class = "logout">

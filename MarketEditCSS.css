@@ -165,7 +165,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-#plus{
+.plus{
 	color: #171614;
 	padding: 1px 0;
 	width: 20px;
@@ -176,12 +176,12 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	transition: all 0.3s ease 0s;
 }
 
-#plus:hover{
+.plus:hover{
 	background-color: #4A7C59;
 	opacity: 0.8;
 }
 
-#minus{
+.minus{
 	color: #171614;
 	padding: 1px 0;
 	width: 20px;
@@ -192,7 +192,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	transition: all 0.3s ease 0s;
 }
 
-#minus:hover{
+.minus:hover{
 	background-color: pink;
 	opacity: 0.8;
 }
@@ -358,7 +358,7 @@ input[type=text]{
 	opacity: 0.8;
 }
 
-.show{
+#show{
 	display: inline-block;
 	bottom:  5vh;
 	right: 13vw;
@@ -375,6 +375,6 @@ input[type=text]{
 	transition: all 0.3s ease 0s;
 }
 
-.show:hover{
+#show:hover{
 	opacity: 0.8;
 }

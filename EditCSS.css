@@ -195,7 +195,7 @@ hr{
 
 /* End of Market List */
 
-.active{
+#active{
 	position: absolute;
 	margin-top: 3%;
 	width: 15%;					/* Active Now */
@@ -229,5 +229,3 @@ h5{
 	border-bottom: 1.5px solid #4A7C59;
 	border-radius: 10px;
 }
-
-

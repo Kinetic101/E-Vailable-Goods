@@ -30,7 +30,7 @@
 	<meta name="description" content="">
 	<link rel = "stylesheet" href = "ResearchCSS.css"> 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript" src="ResearchJS.js"></script>
+	<script type="text/javascript" src="GetOnlineJS.js"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<title>E-Vailable Goods</title>
 
@@ -65,7 +65,6 @@
     	</div>
     	</li>
 		</ul>
-		<!-- Kailangan natins ng cart tas bell icons as links sa navbar for cart and notifications respectively-->
 	</header>
 
 	<div class = "market">

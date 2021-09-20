@@ -58,12 +58,33 @@
 			$conn -> query($update);
 			$checkchange++;
 		}
+
+		$check_orderp = "SELECT `price` 
+							FROM `market` 
+							WHERE `productname` = '$row[productname]' AND `market_name` = '$row[market]'";
+		$temp = $conn -> query($check_orderp);
+		$p = 0;
+		while($row_p = $temp -> fetch_assoc()){
+			$p = $row_p["price"];
+		}
+		$update = "UPDATE `cart`
+					SET `price` = '$p'
+					WHERE `username` = '$_SESSION[usern]' AND `productname` = '$row[productname]' AND `market` = '$row[market]'";
+		$conn -> query($update);
 	}
 	if($checkchange > 0){
-		echo "<script type = text/javascript> alert('Some products in your cart have quantities which are more than the maximum quantity available. We have already adjusted them for you!'); </script>";
+		?>
+		<script type = "text/javascript"> 
+			alert('Some products in your cart have quantities which are more than the maximum quantity available. We have already adjusted them for you!'); 
+		</script>
+		<?php
 	}
 	if($checkzero > 0){
-		echo "<script type = text/javascript> alert('Some products in your cart are out of stock. We have already removed them for you.'); </script>";
+		?>
+		<script type = "text/javascript"> 
+			alert('Some products in your cart are out of stock. We have already removed them for you.'); 
+		</script>
+		<?php
 	}
 
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -102,14 +123,20 @@
 								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
 
 				}
-				echo "<script type = text/javascript> 
-						alert('You will now be redirected to the confirmation page.');
-						location.href  = 'Confirm_Buy.php';
-					</script>";
+				?>
+				<script type = "text/javascript"> 
+					alert('You will now be redirected to the confirmation page.');
+					location.href  = 'Confirm_Buy.php';
+				</script>
+				<?php
 			}
 			else{
 				$_SESSION["buy_arr"] = array();
-				echo "<script type = text/javascript> alert('Invalid Details!'); </script>";
+				?>
+				<script type = "text/javascript"> 
+					alert('Invalid Details!'); 
+				</script>
+				<?php
 			}
 		}
 
@@ -127,7 +154,11 @@
 					$conn -> query($delete);
 				}
 			}
-			echo "<script type = text/javascript> alert('All selected products have been removed!'); </script>";
+			?>
+			<script type = text/javascript> 
+				alert('All selected products have been removed!'); 
+			</script>
+			<?php
 		}
 
 		//If save button is clicked.
@@ -150,7 +181,11 @@
 				}
 				$conn -> query($update);
 			}
-			echo "<script type = text/javascript> alert('All products have been saved!'); </script>";
+			?>
+			<script type = text/javascript> 
+				alert('All products have been saved!'); 
+			</script>
+			<?php
 		}
 	}
 
@@ -196,7 +231,7 @@
 		
 	</header>
 	<div id = "items">
-		<h1 class = "ioyc">ITEMS ON YOUR CART</h1>
+		<h1 class = "ioyc">ITEMS IN YOUR CART</h1>
 		<hr>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			<?php
@@ -214,9 +249,9 @@
 					$temp = $row["productname"];
 					echo "\n";
 					?>
-				<script type="text/javascript">
-					arr["<?php echo $row["productname"];?>"] = <?php echo $row["order_quantity"];?>;
-				</script>
+					<script type="text/javascript">
+						arr["<?php echo $row["productname"];?>"] = <?php echo $row["order_quantity"];?>;
+					</script>
 					<?php
 					$get_max = "SELECT `quantity` FROM `market` WHERE `productname` = '$row[productname]' AND `market_name` = '$row[market]'";
 					$res_max = $conn -> query($get_max);
@@ -225,48 +260,61 @@
 						$maxi = $row_max["quantity"];
 					}
 					$arr_max[$i] = $maxi;
-					echo "\n\t\t\t";
-					echo "<div class = itemsa >"."<label class = checkbox>"."<div class = eman>"."<label for = $idn>".$row["productname"].
-					"</label>\n\t\t\t\t"."</div>".
-					"<input type = checkbox id = formID name = $idn>\n\t\t\t\t"."<span class = checkmark>".
-					"</span>"."</label>".
-							"<div class = orderq>"."Quantity: "."<p id = $uni>$row[order_quantity]</p>"." ".$row["unit"]." ".
-							"<button id = minus type = button onclick = \"
-								function dec(){
-									if(arr['$temp'] > 0){
-										document.getElementById('$num').value = document.getElementById('$uni').innerHTML = --arr['$temp'];
-									}
-								}	
-								dec();
-							\">-</button>
-							<button id = plus type = button onclick = \"
-								function inc(){
-									if(arr['$temp'] < '$arr_max[$i]'){
-										document.getElementById('$num').value = document.getElementById('$uni').innerHTML = ++arr['$temp'];
-									}
-								}	
-								inc();
-							\">+</button>\n\t\t\t\t".
-							"</div>\n\t\t\t\t".
-							"<input type = hidden id = $num name = $num value = $row[order_quantity]>\n\t\t\t\t".
-							"<input type = hidden name = $pro value = $row[productname]>\n\t\t\t\t".
-							"<input type = hidden name = $mar_roxas value = $row[market]>\n\t\t\t\t".
-							"<input type = hidden name = $pr value = $row[price]>\n\t\t\t\t".
-							"<input type = hidden name = $un value = $row[unit]>\n\t\t\t\t".
-							"<div class = priceid>"."Price: ".$row["price"]."</div>\n\t\t\t\t".
-							"<div class = fmarket>"."From: ".$row["market"]."</div>".
-						"\n\t\t\t"."</div>";
+					?>
+					<div class = "itemsa">
+						<label class = "checkbox">
+							<div class = "eman">
+								<label for = "<?php echo $idn; ?>"><?php echo $row["productname"]; ?></label>
+							</div>
+							<input type = "checkbox" id = "formID" name = "<?php echo $idn; ?>">
+							<span class = "checkmark"></span>
+						</label>
+						<div class = "orderq">
+							Quantity: 
+							<p id = "<?php echo $uni?>">
+								<?php echo $row["order_quantity"]; ?>
+							</p>
+							<?php echo " ".$row["unit"]." "; ?>
+							<button id = minus type = button 
+								onclick = "function dec(){
+												if(arr['<?php echo $temp; ?>'] > 0){
+													document.getElementById('<?php echo $num; ?>').value = 
+														document.getElementById('<?php echo $uni; ?>').innerHTML = --arr['<?php echo $temp; ?>'];
+												}
+											}	
+											dec();">-
+							</button>
+							<button id = plus type = button 
+								onclick = "function inc(){
+												if(arr['<?php echo $temp; ?>'] < '<?php echo  $arr_max[$i]; ?>'){
+													document.getElementById('<?php echo $num; ?>').value = 
+														document.getElementById('<?php echo $uni; ?>').innerHTML = ++arr['<?php echo $temp; ?>'];
+												}
+											}	
+											inc();">+
+							</button>
+						</div>
+						<input type = "hidden" id = "<?php echo $num; ?>" name = "<?php echo $num; ?>" value = <?php echo $row["order_quantity"]; ?>>
+						<input type = "hidden" name = "<?php echo $pro; ?>" value = <?php echo $row["productname"]; ?>>
+						<input type = "hidden" name = "<?php echo $mar_roxas; ?>" value = <?php echo $row["market"]; ?>>
+						<input type = "hidden" name = "<?php echo $pr; ?>" value = <?php echo $row["price"]; ?>>
+						<input type = "hidden" name = "<?php echo $un; ?>" value = <?php echo $row["unit"]; ?>>
+						<div class = "priceid">Price: <?php echo $row["price"]; ?></div>
+						<div class = "fmarket">From: <?php echo $row["market"]; ?></div>
+					</div>
+					<?php
 					$i++;
 				}
-				echo "\n";
 			?>
 
 			<footer>
-			<input type = "submit" value = "Remove" id = "remove" name = "remove">
-			<input type = "submit" value = "Save" id = "save" name = "save">
-			<input type = "submit" value = "Buy Now" id = "buynow" name = "buy">
+				<input type = "submit" value = "Remove" id = "remove" name = "remove">
+				<input type = "submit" value = "Save" id = "save" name = "save">
+				<input type = "submit" value = "Buy Now" id = "buynow" name = "buy">
 			</footer>
 		</form>
+
 	</div>
+
 </body>
 </html>

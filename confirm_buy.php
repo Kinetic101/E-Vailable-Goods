@@ -100,10 +100,12 @@
 
 					}
 					unset($_SESSION["buy_arr"]);
-					echo "<script type = text/javascript> 
+					?>
+					<script type = "text/javascript"> 
 						alert('Thank you for using our service!');
 						location.href  = 'Cart.php';
-					</script>";
+					</script>
+					<?php
 				}
 			}
 		}
@@ -151,10 +153,15 @@
 		
 	</header>
 		<div id = "prod">
-		<h3 class = "disc">You are about to make a legitimate transaction. An order will be made once you click the order button. 
+		<h3 class = "disc">
+			You are about to make a legitimate transaction. An order will be made once you click the order button. 
 			All orders that have been already confirmed <span style = "color:#BF2722; font-weight:1000">CANNOT</span> be cancelled anymore. <br> 
 			For problems that may arise with regards to your order, the admins of this website are not liable for it, 
-			except in cases due to problems caused by our servers. <br><br> Below are the products you ordered:</h3>
+			except in cases due to problems caused by our servers. 
+			<br>
+			<br> 
+			Below are the products that you are about to order:
+		</h3>
 			<hr>
 		<div class = "items">
 			<div class = "title">
@@ -166,12 +173,28 @@
 		<?php			
 			$tot = 0;		
 			foreach ($_SESSION["buy_arr"] as $key => $value) {
-				echo "<div class = uni>"."<div class = eman>".$value[1]."</div>"."<div class = unit>x</div>"."<span class = quan>".$value[0]." ".$value[4]."</span>"."<div class = unit>x</div>".
-				"<span class = price>"."Php ".$value[3]."</span>"."<div class = unit>=</div>"."<span class = tprice>"."Php ".$value[3]*$value[0]."</span>"."</div>"."<span id = market>".
-				"From Market: ".$value[2]."</span>"."<br><br>";
+				?>
+				<div class = "uni">
+					<div class = "eman"> <?php echo $value[1]; ?></div>
+					<div class = "unit">x</div>
+					<span class = "quan"> <?php echo $value[0]." ".$value[4]; ?></span>
+					<div class = "unit">x</div>
+					<span class = "price">Php <?php echo $value[3]; ?></span>
+					<div class = "unit">=</div>
+					<span class = "tprice">Php <?php echo $value[3]*$value[0]; ?></span>
+				</div>
+				<span id = "market">From Market: <?php echo $value[2]; ?></span>
+				<br>
+				<br>
+				<?php
 				$tot += $value[3]*$value[0];
 			}
-			echo "<div class = tamount><span id = tamount>Total Amount to Pay:</span> <span id = tantamount>Php ".$tot."</span>"."</div>";
+			?>
+				<div class = "tamount">
+					<span id = "tamount">Total Amount to Pay:</span> 
+					<span id = "tantamount">Php <?php echo $tot; ?></span>
+				</div>
+			<?php
 		?>
 		</div>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">

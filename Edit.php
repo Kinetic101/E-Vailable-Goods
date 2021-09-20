@@ -24,24 +24,15 @@
 												FROM `credentials`
 												WHERE `username` = '$_SESSION[usern]' AND `user_type` = 1"))[0];
 	if($on == 0){
-		echo "<script type = text/javascript>
-				alert('You do not have market admin priviliges.');
-				location.href = 'Research.php';
-				</script>";
+		?>
+		<script type = text/javascript>
+			alert('You do not have market admin priviliges.');
+			location.href = 'Research.php';
+		</script>
+		<?php
 	}
 
 ?>
-
-<!--
-	kailangan natin ng dropdown para dun sa (id = "dp")
-	dropdown items:
-		*Profile
-		*Help & Support
-		*Settings
-		*Log Out
-	Lagay na lang ng dummy links tas ako na bahala sa backend 
--->
-
 <html>
 <head>
 
@@ -51,6 +42,8 @@
 	<meta name="description" content="">
 	<link rel = "stylesheet" href = "EditCSS.css"> 
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="GetOnlineJS.js"></script>
 	<title>E-Vailable Goods</title>
 
 </head>
@@ -134,16 +127,7 @@
 
 	</div>
 
-	<div class = "active">
-		<h1 class = "now">Active Now</h1>
-		<?php
-			$select = "SELECT `username`, `fname`, `lname` FROM `credentials` WHERE `online` = 1 AND `username` != '$_SESSION[usern]'";
-			$res = $conn -> query($select);
-			while($row = $res -> fetch_assoc()) {
-				echo "<a href = Reroute(Dashboard_to_VisitUser).php?user=$row[username]>"."<h5>".$row["fname"]." ".$row["lname"]."</h5>"."</a>";
-			}
-		?>
-	</div>
+	<div id = "active"></div>
 
 </body>
 </html>

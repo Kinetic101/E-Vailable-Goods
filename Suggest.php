@@ -45,10 +45,16 @@
 		}
 		if($input){
 			if(!$error){
-				$insert = "INSERT INTO `suggestions` ";	
+				$insert = "INSERT INTO `suggestions` (`entry`) VALUES ('$sugg')";
+				$conn -> query($insert);	
+				header("Location: Suggest.php");
 			}
 			else{
-				echo("<script type = 'text/javascript'> alert('"."Empty suggestions are not considered suggestions"."'); </script>");
+				?>
+				<script type = 'text/javascript'> 
+					alert("Empty suggestions are not considered suggestions."); 
+				</script>");
+				<?php
 			}
 		}
 	}

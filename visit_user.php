@@ -60,7 +60,6 @@
 		<div class="dlinks">
       			<a href="Profile.php" id = "press">Profile</a>
       			<a href="#">Help & Support</a>
-      			<a href="#">Settings</a>
       			<a href="Logout.php">Logout</a>
     	</div>
     	</li>
@@ -71,22 +70,22 @@
 	<div class = "info">
 		<div class = "cred">
 
-		<?php
-		$select = "SELECT `username`, `fname`, `lname`
-					FROM `credentials` WHERE `username` = '$_SESSION[visit_user]'";
-		$res = $conn -> query($select);
-		$uname = $fname = $lname = "";
-		while($row = $res -> fetch_assoc()){
-			$uname = $row["username"];
-			$fname = $row["fname"];
-			$lname = $row["lname"];
-		}
-		echo "<div id = uname>Username: ".$uname."</div>".
-			 "<div id = name>".$fname." ".$lname."</div>";
-		?>
-		<div class = "msgbox">
-			<a href="Talk.php?user=<?php echo $_SESSION["visit_user"]; ?>" class = "msg">Message</a>
-		</div>
+			<?php
+			$select = "SELECT `username`, `fname`, `lname`
+						FROM `credentials` WHERE `username` = '$_SESSION[visit_user]'";
+			$res = $conn -> query($select);
+			$uname = $fname = $lname = "";
+			while($row = $res -> fetch_assoc()){
+				$uname = $row["username"];
+				$fname = $row["fname"];
+				$lname = $row["lname"];
+			}
+			?>
+			<div id = uname>Username: <?php echo $uname; ?></div>
+			<div id = name><?php echo $fname." ".$lname; ?></div>
+			<div class = "msgbox">
+				<a href="Talk.php?user=<?php echo $_SESSION["visit_user"]; ?>" class = "msg">Message</a>
+			</div>
 			
 		</div>
 	</div>
