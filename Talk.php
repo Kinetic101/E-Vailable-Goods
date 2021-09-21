@@ -38,6 +38,7 @@
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="TalkJS.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
+	<!--  <script type="text/javascript" src="GetOnlineJS.js"></script> -->
 	<title>Talk</title>
 </head>
 <body>
@@ -46,7 +47,7 @@
 		<nav>
 			<ul class="links">
 				<li><a href="Research.php">Buy</a></li>
-				<li id="here"><a href="Talk.php"  id = "talk">Talk</a></li>
+				<li><a href="Talk.php"  id = "press">Talk</a></li>
 				<li><a href="Edit.php">Edit</a></li>
 				<li><a href="Suggest.php">Suggest</a></li>
 				<li><a href="About.php">About</a></li>
@@ -76,7 +77,10 @@
 
 	<div id = "contacts"></div>
 
+	<div id = "chatbox">
 	<div id = "chat">
+
+	</div>
 
 	</div>
 
@@ -86,5 +90,8 @@
 			<button type = "button" id = "sendm">Send</button>
 		</form>
 	</div>
+
+	<!--   <div id = "active"></div>   Balak ko sanang lagyan ng active list dito para mas convienent pag maghahanap ng kakausapin. 
+									   Pero pwede ring wag na HAHAHHAHA-->
 </body>
 </html>

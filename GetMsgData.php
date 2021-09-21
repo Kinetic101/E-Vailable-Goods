@@ -43,17 +43,13 @@
 		$res = $conn -> query($select);
 		while($row = $res -> fetch_assoc()){
 			if($row["from_user"] == $_SESSION["usern"]){
-				echo "<span class = from>".$row["message"]."</span><br>";
+				echo "<div class = from>".$row["message"]."</div><br><div class = br></div>";
 			}
 			else{
-				echo "<span class = to>".$row["message"]."</span><br>";
+				echo "<div class = to>".$row["message"]."</div><br><div class = brto></div>";
 			}
 		}
 		echo "</div>";
-		$update = "UPDATE `messages`
-					SET `unread` = 0
-					WHERE `to_user` = '$_SESSION[usern]' AND `from_user` = '$_SESSION[visit_user]'";
-		$conn -> query($update);
 	}
 	else{
 		echo "Please select a chat.";

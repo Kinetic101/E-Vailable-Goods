@@ -43,7 +43,7 @@
 		<nav>
 			<ul class="links">
 				<li><a href="Research.php">Buy</a></li>
-				<li id="here"><a href="Talk.php">Talk</a></li>
+				<li><a href="Talk.php">Talk</a></li>
 				<li><a href="Edit.php">Edit</a></li>
 				<li><a href="Suggest.php">Suggest</a></li>
 				<li><a href="About.php">About</a></li>
@@ -56,7 +56,7 @@
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
 		<li class = "dropdown"><a href = "Profile.php" class="pic">
-			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
+			<div class="prof"><img src = "abstract-art-artistic-1020315.jpg" alt = "Avatar" class = "dp">
 			</div>
 		</a>
 		<div class="dlinks">
