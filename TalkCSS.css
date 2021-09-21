@@ -130,12 +130,12 @@ ul{
 	display: block;
 }
 
-#press{
+#talk{
 	border-bottom: 2px solid #4A7C59;
 	padding: 10%;
 }
 
-#press:hover{
+#talk:hover{
 	border: none;
 }
 
@@ -181,7 +181,6 @@ ul{
 #msgss{
 	position: relative;
 	top:  5vh;
-	height:  86vh;
 	z-index: 1;
 }
 

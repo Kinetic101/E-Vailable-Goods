@@ -54,7 +54,7 @@
 		<nav>
 			<ul class="links">
 				<li><a href="Research.php">Buy</a></li>
-				<li><a href="Talk.php">Talk</a></li>
+				<li id="here"><a href="Talk.php">Talk</a></li>
 				<li><a href="Edit.php" id = "press">Edit</a></li>
 				<li><a href="Suggest.php">Suggest</a></li>
 				<li><a href="About.php">About</a></li>

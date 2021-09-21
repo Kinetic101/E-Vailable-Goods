@@ -46,7 +46,7 @@
 		<nav>
 			<ul class="links">
 				<li><a href="Research.php">Buy</a></li>
-				<li><a href="Talk.php"  id = "press">Talk</a></li>
+				<li id="here"><a href="Talk.php"  id = "talk">Talk</a></li>
 				<li><a href="Edit.php">Edit</a></li>
 				<li><a href="Suggest.php">Suggest</a></li>
 				<li><a href="About.php">About</a></li>
@@ -77,8 +77,6 @@
 	<div id = "contacts"></div>
 
 	<div id = "chat">
-		
-		<div id = "chatbox"></div>
 
 	</div>
 
