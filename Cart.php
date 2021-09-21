@@ -192,15 +192,20 @@
 ?>
 <html>
 <head>
+
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="CartCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<title>Cart</title>
+
 </head>
 <body>
+	
 	<header>
 		<nav>
 			<ul class="links">
@@ -213,20 +218,20 @@
 		</nav>
 		<ul class="icons">
 			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id = "press"></i></a></li>
-			<li><a href="#"><i class="fas fa-bell"></i></a></li>
+			<li><a href="Notifications.php" id="notifsss"><i class="fas fa-bell" id="bell"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
-		<li class = "dropdown"><a href = "Profile.php" class="pic">
-			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
-			</div>
-		</a>
-		<div class="dlinks">
-      			<a href="Profile.php">Profile</a>
-      			<a href="#">Help & Support</a>
-      			<a href="Logout.php">Logout</a>
-    	</div>
-    	</li>
+			<li class = "dropdown">
+				<a href = "Profile.php" class="pic">
+					<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp"></div>
+				</a>
+				<div class="dlinks">
+	      			<a href="Profile.php">Profile</a>
+	      			<a href="#">Help & Support</a>
+	      			<a href="Logout.php">Logout</a>
+	    		</div>
+	    	</li>
 		</ul>
 		
 	</header>
@@ -247,7 +252,6 @@
 					$pr = $idn."pr";
 					$un = $idn."un";
 					$temp = $row["productname"];
-					echo "\n";
 					?>
 					<script type="text/javascript">
 						arr["<?php echo $row["productname"];?>"] = <?php echo $row["order_quantity"];?>;

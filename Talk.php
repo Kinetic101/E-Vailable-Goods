@@ -37,6 +37,7 @@
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="TalkJS.js"></script>
+	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<title>Talk</title>
 </head>
 <body>
@@ -53,7 +54,7 @@
 		</nav>
 		<ul class="icons">
 			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
-			<li><a href="#"><i class="fas fa-bell"></i></a></li>
+			<li><a href="Notifications.php" id="notifsss"><i class="fas fa-bell" id="bell"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
@@ -82,10 +83,10 @@
 	</div>
 
 	<div id = "send">
-			<form action = "">
-				<input type = "text" name = "msg" placeholder = "Type your message here." id = "msg" />
-				<input type = "submit" name = "sendm" value = "Send" id = "sendm" />
-			</form>
-		</div>
+		<form action = "">
+			<input type = "text" name = "msg" placeholder = "Type your message here." id = "msg" />
+			<button type = "button" id = "sendm">Send</button>
+		</form>
+	</div>
 </body>
 </html>

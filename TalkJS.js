@@ -1,11 +1,11 @@
 $(document).ready(function(){
 	$("#contacts").animate({scrollTop: 0}, "normal");
-
+	
 	$("#sendm").click(function(){
 		var new_msg = $("#msg").val();
 		$.post("Send_Message.php", {msg: new_msg});
 		$("#msg").val("");
-		$("#chatbox").animate({scrollTop: $("#chatbox")[0].scrollHeight - 20}, "normal");
+		$("#chat").animate({scrollTop: $("#chat")[0].scrollHeight - 20}, "normal");
 		return false;
 	});
 
@@ -22,8 +22,8 @@ $(document).ready(function(){
 				}
 			}
 		});
+		return false;
 	};
-
 	setInterval(reload_msgs, 200);
 
 	function reload_contacts(){
@@ -34,7 +34,17 @@ $(document).ready(function(){
 				$("#contacts").html(html);
 			}
 		});
+		return false;
 	};
-
 	setInterval(reload_contacts, 200);
+
+	function change_but(){
+		if($('#msg').val() == '' || !$('#msg').val().replace(/\s/g, '').length){
+			$('#sendm')[0].disabled = true;
+		}
+		else{
+			$('#sendm')[0].disabled = false;
+		}
+	}
+	setInterval(change_but, 200);
 });

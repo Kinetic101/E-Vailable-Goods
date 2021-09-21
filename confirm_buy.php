@@ -120,6 +120,8 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="Confirm_BuyCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<title>Transaction Confirmation</title>
 </head>
 <body>
@@ -135,7 +137,7 @@
 		</nav>
 		<ul class="icons">
 			<li><a href="Cart.php"><i class="fas fa-shopping-cart"></i></a></li>
-			<li><a href="#"><i class="fas fa-bell"></i></a></li>
+			<li><a href="Notifications.php" id="press"><i class="fas fa-bell" id="bell"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
@@ -177,11 +179,11 @@
 				<div class = "uni">
 					<div class = "eman"> <?php echo $value[1]; ?></div>
 					<div class = "unit">x</div>
-					<div class = "quan"> <?php echo $value[0]." ".$value[4]; ?></div>
+					<span class = "quan"> <?php echo $value[0]." ".$value[4]; ?></span>
 					<div class = "unit">x</div>
-					<div class = "price">Php <?php echo $value[3]; ?></div>
+					<span class = "price">Php <?php echo $value[3]; ?></span>
 					<div class = "unit">=</div>
-					<div class = "tprice">Php <?php echo $value[3]*$value[0]; ?></div>
+					<span class = "tprice">Php <?php echo $value[3]*$value[0]; ?></span>
 				</div>
 				<span id = "market">From Market: <?php echo $value[2]; ?></span>
 				<br>
@@ -198,18 +200,10 @@
 		?>
 		</div>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			<div class = "cins">
-			<label id = "contact">Contact Number: </label>
-			<input type = "text" name = "contact" class = "field" id = "cn" value = "<?php echo $contact;?>"> <span class = "error">* <?php echo $contactErr;?></span>
-			<label id = "add">Address/Location: </label>
-			<input type = "text" name = "add" class = "field" id = "al" value = "<?php echo $add;?>"> <span class = "error">* <?php echo $addErr;?></span><br> 
-			</div>
-
-			
+			Contact Number: <input type = "text" name = "contact" class = "field" value = "<?php echo $contact;?>"> <span class = "error">* <?php echo $contactErr;?></span> <br>
+			Address/Location: <input type = "text" name = "add" class = "field" value = "<?php echo $add;?>"> <span class = "error">* <?php echo $addErr;?></span> <br>
 			<input type = "submit" value = "Cancel" id = "cancel" name = "cancel">
 			<input type = "submit" value = "Order" id = "order" name = "order">
-			<div class = "butts">
-			</div>
 		</form>
 	</div>
 </body>
