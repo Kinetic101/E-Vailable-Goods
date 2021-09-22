@@ -22,10 +22,14 @@
 	<?php
 	while($row = $res -> fetch_assoc()) {
 		?>
+		<div class = "plink">
 		<a href = "Talk.php?user=<?php echo $row["username"]; ?>">
-			<h5><img src="<?php echo $row["pic"]; ?>" id="chatur"/>
-			<?php echo $row["fname"]." ".$row["lname"]; ?> </h5>
+			<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
+			<h5>
+			<?php echo $row["fname"]." ".$row["lname"]; ?>
+			</h5> 
 		</a>
+		</div>
 		<?php
 	}
 ?>

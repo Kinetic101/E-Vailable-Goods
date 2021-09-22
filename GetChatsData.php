@@ -36,21 +36,26 @@
 				}
 				if($check_unr > 0){
 					?>
-					<a href = "Talk.php?user=<?php echo $row["to_user"]; ?>" style="font-weight: bold;"> 
-						<img src="<?php echo $url; ?>" class="chatpic">
-						<div class="chatn"> <?php echo $fn." ".$ln;?>  </div>
+					<div class = "cmate">
+					<a href = "Talk.php?user=<?php echo $row["to_user"]; ?>"> 
+						<div class = "chatpicc"><img src="<?php echo $url; ?>" class="chatpic" style="width:55px;height:55px"></div>
+						<h4> 
+							<?php echo $fn." ".$ln;?>  
+						</h4>
 					</a>
-					<br>
+					</div>
 					<?php
 				}
 				else{
 					?>
+					<div class = "cmate">
 					<a href = "Talk.php?user=<?php echo $row["to_user"]; ?>"> 
-						<img src="<?php echo $url; ?>" class="chatpic">
-						<div class="chatn"> <?php echo $fn." ".$ln;?>  </div>
+						<div class = "chatpicc"><img src="<?php echo $url; ?>" class="chatpic" style="width:55px;height:55px"></div>
+						<h4> 
+							<?php echo $fn." ".$ln;?>  
+						</h4>
 					</a>
-					<br>
-					<?php
+					</div>					<?php
 				}
 			}
 			$check[$row["to_user"]] = True;
@@ -72,20 +77,26 @@
 				}
 				if($check_unr > 0){
 					?>
-					<a href = "Talk.php?user=<?php echo $row["from_user"]; ?>" style="font-weight: bold;"> 
-						<img src="<?php echo $url; ?>" class="chatpic">
-						<div class="chatn"> <?php echo $fn." ".$ln;?>  </div>
+					<div class = "cmate">
+					<a href = "Talk.php?user=<?php echo $row["from_user"]; ?>"> 
+						<div class = "chatpicc"><img src="<?php echo $url; ?>" class="chatpic" style="width:55px;height:55px"></div>
+						<h4> 
+							<?php echo $fn." ".$ln;?>  
+						</h4>
 					</a>
-					<br>
+					</div>
 					<?php
 				}
 				else{
 					?>
+					<div class = "cmate">
 					<a href = "Talk.php?user=<?php echo $row["from_user"]; ?>"> 
-						<img src="<?php echo $url; ?>" class="chatpic">
-						<div class="chatn"> <?php echo $fn." ".$ln;?>  </div>
+						<div class = "chatpicc"><img src="<?php echo $url; ?>" class="chatpic" style="width:55px;height:55px"></div>
+						<h4> 
+							<?php echo $fn." ".$ln;?>  
+						</h4>
 					</a>
-					<br>
+					</div>
 					<?php
 				}
 			}

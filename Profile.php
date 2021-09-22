@@ -103,7 +103,7 @@
 		$ext = strtolower(end($lol));
 		$acc = array("jpg", "jpg", "png");
 		if(in_array($ext, $acc)){
-			if($_FILES["upload"]["size"] > 4000000){
+			if($_FILES["upload"]["size"] <= 4000000){
 				if(move_uploaded_file($_FILES["upload"]["tmp_name"], $upfile)){
 					rename($upfile, $updir.$_SESSION["usern"].".".$ext);
 					$upfile = $updir.$_SESSION["usern"].".".$ext;

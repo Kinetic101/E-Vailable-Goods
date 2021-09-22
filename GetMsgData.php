@@ -43,7 +43,7 @@
 		?>
 		<div id = "name"> 
 			<div class="pprof"> 
-				<img src="<?php echo $url; ?>" class="pdp"/>
+				<img src="<?php echo $url; ?>" class="pdp"/ style="height:100%;width:100%">
 			</div>
 			<div class="emannim">
 				<?php echo $fn." ".$ln; ?> 
@@ -92,9 +92,8 @@
 		<div id="name">
 			Please select a chat
 			<br>
-			<span>+-+-+-+-+-+</span>
-		</div>
-		<span>Please select a chat.</span>
+			</div>
+		
 		<?php
 	}
 ?>
