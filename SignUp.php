@@ -105,7 +105,12 @@
 				$emailErr = "Email is already being used";
 			}
 			if(!$error){
-				$user = $admin != "" ? True : False;
+				if($admin != ""){
+					$user = 1;
+				}
+				else{
+					$user = 0;
+				}
 				$insert = "INSERT INTO `credentials` 
 							(`username`, `email`, `pass`, `fname`, `lname`, `online`, `user_type`, `pic`) 
 							VALUES ('$uname', '$email', '$pword', '$fname', '$lname', 1, '$user', './ProfilePix/X5ksjijoa2i39aind239.jpg')";

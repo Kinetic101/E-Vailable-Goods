@@ -17,8 +17,8 @@
 	if(!empty($_POST["msg"])){	
 		$date = date("Y-m-d H:i:s");
 		$insert = "INSERT INTO `messages`
-					(`from_user`, `to_user`, `message`, `time`)
-					VALUES('$_SESSION[usern]', '$_SESSION[visit_user]', '$_POST[msg]', '$date')";
+					(`from_user`, `to_user`, `message`, `time`, `unread`)
+					VALUES('$_SESSION[usern]', '$_SESSION[visit_user]', '$_POST[msg]', '$date', 1)";
 		$conn -> query($insert);
 	}
 ?>

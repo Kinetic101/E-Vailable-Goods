@@ -30,28 +30,71 @@
 		while($row = $res -> fetch_assoc()){
 			$ol = $row["online"];
 		}
-		/* START: nakafix dapat position neto*/
-		echo "<div id = name>".$_SESSION["visit_user"]."<br>"; 
+		$selecto = "SELECT `fname`,`lname`,`pic`
+					FROM `credentials`
+					WHERE `username` = '$_SESSION[visit_user]'";
+		$resu = $conn -> query($selecto);
+		$fn = $ln = $url = "";
+		while($rowi = $resu -> fetch_assoc()){
+			$fn = $rowi["fname"];
+			$ln = $rowi["lname"];
+			$url = $rowi["pic"];
+		}
+		?>
+		<div id = "name"> 
+			<div class="pprof"> 
+				<img src="<?php echo $url; ?>" class="pdp"/>
+			</div>
+			<div class="emannim">
+				<?php echo $fn." ".$ln; ?> 
+			<br>
+		<?php
 		if($ol){
-			echo "<span class = ol>Online</span>";
+			?>
+			<span class = "ol">Online</span>
+			<?php
 		}
 		else{
-			echo "<span class = notol>Not Online</span>";
+			?>
+			<span class = "notol">Not Online</span>
+			<?php
 		}
-		echo "</div><div id = msgss>";
-		/* END */
+		?>
+			</div>
+		</div>
+		<div id = "msgss">
+		<?php
 		$res = $conn -> query($select);
 		while($row = $res -> fetch_assoc()){
 			if($row["from_user"] == $_SESSION["usern"]){
-				echo "<div class = from>".$row["message"]."</div><br><div class = br></div>";
+				?>
+				<div class = "from"> <?php echo $row["message"]; ?> </div>
+				<br>
+				<div class = "br"></div>
+				<?php
 			}
 			else{
-				echo "<div class = to>".$row["message"]."</div><br><div class = brto></div>";
+				?>
+				<div class = "to"> <?php echo $row["message"]; ?> </div>
+				<br>
+				<div class = "brto"></div>
+				<?php
 			}
 		}
 		echo "</div>";
+		$update = "UPDATE `messages`
+					SET `unread` = 0
+					WHERE `to_user` = '$_SESSION[usern]' AND `from_user` = '$_SESSION[visit_user]'";
+		$conn -> query($update);
 	}
 	else{
-		echo "Please select a chat.";
+		?>
+		<div id="name">
+			Please select a chat
+			<br>
+			<span>+-+-+-+-+-+</span>
+		</div>
+		<span>Please select a chat.</span>
+		<?php
 	}
 ?>

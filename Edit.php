@@ -41,6 +41,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel = "stylesheet" href = "EditCSS.css"> 
+	<link rel="stylesheet" type="text/css" href="OnlineCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="GetOnlineJS.js"></script>
@@ -54,7 +55,7 @@
 		<nav>
 			<ul class="links">
 				<li><a href="Research.php">Buy</a></li>
-				<li><a href="Talk.php">Talk</a></li>
+				<li id="here"><a href="Talk.php">Talk</a></li>
 				<li><a href="Edit.php" id = "press">Edit</a></li>
 				<li><a href="Suggest.php">Suggest</a></li>
 				<li><a href="About.php">About</a></li>

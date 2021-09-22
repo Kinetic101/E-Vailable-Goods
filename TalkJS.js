@@ -1,11 +1,23 @@
 $(document).ready(function(){
 	$("#contacts").animate({scrollTop: 0}, "normal");
 	
-	$("#sendm").click(function(){
+	function send_message(){
 		var new_msg = $("#msg").val();
 		$.post("Send_Message.php", {msg: new_msg});
 		$("#msg").val("");
 		$("#chat").animate({scrollTop: $("#chat")[0].scrollHeight - 20}, "normal");
+		return false;
+	}
+
+	$("#sendm").click(send_message);
+
+	$("#msg").keypress(function(e){
+		if(e.keyCode == 13){
+			$("#sendm").click(send_message());
+		}
+		else{
+			$("#msg").val($("#msg").val()+e.key);
+		}
 		return false;
 	});
 
@@ -36,10 +48,10 @@ $(document).ready(function(){
 		});
 		return false;
 	};
-	setInterval(reload_contacts, 200);
+	setInterval(reload_contacts, 500);
 
 	function change_but(){
-		if($('#msg').val() == '' || !$('#msg').val().replace(/\s/g, '').length){
+		if(!$('#msg').val().replace(/\s/g, '').length){
 			$('#sendm')[0].disabled = true;
 		}
 		else{
@@ -47,4 +59,15 @@ $(document).ready(function(){
 		}
 	}
 	setInterval(change_but, 200);
+
+	function reload_active(){
+		$.ajax({
+			url: "GetOnlineDataInTalk.php",
+			cache: false,
+			success: function(html){
+				$("#active").html(html);
+			}
+		});
+	}
+	setInterval(reload_active, 500);
 });

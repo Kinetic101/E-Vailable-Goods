@@ -89,6 +89,40 @@ header{
 	width: auto;
 }
 
+.pprof{
+	position: absolute;
+	top: 0px;
+	width: 45px;
+	height: 45px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.pdp{
+	height: 100%;
+	width: auto;
+}
+
+.emannim{
+	position: absolute;
+	left: 65px;
+}
+
+.chatpic{
+	position: static;
+	top: 0px;
+	width: 45px;
+	height: 45px;
+	overflow: hidden;
+	border-radius: 50%;
+}
+
+.chatn{
+	position: relative;
+	left: 20%;
+	width: auto;
+}
+
 nav{
 	margin-right: auto;
 }
@@ -134,12 +168,12 @@ ul{
 	display: block;
 }
 
-#press{
+#talk{
 	border-bottom: 2px solid #4A7C59;
 	padding: 10%;
 }
 
-#press:hover{
+#talk:hover{
 	border: none;
 }
 
@@ -190,6 +224,14 @@ ul{
 	background-color: #FFFCF2;
 	border: 1px solid #ccc;
 	border-radius: 15px;
+	width:  65vw;
+	z-index: 2;
+	height: 50px;
+}
+
+#msgss{
+	position: relative;
+	z-index: 1;
 }
 
 .ol{
@@ -275,6 +317,10 @@ ul{
 	background-color: #F1F7F1;
 }
 
+#sendm:enabled{
+	cursor: pointer;
+}
+
 #sendm{
 	color: white;
 	margin-right: 3vw;
@@ -282,12 +328,15 @@ ul{
 	border: none;
 	font-size: 13px;
 	border-radius: 5px;
-	cursor: pointer;
 	font-family: "Arial";
 	background-color: #4A7C59;
 }
 
-#sendm:hover{
+#sendm:disabled{
+	background-color: gray;
+}
+
+#sendm:enabled:hover{
 	background-color: #3D6649;
 }
 
@@ -296,7 +345,6 @@ ul{
 	color: green;
 }
 
-/*
 #active{
 	position: absolute;
 	margin-top: 1%;
@@ -319,7 +367,6 @@ ul{
 	text-align: center;
 }
 
-
 h5{
 	display: block;
 	margin-top: 10%; 
@@ -333,4 +380,3 @@ h5{
 	border-radius: 10px;
 }
 
-*/
