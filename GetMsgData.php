@@ -68,16 +68,14 @@
 		while($row = $res -> fetch_assoc()){
 			if($row["from_user"] == $_SESSION["usern"]){
 				?>
-				<div class = "from"> <?php echo $row["message"]; ?> </div>
-				<br>
+				<span class = "from"><?php echo $row["message"]; ?></span>
 				<div class = "br"></div>
 				<?php
 			}
 			else{
 				?>
 				<div class = "to"> <?php echo $row["message"]; ?> </div>
-				<br>
-				<div class = "brto"></div>
+				<div class = "br"></div>
 				<?php
 			}
 		}

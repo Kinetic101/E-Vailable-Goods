@@ -206,7 +206,7 @@ h4{
 	text-align: left;
 	display: block; 
 	margin-left: 0px;
-	padding: 5% 0 5% 15px;
+	padding: 20px 0 5% 15px;
 	font-size: 14px;
 	color: #171614;
 	font-family: "Arial", sans-serif;
@@ -255,6 +255,9 @@ h4{
 }
 
 #msgss{
+	display: flex;
+	flex-direction: column;
+
 	position: relative;
 	z-index: 1;
 }
@@ -273,50 +276,31 @@ h4{
 
 .br{
 	display: block;
-	margin-bottom: 35px;
+	margin-bottom: 5px;
 }
-
-.brto{
-	display: block;
-	margin-bottom: 10px;
-}
-
 
 .to{
-	display: inline-block;
-	position: relative;
-	left: 0;
-	clear: both;
+	align-self: flex-start;
 	text-align: left;
 	max-width: 45%;
-	padding: 10px 15px;
+	padding: 8px 11px;
+	font-size: 14px;
+	line-height: 20px;
 	border-radius: 15px;
 	background-color: #ccc;
 }
 
-.from{
-	display: block;
-	background-color: #4A7C59;
+.from{	
+	align-self: flex-end;
+	font-family: "Verdana", sans-serif;
+	background-color: #66A378;
 	text-align: left;
-	position: relative;
-	float: right;
-	right: 0;
-	clear: both;
 	max-width: 45%;
 	height: auto;
-	padding: 10px 15px;
-	border-radius: 15px 10px 10px 15px;
-}
-
-.from::after{
-	display: block;
-	content: "";
-	clear: both;
-}
-
-.from::before{
-	content: "";
-	clear: both;
+	padding: 8px 11px;
+	font-size: 14px;
+	line-height: 20px;
+	border-radius: 15px;
 }
 
 #send{
