@@ -21,9 +21,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="AboutCSS.css">
+	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
+	<script type="text/javascript" src="LoadingJS.js"></script>
 	<title>About Us</title>
 </head>
 <body>
@@ -75,6 +77,20 @@
 		<br><br>
 		Thousands if not, millions of kilograms of food are thrown to waste because of oversupply. However, even though there is a presence of oversupply, many of our fellow Filipinos regularly sleep with little to no food in their stomachs. With this, we do not just want to lessen food wastes but, also give a light of hope to our fellow countrymen who unfortunately do not have the ability to put food on their tables.
 	</p>
+	</div>
+
+	<div id="loading">
+		<div class="content">
+			<div class="load-wrapp">
+				<div class="load">
+					<p>Loading</p>
+					<div class="line"></div>
+					<div class="line"></div>
+					<div class="line"></div>
+				</div>
+			</div>
+		</div>
+		<!--Credits to @Manoz from CodePen for the loading screen-->
 	</div>
 		
 </body>

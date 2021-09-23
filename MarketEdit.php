@@ -47,11 +47,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="MarketEditCSS.css">
+	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="MarketEditJS.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
+	<script type="text/javascript" src="LoadingJS.js"></script>
 	<title><?php echo $_SESSION["market"]?> Edit</title>
 
 </head>	
@@ -153,36 +155,38 @@
 			<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<?php
 					$i  = 0;
+					$arr = [];
 					$res = $conn -> query($select);
 					while($row = $res -> fetch_assoc()){
 						$idname1 = "num1".strval($i);
 						$temp_var1 = "a".$row["productname"];
+						$arr[$row["productname"]] = $row["quantity"];
 						?>
 						<div class = "filler">
 							<input id = "<?php echo $idname1; ?>" type = "number"  name = "<?php echo $temp_var1; ?>" value = "<?php echo $row["quantity"]; ?>" min = 0>
 							<button class = "minus" id = "minus1" type = "button" 
-								onclick = "function inc(){
+								onclick = "function dec(){
 												document.getElementById('<?php echo $idname1; ?>').stepDown();
-												if(document.getElementById('<?php echo $idname1; ?>').value > 0){
+												if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
 													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
 												}
 												else{
 													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
 												}
 											}
-											inc();"
+											dec();"
 											>-</button>
 							<button class = "plus" id = "plus1" type = "button"
-								onclick = "function dec(){
+								onclick = "function inc(){
 												document.getElementById('<?php echo $idname1; ?>').stepUp();
-												if(document.getElementById('<?php echo $idname1; ?>').value > 0){
+												if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
 													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
 												}
 												else{
 													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
 												}
 											}
-											dec();">+</button>
+											inc();">+</button>
 						</div>
 						<hr>
 						<?php
@@ -199,32 +203,33 @@
 					while($row = $res -> fetch_assoc()){
 						$idname2 = "num2".strval($i);
 						$temp_var2 = "b".$row["productname"];
+						$arr2[$row["productname"]] = $row["price"];
 						?>
 						<div class = "filler">
 							<input id = "<?php echo $idname2; ?>" type = "number"  name = "<?php echo $temp_var2; ?>" value = "<?php echo $row["price"]; ?>" min = 0>
 							<button class = "minus" id = "minus2" type = "button"
-								onclick = "function inc(){
+								onclick = "function dec(){
 												document.getElementById('<?php echo $idname2; ?>').stepDown();
-												if(document.getElementById('<?php echo $idname2; ?>').value > 0){
+												if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
 													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
 												}
 												else{
 													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: none;';
 												}
 											}
-											inc();">-
+											dec();">-
 							</button>
 							<button class = "plus" id = "plus2" type = "button"
-								onclick = "function dec(){
+								onclick = "function inc(){
 												document.getElementById('<?php echo $idname2; ?>').stepUp();
-												if(document.getElementById('<?php echo $idname2; ?>').value > 0){
+												if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
 													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
 												}
 												else{
 													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: none;';
 												}
 											}
-											dec();">+
+											inc();">+
 							</button>
 						</div>
 						<hr>
@@ -248,9 +253,41 @@
 		</form>
 	</div>
 	<button type = "button" id = "show">Add Products</button>
+
+	<div id="loading">
+		<div class="content">
+			<div class="load-wrapp">
+				<div class="load">
+					<p>Loading</p>
+					<div class="line"></div>
+					<div class="line"></div>
+					<div class="line"></div>
+				</div>
+			</div>
+		</div>
+		<!--Credits to @Manoz from CodePen for the loading screen-->
+	</div>
+
 </body>
 </html>
 <?php 
+	$on = mysqli_fetch_array($conn -> query("SELECT COUNT(*)
+												FROM `credentials`
+												WHERE `username` = '$_SESSION[usern]' AND `user_type` = 1"))[0];
+	if($on == 0){
+		?>
+		<script type = "text/javascript">
+			swal({
+					title: "Unauthorized", 
+					text: "You do not have market admin priviliges.", 
+					icon: "error"
+				})
+				.then(function(){
+					location.href = 'Research.php';
+				});
+		</script>
+		<?php
+	}
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		$res = $conn -> query($select);
 		$i = $cnt = 0;
@@ -329,7 +366,7 @@
 					swal({
 						title: "Invalid", 
 						text: "None of the products have been changed", 
-						icon: "warning"
+						icon: "error"
 					})
 					.then(function(){
 						location.href = 'MarketEdit.php';

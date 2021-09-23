@@ -22,5 +22,5 @@ $(document).ready(function(){
 		}
 		return false;
 	}
-	setInterval(change_but, 200);
+	setInterval(change_but, 10);
 })

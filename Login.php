@@ -103,6 +103,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel = "stylesheet" href = "LoginCSS.css"> 
+	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="LoginJS.js"></script>
+	<script type="text/javascript" src="LoadingJS.js"></script>
 	<title>Log In</title>
 </head>
 <body>
@@ -121,11 +125,26 @@
 	</div>
 	<div class = "login">
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			E-Mail: <br> <input type = "text" name = "email" class = "field" value = "<?php echo $email;?>"> <span class = "error">* <?php echo $emailErr;?></span> <br>
-			Password: <br> <input type = "password" name = "pword" class = "field"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
+			E-Mail: <br> <input type = "text" name = "email" class = "field" value = "<?php echo $email;?>" id="email"> <span class = "error">* <?php echo $emailErr;?></span> <br>
+			Password: <br> <input type = "password" name = "pword" class = "field" id="pword"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
 			<br>
-			<input type = "submit" value = "Log In" class = "button">
+			<input type = "submit" value = "Log In" class = "button" id="submit">
 		</form>
 	</div>
+
+	<div id="loading">
+		<div class="content">
+			<div class="load-wrapp">
+				<div class="load">
+					<p>Loading</p>
+					<div class="line"></div>
+					<div class="line"></div>
+					<div class="line"></div>
+				</div>
+			</div>
+		</div>
+		<!--Credits to @Manoz from CodePen for the loading screen-->
+	</div>
+
 </body>
 </html>

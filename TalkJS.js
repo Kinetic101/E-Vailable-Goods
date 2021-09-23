@@ -58,7 +58,7 @@ $(document).ready(function(){
 			$('#sendm')[0].disabled = false;
 		}
 	}
-	setInterval(change_but, 200);
+	setInterval(change_but, 10);
 
 	function reload_active(){
 		$.ajax({

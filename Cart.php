@@ -95,10 +95,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="CartCSS.css">
+	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
+	<script type="text/javascript" src="LoadingJS.js"></script>
 	<title>Cart</title>
 
 </head>
@@ -219,6 +221,20 @@
 
 	</div>
 
+	<div id="loading">
+		<div class="content">
+			<div class="load-wrapp">
+				<div class="load">
+					<p>Loading</p>
+					<div class="line"></div>
+					<div class="line"></div>
+					<div class="line"></div>
+				</div>
+			</div>
+		</div>
+		<!--Credits to @Manoz from CodePen for the loading screen-->
+	</div>
+
 </body>
 </html>
 <?php
@@ -278,7 +294,10 @@
 					swal({
 						title: "Invalid", 
 						text: "You have not selected at least one product", 
-						icon: "warning"
+						icon: "error"
+					})
+					.then(function(){
+						location.href = 'Confirm_Buy.php';
 					});
 				</script>
 				<?php

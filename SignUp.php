@@ -45,8 +45,8 @@
 		} 
 		else{
 		    $uname = test_input($_POST["uname"]);
-		    if(!preg_match("/^[a-zA-Z-' ]*$/",$uname)){
-      			$unameErr = "Only letters and white space allowed";
+		    if(!preg_match('/^[a-zA-Z0-9]{5,}$/', $uname)){
+      			$unameErr = "White space is not allowed";
       			$error = True;
     		}
 		}
@@ -139,7 +139,11 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="SignUpJS.js"></script>
+	<script type="text/javascript" src="LoadingJS.js"></script>
 	<link rel = "stylesheet" href = "SignUpCSS.css"> 
+	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<title>Sign Up</title>
 
 </head>
@@ -160,17 +164,32 @@
 
 	<div class = "login"> 
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			Username: <br> <input type = "text" name = "uname" class = "field" value = "<?php echo $uname?>"> <span class = "error">* <?php echo $unameErr;?></span> <br>
-			E-Mail: <br>  <input type = "text" name = "email" class = "field" value = "<?php echo $email?>"> <span class = "error">* <?php echo $emailErr;?></span> <br>
-			Password: <br> <input type = "password" name = "pword" class = "field"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
-			First Name: <br> <input type = "text" name = "fname" class = "field" value = "<?php echo $fname?>"> <span class = "error">* <?php echo $fnameErr;?></span> <br>
-			Last Name: <br> <input type = "text" name = "lname" class = "field" value = "<?php echo $lname?>"> <span class = "error">* <?php echo $lnameErr;?></span> <br>
+			Username: <br> <input type = "text" name = "uname" class = "field" value = "<?php echo $uname?>" id="uname"> <span class = "error" id="unameE">* <?php echo $unameErr;?></span> <br>
+			E-Mail: <br>  <input type = "text" name = "email" class = "field" value = "<?php echo $email?>"id="email"> <span class = "error">* <?php echo $emailErr;?></span> <br>
+			Password: <br> <input type = "password" name = "pword" class = "field" id="pword"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
+			First Name: <br> <input type = "text" name = "fname" class = "field" value = "<?php echo $fname?>" id="fname"> <span class = "error">* <?php echo $fnameErr;?></span> <br>
+			Last Name: <br> <input type = "text" name = "lname" class = "field" value = "<?php echo $lname?>" id="lname"> <span class = "error">* <?php echo $lnameErr;?></span> <br>
 			<input type = "radio" id = "admin" name = "user_type"  value = "admin" <?php if($admin != ""){echo "checked";}?>> Market Admin <span class = "error"> * <?php echo $adminErr; ?> </span> <br>
 			<input type = "radio" id = "cust" name = "user_type" value = "cust" <?php if($cust != ""){echo "checked";}?>> Customer <span class = "error"> * <?php echo $custErr; ?> </span> 
 			<br>
 			<br>
-			<input type = "submit" value = "Sign Up" class = "button">
+			<input type = "submit" value = "Sign Up" class = "button" id="submit">
 		</form>
 	</div>
+
+	<div id="loading">
+		<div class="content">
+			<div class="load-wrapp">
+				<div class="load">
+					<p>Loading</p>
+					<div class="line"></div>
+					<div class="line"></div>
+					<div class="line"></div>
+				</div>
+			</div>
+		</div>
+		<!--Credits to @Manoz from CodePen for the loading screen-->
+	</div>
+	
 </body>
 </html>

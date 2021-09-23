@@ -37,9 +37,20 @@
 				if($check_unr > 0){
 					?>
 					<div class = "cmate">
-					<a href = "Talk.php?user=<?php echo $row["to_user"]; ?>"> 
+					<?php
+						if($_SESSION["visit_user"] == $row["to_user"]){
+						?>
+						<a href = "#"> 
+						<?php
+						}
+						else{
+						?>
+						<a href = "Talk.php?user=<?php echo $row["to_user"]; ?>"> 
+						<?php
+						}
+					?>
 						<div class = "chatpicc"><img src="<?php echo $url; ?>" class="chatpic" style="width:55px;height:55px"></div>
-						<h4> 
+						<h4 style="font-weight: bold;"> 
 							<?php echo $fn." ".$ln;?>  
 						</h4>
 					</a>
@@ -49,9 +60,20 @@
 				else{
 					?>
 					<div class = "cmate">
-					<a href = "Talk.php?user=<?php echo $row["to_user"]; ?>"> 
+					<?php
+						if($_SESSION["visit_user"] == $row["to_user"]){
+						?>
+						<a href = "#"> 
+						<?php
+						}
+						else{
+						?>
+						<a href = "Talk.php?user=<?php echo $row["to_user"]; ?>"> 
+						<?php
+						}
+					?>
 						<div class = "chatpicc"><img src="<?php echo $url; ?>" class="chatpic" style="width:55px;height:55px"></div>
-						<h4> 
+						<h4 style="font-weight: normal;"> 
 							<?php echo $fn." ".$ln;?>  
 						</h4>
 					</a>
@@ -78,9 +100,20 @@
 				if($check_unr > 0){
 					?>
 					<div class = "cmate">
-					<a href = "Talk.php?user=<?php echo $row["from_user"]; ?>"> 
+					<?php
+						if($_SESSION["visit_user"] == $row["from_user"]){
+						?>
+						<a href = "#"> 
+						<?php
+						}
+						else{
+						?>
+						<a href = "Talk.php?user=<?php echo $row["from_user"]; ?>"> 
+						<?php
+						}
+					?>
 						<div class = "chatpicc"><img src="<?php echo $url; ?>" class="chatpic" style="width:55px;height:55px"></div>
-						<h4> 
+						<h4 style="font-weight: bold;"> 
 							<?php echo $fn." ".$ln;?>  
 						</h4>
 					</a>
@@ -90,9 +123,20 @@
 				else{
 					?>
 					<div class = "cmate">
-					<a href = "Talk.php?user=<?php echo $row["from_user"]; ?>"> 
+					<?php
+						if($_SESSION["visit_user"] == $row["from_user"]){
+						?>
+						<a href = "#"> 
+						<?php
+						}
+						else{
+						?>
+						<a href = "Talk.php?user=<?php echo $row["from_user"]; ?>"> 
+						<?php
+						}
+					?>
 						<div class = "chatpicc"><img src="<?php echo $url; ?>" class="chatpic" style="width:55px;height:55px"></div>
-						<h4> 
+						<h4 style="font-weight: normal;"> 
 							<?php echo $fn." ".$ln;?>  
 						</h4>
 					</a>

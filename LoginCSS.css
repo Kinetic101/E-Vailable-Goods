@@ -55,8 +55,14 @@ input{
 	border-radius: 7.5px;
 	opacity: 0.8;
 }
-.button:hover{
+
+.button:disabled{
+	background-color: gray;
+}
+
+.button:enabled:hover{
 	opacity: 1;
+	cursor: pointer;
 }
 
 header{
