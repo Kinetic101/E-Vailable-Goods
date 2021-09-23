@@ -34,9 +34,11 @@
 		header("Location: Edit.php");		
 	}
 	else{
-		echo "<script type = text/javascript>
-				alert('You do not have market admin priviliges.');
-				location.href = 'Research.php';
-				</script>";
+		?>
+		<script type = text/javascript>
+			alert('You do not have market admin priviliges.');
+			location.href = 'Research.php';
+		</script>
+		<?php
 	}
 ?>

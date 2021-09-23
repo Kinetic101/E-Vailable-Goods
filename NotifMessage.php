@@ -4,6 +4,9 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
+	if($_SESSION["notif_id"] == ""){
+		header("Notifications.php");
+	}
 	$server = "localhost";
 	$usname = "root";
 	$pass = "";
@@ -12,14 +15,30 @@
 	if($conn -> connect_error){
 		die("Connection Failed: ".$conn->connect_error);
 	}
+
+	$update = "UPDATE `notifications`
+				SET `unread` = 0
+				WHERE `id` = '$_SESSION[notif_id]'";
+	$conn -> query($update);
+
+	$select = "SELECT *
+				FROM `notifications`
+				WHERE `id` = '$_SESSION[notif_id]'";
+	$tit = $msg = "";
+	$res = $conn -> query($select);
+	while($row = $res -> fetch_assoc()){
+		$tit = $row["notif_title"];
+		$msg = $row["notif_msg"];
+	}
 ?>
 <html>
 <head>
+
 	<meta charset = "utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
-	<link rel = "stylesheet" href = "NotificationsCSS.css"> 
+	<link rel = "stylesheet" href = "NotifMessageCSS.css"> 
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="AreThereNotifs.js"></script>
@@ -59,35 +78,14 @@
 		</ul>
 	</header>
 
-	<!--Palagay ng Mark All as Read-->
-	<div id="notifs">
-		<?php
-			$select = "SELECT *
-						FROM `notifications`
-						WHERE `username`  = '$_SESSION[usern]'
-						ORDER BY `id` DESC";
-			$res = $conn -> query($select);
-			while($row = $res -> fetch_assoc()){
-			?>
-				<div class="notif_box">
-					<a href="Reroute(Notifications_to_NotifMessage).php?id=<?php echo $row["id"]; ?>">
-						<?php
-						if($row["unread"] == 0){
-						?>
-							<h3 style="font-weight: normal;"><?php echo $row["notif_title"]; ?></h3>
-						<?php
-						}
-						else{
-						?>
-							<h3 style="font-weight: bold;"><?php echo $row["notif_title"]; ?></h3>
-						<?php
-						}
-						?>
-					</a>
-				</div>
-			<?php
-			}
-		?>
+	<div id="back">
+		<a href="Notifications.php"><i class="fas fa-arrow-left"></i></a>
 	</div>
+
+	<div id="notifff">
+		<h2><?php echo $tit; ?></h2>
+		<h5><?php echo $msg; ?></h5>
+	</div>
+
 </body>
 </html>

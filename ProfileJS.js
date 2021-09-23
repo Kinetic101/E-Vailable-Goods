@@ -11,6 +11,16 @@ $(document).ready(function(){
 	}
 
 	$("#magic1").click(showh);
-
 	$("#magic2").click(showh);
-});
+
+	function change_but(){
+		if(!$('#opassw').val().replace(/\s/g, '').length || !$('#npassw').val().replace(/\s/g, '').length || !$('#rnpassw').val().replace(/\s/g, '').length){
+			$('#changepass')[0].disabled = true;
+		}
+		else{
+			$('#changepass')[0].disabled = false;
+		}
+		return false;
+	}
+	setInterval(change_but, 200);
+})

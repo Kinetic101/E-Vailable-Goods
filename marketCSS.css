@@ -304,4 +304,5 @@ hr{
 
 .addtocart:hover{
 	opacity: 0.8;
+	cursor: pointer;
 }

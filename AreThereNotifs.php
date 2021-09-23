@@ -7,6 +7,9 @@
 		header("Location: SignUp.php");
 	}
 
+	$_SESSION["market"] = "";
+	$_SESSION["visit_user"] = "";
+
 	$server = "localhost";
 	$usname = "root";
 	$pass = "";
@@ -15,18 +18,17 @@
 	if($conn -> connect_error){
 		die("Connection Failed: ".$conn -> connect_error);
 	}
-
 	$select_count = "SELECT COUNT(*) 
-						FROM `messages` 
-						WHERE `to_user` = '$_SESSION[usern]' AND `unread` = 1";
+						FROM `notifications` 
+						WHERE `username` = '$_SESSION[usern]' AND `unread` = 1";
 	if(mysqli_fetch_array($conn -> query($select_count))[0] > 0){
 		?>
-		<a href="Talk.php" id="talk" style = "color: red;" title="You currently have unread messages">Talk</a>
+		<i class="fas fa-bell" id="press"></i>
 		<?php
 	}
 	else{
 		?>
-		<a href="Talk.php" id="talk" title="You currently do not have unread messages">Talk</a>
-		<?php
+		<i class="fas fa-bell-slash" id="press"></i>
+		<?php	
 	}
 ?>

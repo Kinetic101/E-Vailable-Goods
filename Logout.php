@@ -24,6 +24,8 @@
 	unset($_SESSION["visit_user"]);
 	unset($_SESSION["product"]);
 	unset($_SESSION["prof_pic"]);
+	unset($_SESSION["buy_arr"]);
+	unset($_SESSION["notif_id"]);
 	session_destroy();
 	header("Location: Login.php");
 ?>

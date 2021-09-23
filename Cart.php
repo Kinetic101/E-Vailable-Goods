@@ -86,109 +86,6 @@
 		</script>
 		<?php
 	}
-
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-
-		//If buy button is clicked.
-
-		if(isset($_POST["buy"])){
-			$cnt = 0;
-			$error = False;
-			$_SESSION["buy_arr"] = array();
-			for($i = 0; $i < $n; $i++){
-				$idn = "id".strval($i);
-				$num = $idn."num";
-				$pro = $idn."pro";
-				$mar_roxas = $idn."mar_roxas";
-				$pr = $idn."pr";
-				$un = $idn."un";
-				if(isset($_POST[$idn])){
-					if($_POST[$num] == 0){
-						$error = True;
-						break;
-					}
-					$_SESSION["buy_arr"][$cnt++] = [$_POST[$num], $_POST[$pro], $_POST[$mar_roxas], $_POST[$pr], $_POST[$un]];
-				}
-			}
-			if($cnt > 0 && !$error){
-				for($i = 0; $i < $n; $i++){
-					$idn = "id".strval($i);
-					$num = $idn."num";
-					$pro = $idn."pro";
-					$mar_roxas = $idn."mar_roxas";
-					$pr = $idn."pr";
-					$un = $idn."un";
-					$update = "UPDATE `cart` 
-								SET `order_quantity` = '$_POST[$num]'
-								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
-
-				}
-				?>
-				<script type = "text/javascript"> 
-					alert('You will now be redirected to the confirmation page.');
-					location.href  = 'Confirm_Buy.php';
-				</script>
-				<?php
-			}
-			else{
-				$_SESSION["buy_arr"] = array();
-				?>
-				<script type = "text/javascript"> 
-					alert('Invalid Details!'); 
-				</script>
-				<?php
-			}
-		}
-
-		//If remove button is clicked.
-
-		else if(isset($_POST["remove"])){
-			for($i = 0; $i < $n; $i++){
-				$idn = "id".strval($i);
-				$num = $idn."num";
-				$pro = $idn."pro";
-				$mar_roxas = $idn."mar_roxas";
-				if(isset($_POST[$idn])){
-					$delete = "DELETE FROM `cart`
-								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
-					$conn -> query($delete);
-				}
-			}
-			?>
-			<script type = text/javascript> 
-				alert('All selected products have been removed!'); 
-			</script>
-			<?php
-		}
-
-		//If save button is clicked.
-
-		else if(isset($_POST["save"])){
-			for($i = 0; $i < $n; $i++){
-				$idn = "id".strval($i);
-				$num = $idn."num";
-				$pro = $idn."pro";
-				$mar_roxas = $idn."mar_roxas";
-				$update = "";
-				if($_POST[$num] > 0){
-					$update = "UPDATE `cart` 
-								SET `order_quantity` = '$_POST[$num]'
-								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
-				}
-				else{
-					$update = "DELETE FROM `cart`
-								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
-				}
-				$conn -> query($update);
-			}
-			?>
-			<script type = text/javascript> 
-				alert('All products have been saved!'); 
-			</script>
-			<?php
-		}
-	}
-
 ?>
 <html>
 <head>
@@ -200,6 +97,7 @@
 	<link rel="stylesheet" type="text/css" href="CartCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<title>Cart</title>
 
@@ -217,8 +115,9 @@
 			</ul>
 		</nav>
 		<ul class="icons">
-			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id = "press"></i></a></li>
-			<li><a href="Notifications.php" id="notifsss"><i class="fas fa-bell" id="bell"></i></a></li>
+			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="press"></i></a></li>
+			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell-slash" id="bell"></i></a></li>
+			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
@@ -322,3 +221,130 @@
 
 </body>
 </html>
+<?php
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+		//If buy button is clicked.
+
+		if(isset($_POST["buy"])){
+			$cnt = 0;
+			$error = False;
+			$_SESSION["buy_arr"] = array();
+			for($i = 0; $i < $n; $i++){
+				$idn = "id".strval($i);
+				$num = $idn."num";
+				$pro = $idn."pro";
+				$mar_roxas = $idn."mar_roxas";
+				$pr = $idn."pr";
+				$un = $idn."un";
+				if(isset($_POST[$idn])){
+					if($_POST[$num] == 0){
+						$error = True;
+						break;
+					}
+					$_SESSION["buy_arr"][$cnt++] = [$_POST[$num], $_POST[$pro], $_POST[$mar_roxas], $_POST[$pr], $_POST[$un]];
+				}
+			}
+			if($cnt > 0 && !$error){
+				for($i = 0; $i < $n; $i++){
+					$idn = "id".strval($i);
+					$num = $idn."num";
+					$pro = $idn."pro";
+					$mar_roxas = $idn."mar_roxas";
+					$pr = $idn."pr";
+					$un = $idn."un";
+					$update = "UPDATE `cart` 
+								SET `order_quantity` = '$_POST[$num]'
+								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
+
+				}
+				?>
+				<script type = "text/javascript"> 
+					swal({
+						title: "Redirecting", 
+						text: "You will now ne redirected to the confirmation page", 
+						icon: "warning"
+					})
+					.then(function(){
+						location.href = 'Confirm_Buy.php';
+					});
+				</script>
+				<?php
+			}
+			else{
+				$_SESSION["buy_arr"] = array();
+				?>
+				<script type = "text/javascript"> 
+					swal({
+						title: "Invalid", 
+						text: "You have not selected at least one product", 
+						icon: "warning"
+					});
+				</script>
+				<?php
+			}
+		}
+
+		//If remove button is clicked.
+
+		else if(isset($_POST["remove"])){
+			for($i = 0; $i < $n; $i++){
+				$idn = "id".strval($i);
+				$num = $idn."num";
+				$pro = $idn."pro";
+				$mar_roxas = $idn."mar_roxas";
+				if(isset($_POST[$idn])){
+					$delete = "DELETE FROM `cart`
+								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
+					$conn -> query($delete);
+				}
+			}
+			?>
+			<script type = text/javascript> 
+				swal({
+						title: "Products Removed", 
+						text: "All of the selected products have been removed from your cart", 
+						icon: "success"
+					})
+					.then(function(){
+						location.href = 'Cart.php';
+					});
+			</script>
+			<?php
+		}
+
+		//If save button is clicked.
+
+		else if(isset($_POST["save"])){
+			for($i = 0; $i < $n; $i++){
+				$idn = "id".strval($i);
+				$num = $idn."num";
+				$pro = $idn."pro";
+				$mar_roxas = $idn."mar_roxas";
+				$update = "";
+				if($_POST[$num] > 0){
+					$update = "UPDATE `cart` 
+								SET `order_quantity` = '$_POST[$num]'
+								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
+				}
+				else{
+					$update = "DELETE FROM `cart`
+								WHERE `productname` = '$_POST[$pro]' AND `username` = '$_SESSION[usern]' AND `market` = '$_POST[$mar_roxas]'";
+				}
+				$conn -> query($update);
+			}
+			?>
+			<script type = text/javascript> 
+				swal({
+						title: "Products Saved", 
+						text: "All selected products have been successfully changed", 
+						icon: "success"
+					})
+					.then(function(){
+						location.href = 'Cart.php';
+					});
+			</script>
+			<?php
+		}
+	}
+?>

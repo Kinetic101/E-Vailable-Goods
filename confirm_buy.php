@@ -136,8 +136,9 @@
 			</ul>
 		</nav>
 		<ul class="icons">
-			<li><a href="Cart.php"><i class="fas fa-shopping-cart"></i></a></li>
-			<li><a href="Notifications.php" id="press"><i class="fas fa-bell" id="bell"></i></a></li>
+			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
+			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell-slash" id="bell"></i></a></li>
+			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
@@ -146,9 +147,9 @@
 			</div>
 		</a>
 		<div class="dlinks">
-      			<a href="Profile.php">Profile</a>
-      			<a href="#">Help & Support</a>
-      			<a href="Logout.php">Logout</a>
+      		<a href="Profile.php">Profile</a>
+      		<a href="#">Help & Support</a>
+      		<a href="Logout.php">Logout</a>
     	</div>
     	</li>
 		</ul>
@@ -201,17 +202,23 @@
 		</div>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			<div class = "cins">
-			<label id = "contact">Contact Number: </label>
-			<input type = "text" name = "contact" class = "field" id = "cn" value = "<?php echo $contact;?>"> <span class = "error">* <?php echo $contactErr;?></span>
-			<label id = "add">Address/Location: </label>
-			<input type = "text" name = "add" class = "field" id = "al" value = "<?php echo $add;?>"> <span class = "error">* <?php echo $addErr;?></span><br> 
+				<label id = "contact">Contact Number: </label>
+				<input type = "text" name = "contact" class = "field" id = "cn" value = "<?php echo $contact;?>"> <span class = "error">* <?php echo $contactErr;?></span>
+
+				<!--Palitan natin to, instead na address/location lang iseparate natin into Town (towns sa Partido) tas respective brgys. ng kada town gawin mo lang yung dropdown inputs tas ako na dun sa nagapalit palit, yung pareho sa lazada/shopee so bale:
+
+				Municipality (drodown)
+				Brgy (dropdow)
+				Street Address (simple text box)-->
+
+				<label id = "add">Address/Location: </label>
+				<input type = "text" name = "add" class = "field" id = "al" value = "<?php echo $add;?>"> <span class = "error">* <?php echo $addErr;?></span><br> 
 			</div>
 
 			
 			<input type = "submit" value = "Cancel" id = "cancel" name = "cancel">
 			<input type = "submit" value = "Order" id = "order" name = "order">
-			<div class = "butts">
-			</div>
+			<div class = "butts"></div>
 		</form>
 	</div>
 </body>

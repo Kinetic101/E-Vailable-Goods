@@ -32,6 +32,7 @@
 	$opwErr = $npwErr = $rnpwErr = "";
 	$opw = $npw = $rnpw = "";
 	$error = $input = False;
+
 	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])){
 
 
@@ -71,18 +72,7 @@
 			  		$fin = $res["pass"];
 			  	}
 			  	if($fin == $opw){
-				  	if($npw == $rnpw){
-				  		$update = "UPDATE `credentials` SET pass = '$npw' WHERE `username` = '$_SESSION[usern]'";
-				  		if($conn->query($update) == True){
-				  			?>
-				  			<script type='text/javascript'> 
-				  				alert("Password successfully changed"); 
-				  				location.href = "Profile.php";
-				  			</script>
-				  			<?php
-				  		}
-				  	}
-				  	else{
+				  	if($npw != $rnpw){
 				  		$rnpwErr = $npwErr = "New Passwords do not match";
 				  	}
 				}
@@ -96,38 +86,6 @@
 		}
 	}
 
-	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["up"]) && !isset($FILES["upload"])){
-		$updir = "./ProfilePix/";
-		$upfile = $updir.basename($_FILES["upload"]["name"]);
-		$lol = explode('.', $_FILES["upload"]["name"]);
-		$ext = strtolower(end($lol));
-		$acc = array("jpg", "jpg", "png");
-		if(in_array($ext, $acc)){
-			if($_FILES["upload"]["size"] <= 4000000){
-				if(move_uploaded_file($_FILES["upload"]["tmp_name"], $upfile)){
-					rename($upfile, $updir.$_SESSION["usern"].".".$ext);
-					$upfile = $updir.$_SESSION["usern"].".".$ext;
-					$update = "UPDATE `credentials` SET `pic` = '$upfile' WHERE `username` = '$_SESSION[usern]'";
-					$conn -> query($update);
-					$_SESSION["prof_pic"] = $upfile;
-				}
-			}
-			else{
-				?>
-				<script type="text/javascript"> 
-					alert('Maximum file size exceeded!'); 
-				</script>
-				<?php
-			}
-		}
-		else{
-			?>
-			<script type="text/javascript"> 
-				alert('Invalid file format!'); 
-			</script>
-			<?php
-		}
-	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -139,6 +97,7 @@
 	<link rel = "stylesheet" href = "ProfileCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="ProfileJS.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<title>Profile</title>
@@ -155,8 +114,9 @@
 			</ul>
 		</nav>
 		<ul class="icons">
-			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
-			<li><a href="Notifications.php" id="notifsss"><i class="fas fa-bell" id="bell"></i></a></li>
+			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
+			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell-slash" id="bell"></i></a></li>
+			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
@@ -213,13 +173,13 @@
 	<div class = "changep">
 		<h3 class = "passer">Change your password</h3>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			<input type = "text" name = "opw" placeholder = "Old Password"> <span class = "error">* <?php echo $opwErr;?></span> 
+			<input type = "text" name = "opw" placeholder = "Old Password" id="opassw"> <span class = "error">* <?php echo $opwErr;?></span> 
 			<br>
-			<input type = "text" name = "npw" placeholder = "New Password"> <span class = "error">* <?php echo $npwErr;?></span> 
+			<input type = "text" name = "npw" placeholder = "New Password" id="npassw"> <span class = "error">* <?php echo $npwErr;?></span> 
 			<br> 
-			<input type = "text" name = "rnpw" placeholder = "Re-enter New Password"> <span class = "error">* <?php echo $rnpwErr;?></span>
+			<input type = "text" name = "rnpw" placeholder = "Re-enter New Password" id="rnpassw"> <span class = "error">* <?php echo $rnpwErr;?></span>
 			<br>
-			<input type = "submit" value = "Change Password" class = "button" name = "submit">
+			<input type = "submit" value = "Change Password" class = "button" name = "submit" id="changepass">
 		</form>
 	</div>
 	<div class = "logout">
@@ -227,3 +187,71 @@
 	</div>
 </body>
 </html>
+<?php
+	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])){
+		$find = "SELECT `pass` FROM `credentials` WHERE `username` = '$_SESSION[usern]'";
+		$query = $conn->query($find);
+		$fin = "";
+		while($res = $query->fetch_assoc()){
+			$fin = $res["pass"];
+		}
+		if($npw == $rnpw && $fin == $opw && $input && !$error){
+			$update = "UPDATE `credentials` SET pass = '$npw' WHERE `username` = '$_SESSION[usern]'";
+			if($conn->query($update) == True){
+				?>
+				<script type="text/javascript"> 
+					swal({
+						title: "Password Changed", 
+						text: "You have successfully changed your password", 
+						icon: "success"
+					})
+					.then(function(){
+						location.href = "Profile.php";
+					});
+				</script>
+				<?php
+			}
+		}
+	}
+
+	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["up"]) && !isset($FILES["upload"])){
+		$updir = "./ProfilePix/";
+		$upfile = $updir.basename($_FILES["upload"]["name"]);
+		$lol = explode('.', $_FILES["upload"]["name"]);
+		$ext = strtolower(end($lol));
+		$acc = array("jpg", "jpg", "png");
+		if(in_array($ext, $acc)){
+			if($_FILES["upload"]["size"] <= 4000000){
+				if(move_uploaded_file($_FILES["upload"]["tmp_name"], $upfile)){
+					rename($upfile, $updir.$_SESSION["usern"].".".$ext);
+					$upfile = $updir.$_SESSION["usern"].".".$ext;
+					$update = "UPDATE `credentials` SET `pic` = '$upfile' WHERE `username` = '$_SESSION[usern]'";
+					$conn -> query($update);
+					$_SESSION["prof_pic"] = $upfile;
+				}
+			}
+			else{
+				?>
+				<script type="text/javascript"> 
+					swal({
+						title: "Warning", 
+						text: "Maximum file size has exceeded 4MB", 
+						icon: "error"
+					});
+				</script>
+				<?php
+			}
+		}
+		else{
+			?>
+			<script type="text/javascript"> 
+				swal({
+						title: "Warning", 
+						text: "Invalid file format", 
+						icon: "error"
+					});
+			</script>
+			<?php
+		}
+	}
+?>

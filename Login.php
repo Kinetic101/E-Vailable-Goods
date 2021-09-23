@@ -20,6 +20,8 @@
 		unset($_SESSION["visit_user"]);
 		unset($_SESSION["product"]);
 		unset($_SESSION["prof_pic"]);
+		unset($_SESSION["buy_arr"]);
+		unset($_SESSION["notif_id"]);
 	}
 
 	//Function to trim unnecessary characters from input
@@ -76,6 +78,7 @@
 						$_SESSION["usern"] = $uname;
 						$_SESSION["market"] = "";
 						$_SESSION["visit_user"] = "";
+						$_SESSION["notif_id"] = "";
 						$_SESSION["buy_arr"] = array();
 						$update = "UPDATE `credentials` SET `online` = 1 WHERE `email` = '$email'";
 				  		$conn -> query($update);

@@ -38,83 +38,6 @@
 	$prodname = $quan = $price = $unit = "";
 	$err = "";
 	$cnt = 0;
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		$res = $conn -> query($select);
-		$i = $cnt = 0;
-		if(empty($_POST["prodname"])){
-			$cnt++;
-		}
-		else{
-			$prodname = test_input($_POST["prodname"]);
-		}
-		if(empty($_POST["quan"])){
-			$cnt++;
-		}
-		else{
-			$quan = (double)$_POST["quan"];
-		}
-		if(empty($_POST["unit"])){
-			$cnt++;
-		}
-		else{
-			$unit = test_input($_POST["unit"]);
-		}
-		if(empty($_POST["price"])){
-			$cnt++;
-		}
-		else{
-			$price = (double) $_POST["price"];
-		}
-		if($cnt != 0 && $cnt != 4){
-			$err = "This field is required";
-		}
-		$cnt = 0;
-		if($err == ""){
-			if($unit != ""){
-				$cnt++;
-				$insert = "INSERT INTO `market`
-							(`productname`, `quantity`, `unit`, `price`, `market_name`)
-							VALUES ('$prodname', '$quan', '$unit', '$price', '$_SESSION[market]')";
-				$conn -> query($insert);
-				echo $prodname." ".$quan." ".$price." ".$unit;																		 
-			}
-			while($row = $res -> fetch_assoc()){
-				if($_POST["b".$row["productname"]] != $row["price"] || $_POST["a".$row["productname"]] != $row["quantity"]){
-					$cnt++;
-					$temp_var = $_POST["a".$row["productname"]];
-					$update = "UPDATE `market` 
-								SET `quantity` = '$temp_var' 
-								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
-					$conn -> query($update);
-					$temp_var = $_POST["b".$row["productname"]];
-					$update = "UPDATE `market` 
-								SET `price` = '$temp_var' 
-								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
-					$conn -> query($update);
-					
-				}
-				$i++;
-			}
-
-			if($cnt > 0){
-				?>
-				<script type = "text/javascript">
-					alert('All changes have been saved.'); 
-					location.href = 'MarketEdit.php';
-				</script>
-				<?php
-			}
-			else{
-				?>
-				<script type = "text/javascript">
-					alert('No products have been changed.'); 
-					location.href = 'MarketEdit.php';
-				</script>
-				<?php
-			}
-
-		}
-	}
 ?>
 <html>
 <head>
@@ -126,6 +49,7 @@
 	<link rel="stylesheet" type="text/css" href="MarketEditCSS.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="MarketEditJS.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<title><?php echo $_SESSION["market"]?> Edit</title>
@@ -143,8 +67,9 @@
 			</ul>
 		</nav>
 		<ul class="icons">
-			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
-			<li><a href="Notifications.php" id="notifsss"><i class="fas fa-bell" id="bell"></i></a></li>
+			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
+			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell-slash" id="bell"></i></a></li>
+			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
 		</ul>
 		
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
@@ -225,7 +150,7 @@
 		<div class = "editp">
 			<h3>Edit Quantity</h3>
 			<hr id ="fhr">
-			<form method = post action = <?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>>
+			<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 				<?php
 					$i  = 0;
 					$res = $conn -> query($select);
@@ -238,12 +163,24 @@
 							<button class = "minus" id = "minus1" type = "button" 
 								onclick = "function inc(){
 												document.getElementById('<?php echo $idname1; ?>').stepDown();
+												if(document.getElementById('<?php echo $idname1; ?>').value > 0){
+													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
+												}
+												else{
+													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
+												}
 											}
 											inc();"
 											>-</button>
 							<button class = "plus" id = "plus1" type = "button"
 								onclick = "function dec(){
 												document.getElementById('<?php echo $idname1; ?>').stepUp();
+												if(document.getElementById('<?php echo $idname1; ?>').value > 0){
+													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
+												}
+												else{
+													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
+												}
 											}
 											dec();">+</button>
 						</div>
@@ -268,12 +205,24 @@
 							<button class = "minus" id = "minus2" type = "button"
 								onclick = "function inc(){
 												document.getElementById('<?php echo $idname2; ?>').stepDown();
+												if(document.getElementById('<?php echo $idname2; ?>').value > 0){
+													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
+												}
+												else{
+													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: none;';
+												}
 											}
 											inc();">-
 							</button>
 							<button class = "plus" id = "plus2" type = "button"
 								onclick = "function dec(){
 												document.getElementById('<?php echo $idname2; ?>').stepUp();
+												if(document.getElementById('<?php echo $idname2; ?>').value > 0){
+													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
+												}
+												else{
+													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: none;';
+												}
 											}
 											dec();">+
 							</button>
@@ -287,13 +236,13 @@
 		</div>
 		<div id = "float_form" style = "display: none;">
 			<label id = "prodname">Product Name:</label>
-			<input id = "prodname" type = "text" name = "prodname" value = <?php echo $prodname;?> > <span class = "error">* <?php echo $err;?> </span> <br>
+			<input id = "prodname" type = "text" name = "prodname" value = "<?php echo $prodname;?>" > <span class = "error">* <?php echo $err;?> </span> <br>
 			<label id = "quan">Quantity:</label> 
-			<input id = "quan" type = "number" name = "quan" min = 0 value = <?php echo $quan;?>> <span class = "error">* <?php echo $err;?> </span> <br>
+			<input id = "quan" type = "number" name = "quan" min = 0 value = "<?php echo $quan;?>"> <span class = "error">* <?php echo $err;?> </span> <br>
 			<label id = "unit">Unit:</label> 
-			<input id = "unit" type = "text" name = "unit" value = <?php echo $unit;?>> <span class = "error">* <?php echo $err;?> </span> <br>
+			<input id = "unit" type = "text" name = "unit" value = "<?php echo $unit;?>"> <span class = "error">* <?php echo $err;?> </span> <br>
 			<label id = "price">Price:</label>  
-			<input id = "price" type = "number" name = "price" min = 0 value = <?php echo $price;?>> <span class = "error">* <?php echo $err;?> </span> <br>
+			<input id = "price" type = "number" name = "price" min = 0 value = "<?php echo $price;?>"> <span class = "error">* <?php echo $err;?> </span> <br>
 		</div>
 		<input type = "submit" value = "Save" class = "save">
 		</form>
@@ -301,3 +250,94 @@
 	<button type = "button" id = "show">Add Products</button>
 </body>
 </html>
+<?php 
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		$res = $conn -> query($select);
+		$i = $cnt = 0;
+		if(empty($_POST["prodname"])){
+			$cnt++;
+		}
+		else{
+			$prodname = test_input($_POST["prodname"]);
+		}
+		if(empty($_POST["quan"])){
+			$cnt++;
+		}
+		else{
+			$quan = (double)$_POST["quan"];
+		}
+		if(empty($_POST["unit"])){
+			$cnt++;
+		}
+		else{
+			$unit = test_input($_POST["unit"]);
+		}
+		if(empty($_POST["price"])){
+			$cnt++;
+		}
+		else{
+			$price = (double) $_POST["price"];
+		}
+		if($cnt != 0 && $cnt != 4){
+			$err = "This field is required";
+		}
+		$cnt = 0;
+		if($err == ""){
+			if($unit != ""){
+				$cnt++;
+				$insert = "INSERT INTO `market`
+							(`productname`, `quantity`, `unit`, `price`, `market_name`)
+							VALUES ('$prodname', '$quan', '$unit', '$price', '$_SESSION[market]')";
+				$conn -> query($insert);
+				echo $prodname." ".$quan." ".$price." ".$unit;																		 
+			}
+			while($row = $res -> fetch_assoc()){
+				if($_POST["b".$row["productname"]] != $row["price"] || $_POST["a".$row["productname"]] != $row["quantity"]){
+					$cnt++;
+					$temp_var = $_POST["a".$row["productname"]];
+					$update = "UPDATE `market` 
+								SET `quantity` = '$temp_var' 
+								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
+					$conn -> query($update);
+					$temp_var = $_POST["b".$row["productname"]];
+					$update = "UPDATE `market` 
+								SET `price` = '$temp_var' 
+								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
+					$conn -> query($update);
+					
+				}
+				$i++;
+			}
+
+			if($cnt > 0){
+				?>
+				<script type = "text/javascript">
+					swal({
+						title: "Changes Saved", 
+						text: "All changes have been saved", 
+						icon: "success"
+					})
+					.then(function(){
+						location.href = 'MarketEdit.php';
+					});
+				</script>
+				<?php
+			}
+			else{
+				?>
+				<script type = "text/javascript">
+					swal({
+						title: "Invalid", 
+						text: "None of the products have been changed", 
+						icon: "warning"
+					})
+					.then(function(){
+						location.href = 'MarketEdit.php';
+					});
+				</script>
+				<?php
+			}
+
+		}
+	}
+?>

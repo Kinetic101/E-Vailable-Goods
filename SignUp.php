@@ -20,6 +20,9 @@
 		unset($_SESSION["market"]);
 		unset($_SESSION["visit_user"]);
 		unset($_SESSION["product"]);
+		unset($_SESSION["prof_pic"]);
+		unset($_SESSION["buy_arr"]);
+		unset($_SESSION["notif_id"]);
 	}
 
 	//Function to trim unnecessary characters from input
@@ -119,6 +122,7 @@
 				$_SESSION["market"] = "";
 				$_SESSION["visit_user"] = "";
 				$_SESSION["buy_arr"] = array();
+				$_SESSION["notif_id"] = "";
 				if($conn -> query($insert) == False){
 					die("Error: ".$insert."<br>".$conn -> error);
 				}

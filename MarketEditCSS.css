@@ -356,6 +356,7 @@ input[type=text]{
 
 .save:hover{
 	opacity: 0.8;
+	cursor: pointer;
 }
 
 #show{
@@ -377,4 +378,5 @@ input[type=text]{
 
 #show:hover{
 	opacity: 0.8;
+	cursor: pointer;
 }

@@ -134,6 +134,9 @@ ul{
 	border: none;
 }
 
+/* End of Nav bar*/
+
+/* Stanbdy muna to (for searching users)
 .search-bar input[type=text] {
   padding: 6px;
   margin-top: 1.1vh;
@@ -155,3 +158,5 @@ ul{
 .search-bar button:hover {
   background: #ccc;
 }
+/*
+

@@ -7,8 +7,6 @@
 		header("Location: SignUp.php");
 	}
 
-	$_SESSION["market"] = "";
-
 	$server = "localhost";
 	$usname = "root";
 	$pass = "";
@@ -23,12 +21,12 @@
 						WHERE `username` = '$_SESSION[usern]' AND `unread` = 1";
 	if(mysqli_fetch_array($conn -> query($select_count))[0] > 0){
 		?>
-		<i class="fas fa-bell" id="bell" style="color: red;"></i>
+		<i class="fa fa-bell" id="bellalarm" title="You currently have notifications" style="color: red;"></i>
 		<?php
 	}
 	else{
 		?>
-		<i class="fas fa-bell" id="bell" style="color: white;"></i>
+		<i class="fas fa-bell-slash" id="bell" title="You currently do not have notifications"></i>
 		<?php
 	}
 ?>

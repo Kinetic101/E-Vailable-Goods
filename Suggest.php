@@ -34,30 +34,6 @@
 	$suggErr = "";
 	$sugg = "";
 	$error = $input = False;
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		$input = True;
-		if(empty($_POST["sugg"])){
-		    $suggErr = "Username is required";
-		    $error = True;
-		} 
-		else{
-		    $sugg = test_input($_POST["sugg"]);
-		}
-		if($input){
-			if(!$error){
-				$insert = "INSERT INTO `suggestions` (`entry`) VALUES ('$sugg')";
-				$conn -> query($insert);	
-				header("Location: Suggest.php");
-			}
-			else{
-				?>
-				<script type = 'text/javascript'> 
-					alert("Empty suggestions are not considered suggestions."); 
-				</script>");
-				<?php
-			}
-		}
-	}
 ?>
 
 <html>
@@ -70,7 +46,9 @@
 	<link rel = "stylesheet" href = "SuggestCSS.css"> 
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
+	<script type="text/javascript" src="SuggestJS.js"></script>
 	<title>Suggest</title>
 
 </head>
@@ -86,8 +64,9 @@
 			</ul>
 		</nav>
 		<ul class="icons">
-			<li><a href="Cart.php"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
-			<li><a href="Notifications.php" id="notifsss"><i class="fas fa-bell" id="bell"></i></a></li>
+			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
+			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell-slash" id="bell"></i></a></li>
+			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
@@ -119,12 +98,31 @@
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			<br> 
 			<h4 class = "comm">Suggest here</h4>
-			<textarea type = "text" name = "sugg" class = "field" placeholder="Write your comment.."></textarea><span class = "error">* <?php echo $suggErr;?></span> <br>
+			<textarea type = "text" name = "sugg" class = "field" placeholder="Write your comment.." id="suggest"></textarea><span class = "error">*</span> <br>
 			<br>
-			<input type = "submit" value = "Suggest" class = "button">
+			<button type = "submit" class = "button" id="post_sugg">Suggest</button>
 		</form>
 	</div>
 	</div>
 
 </body>
 </html>
+<?php
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		$input = True;
+		if(empty($_POST["sugg"])){
+		    $suggErr = "Suggestion is required";
+		    $error = True;
+		} 
+		else{
+		    $sugg = test_input($_POST["sugg"]);
+		}
+		if($input){
+			if(!$error){
+				$insert = "INSERT INTO `suggestions` (`entry`) VALUES ('$sugg')";
+				$conn -> query($insert);	
+				header("Location: Suggest.php");
+			}
+		}
+	}
+?>
