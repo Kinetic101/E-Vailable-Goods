@@ -16,6 +16,8 @@
 		die("Connection Failed: ".$conn->connect_error);
 	}
 
+	$_SESSION["author"] = 0;
+
 	$update = "UPDATE `notifications`
 				SET `unread` = 0
 				WHERE `id` = '$_SESSION[notif_id]'";
@@ -30,6 +32,7 @@
 		$tit = $row["notif_title"];
 		$msg = $row["notif_msg"];
 	}
+
 ?>
 <html>
 <head>

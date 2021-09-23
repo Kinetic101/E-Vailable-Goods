@@ -12,6 +12,7 @@
 	if($conn -> connect_error){
 		die("Connection Failed: ".$conn->connect_error);
 	}
+	$_SESSION["author"] = 0;
 ?>
 
 <html>

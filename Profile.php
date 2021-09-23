@@ -17,6 +17,7 @@
 
 	$_SESSION["market"] = "";
 	$_SESSION["product"] = "";
+	$_SESSION["author"] = 0;
 	
 	//Function to trim unnecessary characters from input
 
@@ -146,7 +147,7 @@
 			Username: <?php echo $_SESSION["usern"];?>
 			<br>
 			<?php
-				$select = "SELECT `email`,`fname`,`lname` FROM `credentials` WHERE `username` = '$_SESSION[usern]'";
+				$select = "SELECT `email`,`fname`,`lname`,`user_type` FROM `credentials` WHERE `username` = '$_SESSION[usern]'";
 				$res = $conn->query($select);
 				while($row = $res->fetch_assoc()) {
 					echo 
@@ -154,7 +155,14 @@
 					"<br>".
 					"First Name: ".$row["fname"].
 					"<br>".
-					"Last Name: ".$row["lname"];
+					"Last Name: ".$row["lname"].
+					"<br>"."User Type: ";
+					if($row["user_type"] == 0){
+						echo "Customer";
+					}
+					else{
+						echo "Market Administrator";
+					}
 				}
 			?>
 		</h4>

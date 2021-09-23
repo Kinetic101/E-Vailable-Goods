@@ -18,6 +18,7 @@
 
 	$_SESSION["market"] = "";
 	$_SESSION["product"] = "";
+	$_SESSION["author"] = 0;
 
 	//Function to trim unnecessary characters from input
 

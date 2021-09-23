@@ -8,8 +8,12 @@
 		header("Location: SignUp.php");
 	}
 
-	if($_SESSION["market"] == ""){
+	else if($_SESSION["market"] == ""){
 		header("Location: Research.php");
+	}
+
+	else if($_SESSION["author"] == 0){
+		header("Location: Edit.php");
 	}
 
 	$_SESSION["visit_user"] = "";

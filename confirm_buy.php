@@ -10,6 +10,7 @@
 	$_SESSION["market"] = "";
 	$_SESSION["product"] = "";
 	$_SESSION["visit_user"] = "";
+	$_SESSION["author"] = 0;
 
 	if(empty($_SESSION["buy_arr"])){
 		header("Location: Cart.php");

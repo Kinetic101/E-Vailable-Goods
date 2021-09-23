@@ -21,6 +21,7 @@
 	$_SESSION["market"] = "";
 	$_SESSION["product"] = "";
 	$_SESSION["buy_arr"] = array();
+	$_SESSION["author"] = 0;
 
 	if(isset($_GET["user"])){
 		$_SESSION["visit_user"] = $_GET["user"];

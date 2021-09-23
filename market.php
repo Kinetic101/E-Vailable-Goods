@@ -13,6 +13,7 @@
 	}
 
 	$_SESSION["visit_user"] = "";
+	$_SESSION["author"] = 0;
 
 
 	$server = "localhost";

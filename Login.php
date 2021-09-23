@@ -22,6 +22,7 @@
 		unset($_SESSION["prof_pic"]);
 		unset($_SESSION["buy_arr"]);
 		unset($_SESSION["notif_id"]);
+		unset($_SESSION["author"]);
 	}
 
 	//Function to trim unnecessary characters from input
@@ -66,13 +67,15 @@
 				  		$fin = $res["pass"];
 				  	}
 					if($fin == $pword){
-						$find = "SELECT `username`, `pic` FROM `credentials` WHERE `email` = '$email'";
+						$find = "SELECT `username`, `pic`, `user_type` FROM `credentials` WHERE `email` = '$email'";
 						$query = $conn -> query($find);
 					  	$uname = "";
 					  	$ppic = "";
+					  	$ust = 0;
 					  	while($res = $query -> fetch_assoc()){
 					  		$uname = $res["username"];
 					  		$ppic = $res["pic"];
+					  		$ust = $res["user_type"];
 					  	}
 					  	$_SESSION["prof_pic"] = $ppic;
 						$_SESSION["usern"] = $uname;
@@ -80,9 +83,15 @@
 						$_SESSION["visit_user"] = "";
 						$_SESSION["notif_id"] = "";
 						$_SESSION["buy_arr"] = array();
+						$_SESSION["author"] = 0;
 						$update = "UPDATE `credentials` SET `online` = 1 WHERE `email` = '$email'";
 				  		$conn -> query($update);
-						header("Location: Research.php");
+				  		if($ust == 0){
+							header("Location: Research.php");
+						}
+						else{
+							header("Location: Edit.php");
+						}
 					}
 					else{
 						$pwordErr = "Incorrect Password!";

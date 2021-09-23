@@ -167,6 +167,22 @@ ul{
 	margin-top: 5%;
 }
 
+.mprof{
+	width: 9vw;
+	height: 9vw;
+	overflow: hidden;
+	border-radius: 50%;
+	margin: 1% 0vw 0vw 19.75vw; 
+	text-align: center;
+}
+
+.mdp{
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	object-position: 50% 50%;
+}
+
 #uname{
 	font-family: "Arial";
 	font-weight: 1000;

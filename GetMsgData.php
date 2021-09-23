@@ -43,7 +43,7 @@
 		?>
 		<div id = "name"> 
 			<div class="pprof"> 
-				<img src="<?php echo $url; ?>" class="pdp" style="height:100%;width:100%">
+				<a href="Reroute(Dashboard_to_VisitUser).php?user=<?php echo $_SESSION["visit_user"]?>"><img src="<?php echo $url; ?>" class="pdp" style="height:100%;width:100%"></a>
 			</div>
 			<div class="emannim">
 				<?php echo $fn." ".$ln; ?> 

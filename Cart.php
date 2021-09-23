@@ -14,6 +14,7 @@
 	$_SESSION["product"] = "";
 	$_SESSION["visit_user"] = "";
 	$_SESSION["buy_arr"] = array();
+	$_SESSION["author"] = 0;
 
 	$server = "localhost";
 	$usname = "root";

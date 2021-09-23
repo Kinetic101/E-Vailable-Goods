@@ -15,6 +15,7 @@
 	$_SESSION["market"] = "";
 	$_SESSION["product"] = "";
 	$_SESSION["buy_arr"] = array();
+	$_SESSION["author"] = 0;
 
 	$server = "localhost";
 	$usname = "root";
@@ -73,21 +74,36 @@
 	</header>
 
 	<div class = "info">
-		<div class = "cred">
-
-			<?php
-			$select = "SELECT `username`, `fname`, `lname`
+		<?php
+			$select = "SELECT `pic`, `username`, `fname`, `lname`, `user_type`
 						FROM `credentials` WHERE `username` = '$_SESSION[visit_user]'";
 			$res = $conn -> query($select);
-			$uname = $fname = $lname = "";
+			$uname = $fname = $lname = $utype = $pic = "";
 			while($row = $res -> fetch_assoc()){
 				$uname = $row["username"];
 				$fname = $row["fname"];
 				$lname = $row["lname"];
+				$utype = $row["user_type"];
+				$pic = $row["pic"];
 			}
-			?>
-			<div id = uname>Username: <?php echo $uname; ?></div>
-			<div id = name><?php echo $fname." ".$lname; ?></div>
+		?>
+		<div class="mprof">
+			<img src="<?php echo $pic; ?>" alt="Avatar" class="mdp">
+		</div>
+		<div class = "cred">
+
+			
+			<div id = "uname">Username: <?php echo $uname; ?></div>
+			<div id = "name"><?php 
+					echo $fname." ".$lname."<br>"; 
+					if($utype == 0){
+						echo "Customer";
+					}
+					else{
+						echo "Market Administrator";
+					}
+				?>
+			</div>
 			<div class = "msgbox">
 				<a href="Talk.php?user=<?php echo $_SESSION["visit_user"]; ?>" class = "msg">Message</a>
 			</div>

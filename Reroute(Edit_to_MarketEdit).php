@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <?php
 
 	//Connect to SQL database
@@ -29,7 +30,27 @@
 		if($conn -> connect_error){
 			die("Connection Failed: ".$conn->connect_error);
 		}
-
-		header("Location: MarketEdit.php");
 	}
 ?>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Authorization</title>
+	<link rel="stylesheet" type="text/css" href="AuthorizationCSS.css">
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" src="AuthorizationJS.js"></script>
+</head>
+<body>
+
+	<a href="Edit.php"><i class="fa fa-arrow-left"></i></a>
+	<h4>For security purposes, you are to input the required security code to access the edit page for <?php echo $_SESSION["market"]; ?></h4>
+	<form action="">
+		<input name="password" type="password" id="pw">
+		<button type="button" id="submit">Submit</button>
+	</form>
+	<div id="message"></div>
+
+</body>
+</html>
