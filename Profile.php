@@ -45,21 +45,39 @@
 		    $error = True;
 		  } 
 		  else{
-		    $opw = test_input($_POST["opw"]);
+		  	if(strlen($_POST["opw"]) > 25){
+		  		$opwErr = "Nice try but try again";
+		  		$error = True;
+		  	}
+		  	else{
+		    	$opw = test_input($_POST["opw"]);
+		    }
 		  }
 		  if(empty($_POST["npw"])){
 		    $npwErr = "This field is required";
 		    $error = True;
 		  } 
 		  else{
-		    $npw = test_input($_POST["npw"]);
+		  	if(strlen($_POST["npw"]) > 25){
+		  		$npwErr = "Nice try but try again";
+		  		$error = True;
+		  	}
+		  	else{
+		    	$npw = test_input($_POST["npw"]);
+		    }
 		  }
 		  if(empty($_POST["rnpw"])) {
 		    $rnpwErr = "This field is required";
 		    $error = True;
 		  } 
 		  else{
-		    $rnpw = test_input($_POST["rnpw"]);
+		  	if(strlen($_POST["rnpw"]) > 25){
+		  		$rnpwErr = "Nice try but try again";
+		  		$error = True;
+		  	}
+		  	else{
+		    	$rnpw = test_input($_POST["rnpw"]);
+		    }
 		  }
 
 		  //Update
@@ -72,7 +90,7 @@
 			  	while($res = $query->fetch_assoc()){
 			  		$fin = $res["pass"];
 			  	}
-			  	if($fin == $opw){
+			  	if($fin == md5($opw)){
 				  	if($npw != $rnpw){
 				  		$rnpwErr = $npwErr = "New Passwords do not match";
 				  	}
@@ -81,7 +99,7 @@
 					$opwErr = "Incorrect Old Password!";
 				}
 			}
-			else{
+			else if(($opwErr != "Nice try but try again" && $npwErr != "Nice try but try again" && $rnpwErr != "Nice try but try again") && $error){
 				$rnpwErr = $npwErr = $opwErr = "Invalid Details";
 			}
 		}
@@ -183,11 +201,11 @@
 	<div class = "changep">
 		<h3 class = "passer">Change your password</h3>
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			<input type = "text" name = "opw" placeholder = "Old Password" id="opassw"> <span class = "error">* <?php echo $opwErr;?></span> 
+			<input type = "text" name = "opw" placeholder = "Old Password" id="opassw" maxlength="25"> <span class = "error">* <?php echo $opwErr;?></span> 
 			<br>
-			<input type = "text" name = "npw" placeholder = "New Password" id="npassw"> <span class = "error">* <?php echo $npwErr;?></span> 
+			<input type = "text" name = "npw" placeholder = "New Password" id="npassw" maxlength="25"> <span class = "error">* <?php echo $npwErr;?></span> 
 			<br> 
-			<input type = "text" name = "rnpw" placeholder = "Re-enter New Password" id="rnpassw"> <span class = "error">* <?php echo $rnpwErr;?></span>
+			<input type = "text" name = "rnpw" placeholder = "Re-enter New Password" id="rnpassw" maxlength="25"> <span class = "error">* <?php echo $rnpwErr;?></span>
 			<br>
 			<input type = "submit" value = "Change Password" class = "button" name = "submit" id="changepass">
 		</form>
@@ -221,6 +239,7 @@
 			$fin = $res["pass"];
 		}
 		if($npw == $rnpw && $fin == $opw && $input && !$error){
+			$npw = md5($npw);
 			$update = "UPDATE `credentials` SET pass = '$npw' WHERE `username` = '$_SESSION[usern]'";
 			if($conn->query($update) == True){
 				?>
@@ -253,6 +272,18 @@
 					$update = "UPDATE `credentials` SET `pic` = '$upfile' WHERE `username` = '$_SESSION[usern]'";
 					$conn -> query($update);
 					$_SESSION["prof_pic"] = $upfile;
+					?>
+					<script type="text/javascript"> 
+						swal({
+							title: "Profile Picture Updated", 
+							text: "You have successfully changed your profile picture", 
+							icon: "success"
+						})
+						.then(function(){
+							location.href = "Profile.php";
+						});
+					</script>
+					<?php
 				}
 			}
 			else{

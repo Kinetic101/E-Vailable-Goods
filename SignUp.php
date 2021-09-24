@@ -46,7 +46,11 @@
 		} 
 		else{
 		    $uname = test_input($_POST["uname"]);
-		    if(!preg_match('/^[a-zA-Z0-9]{5,}$/', $uname)){
+		    if(strlen($uname) > 16){
+		    	$unameErr = "Nice try but try again";
+      			$error = True;
+		    }
+		    else if(!preg_match('/^[a-zA-Z0-9]{5,}$/', $uname)){
       			$unameErr = "White space is not allowed";
       			$error = True;
     		}
@@ -57,7 +61,11 @@
 		} 
 		else{ 
 		   	$email = test_input($_POST["email"]);
-		    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+		   	if(strlen($email) > 25){
+		    	$emailErr = "Nice try but try again";
+      			$error = True;
+		    }
+		    else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
       			$emailErr = "Invalid email format";
       			$error = True;
     		}
@@ -67,7 +75,14 @@
 		    $error = True;
 		} 
 		else{
-		    $pword = test_input($_POST["pword"]);
+			$pword = test_input($_POST["pword"]);
+			if(strlen($pword) > 25){
+		    	$pwordErr = "Nice try but try again";
+      			$error = True;
+		    }
+		    else{
+		    	$pword = md5(test_input($_POST["pword"]));
+		    }
 		}
 		if(empty($_POST["fname"])){
 			$fnameErr = "First Name is required";
@@ -75,6 +90,10 @@
 		} 
 		else{
 		    $fname = test_input($_POST["fname"]);
+		    if(strlen($fname) > 16){
+		    	$fnameErr = "Nice try but try again";
+      			$error = True;
+		    }
 		}
 		if(empty($_POST["lname"])){
 		    $lnameErr = "Last Name is required";
@@ -82,6 +101,10 @@
 		} 
 		else{
 		    $lname = test_input($_POST["lname"]);
+		    if(strlen($lname) > 16){
+		    	$lnameErr = "Nice try but try again";
+      			$error = True;
+		    }
 		}
 		if(!isset($_POST["user_type"])){
 			$adminErr = $custErr = "Please select one";
@@ -166,11 +189,11 @@
 
 	<div class = "login"> 
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			Username: <br> <input type = "text" name = "uname" class = "field" value = "<?php echo $uname?>" id="uname"> <span class = "error" id="unameE">* <?php echo $unameErr;?></span> <br>
-			E-Mail: <br>  <input type = "text" name = "email" class = "field" value = "<?php echo $email?>"id="email"> <span class = "error">* <?php echo $emailErr;?></span> <br>
-			Password: <br> <input type = "password" name = "pword" class = "field" id="pword"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
-			First Name: <br> <input type = "text" name = "fname" class = "field" value = "<?php echo $fname?>" id="fname"> <span class = "error">* <?php echo $fnameErr;?></span> <br>
-			Last Name: <br> <input type = "text" name = "lname" class = "field" value = "<?php echo $lname?>" id="lname"> <span class = "error">* <?php echo $lnameErr;?></span> <br>
+			Username: <br> <input type = "text" placeholder="Must not exceed 16 characters" name = "uname" class = "field" value = "<?php echo $uname?>" id="uname" maxlength="16"> <span class = "error" id="unameE">* <?php echo $unameErr;?></span> <br>
+			E-Mail: <br>  <input type = "text" placeholder="Must not exceed 25 characters" name = "email" class = "field" value = "<?php echo $email?>"id="email" maxlength="25"> <span class = "error">* <?php echo $emailErr;?></span> <br>
+			Password: <br> <input type = "password" placeholder="Must not exceed 25 characters" name = "pword" class = "field" id="pword" maxlength="25"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
+			First Name: <br> <input type = "text" placeholder="Must not exceed 16 characters" name = "fname" class = "field" value = "<?php echo $fname?>" id="fname" maxlength="16"> <span class = "error">* <?php echo $fnameErr;?></span> <br>
+			Last Name: <br> <input type = "text" placeholder="Must not exceed 16 characters" name = "lname" class = "field" value = "<?php echo $lname?>" id="lname" maxlength="16"> <span class = "error">* <?php echo $lnameErr;?></span> <br>
 			<input type = "radio" id = "admin" name = "user_type"  value = "admin" <?php if($admin != ""){echo "checked";}?>> Market Admin <span class = "error"> * <?php echo $adminErr; ?> </span> <br>
 			<input type = "radio" id = "cust" name = "user_type" value = "cust" <?php if($cust != ""){echo "checked";}?>> Customer <span class = "error"> * <?php echo $custErr; ?> </span> 
 			<br>

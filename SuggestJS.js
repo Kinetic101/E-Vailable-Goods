@@ -7,5 +7,5 @@ $(document).ready(function(){
 			$('#post_sugg')[0].disabled = false;
 		}
 	}
-	setInterval(change_but, 200);
+	setInterval(change_but, 10);
 });

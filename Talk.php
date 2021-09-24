@@ -87,8 +87,8 @@
 
 	<div id = "send">
 		<form action = "">
-			<input type = "text" name = "msg" placeholder = "Type your message here." id = "msg" />
-			<button type = "button" id = "sendm">Send</button>
+			<input type = "text" name = "msg" placeholder = "Type your message here. Sadly, we do not YET support emojis; but, will in our future updates." id = "msg"/>
+			<button type = "button" id = "sendm"><i class="fas fa-location-arrow"></i></button>
 		</form>
 	</div>
 

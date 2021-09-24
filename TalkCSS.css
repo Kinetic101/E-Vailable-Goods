@@ -288,6 +288,7 @@ h4{
 	line-height: 20px;
 	border-radius: 15px;
 	background-color: #ccc;
+	word-wrap: break-word;
 }
 
 .from{	
@@ -301,6 +302,7 @@ h4{
 	font-size: 14px;
 	line-height: 20px;
 	border-radius: 15px;
+	word-wrap: break-word;
 }
 
 #send{

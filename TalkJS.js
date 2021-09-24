@@ -27,7 +27,9 @@ $(document).ready(function(){
 			url: "GetMsgData.php",
 			cache: false,
 			success: function(html){
-				$("#chat").html(html);
+				if($("#chat").html().replace(/\s/g, '') != html.replace(/\s/g, '')){
+					$("#chat").html(html);
+				}
 				var newS = $("#chat")[0].scrollHeight - 20;
 				if(newS > oldS){
 					$("#chat").animate({scrollTop: newS}, "normal");
@@ -43,7 +45,9 @@ $(document).ready(function(){
 			url: "GetChatsData.php",
 			cache: false,
 			success: function(html){
-				$("#contacts").html(html);
+				if($("#contacts").html().replace(/\s/g, '') != html.replace(/\s/g, '')){
+					$("#contacts").html(html);
+				}
 			}
 		});
 		return false;
@@ -65,7 +69,9 @@ $(document).ready(function(){
 			url: "GetOnlineDataInTalk.php",
 			cache: false,
 			success: function(html){
-				$("#active").html(html);
+				if($("#active").html().replace(/\s/g, '') != html.replace(/\s/g, '')){
+					$("#active").html(html);
+				}
 			}
 		});
 	}

@@ -167,14 +167,25 @@
 					}
 					$arr_max[$i] = $maxi;
 					?>
-					<div class = "itemsa">
+					<div class = "itemsa" id="<?php echo $idn."wow"; ?>">
 						<label class = "checkbox">
 							<div class = "eman">
 								<label for = "<?php echo $idn; ?>"><?php echo $row["productname"]; ?></label>
 							</div>
-							<input type = "checkbox" id = "formID" name = "<?php echo $idn; ?>">
+							<input type = "checkbox" id = "<?php echo $idn; ?>" name = "<?php echo $idn; ?>">
 							<span class = "checkmark"></span>
 						</label>
+						<script type="text/javascript">
+							var x = "#"+'<?php echo $idn; ?>';
+							$(x).click(function(){
+								if(document.getElementById('<?php echo $idn; ?>').checked){
+									document.getElementById('<?php echo $idn."wow"; ?>').style.outline = "2px solid #4A7C59";
+								}
+								else{
+									document.getElementById('<?php echo $idn."wow"; ?>').style.outline = "none";
+								}
+							})
+						</script>
 						<div class = "orderq">
 							Quantity: 
 							<p id = "<?php echo $uni?>">
