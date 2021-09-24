@@ -162,24 +162,23 @@
 			</a>
 		</div>
 		<h4 class = "cred">
-			Username: <?php echo $_SESSION["usern"];?>
+			<span id="usern">Username: <?php echo $_SESSION["usern"]."</span>";?>
 			<br>
 			<?php
 				$select = "SELECT `email`,`fname`,`lname`,`user_type` FROM `credentials` WHERE `username` = '$_SESSION[usern]'";
 				$res = $conn->query($select);
 				while($row = $res->fetch_assoc()) {
 					echo 
-					"E-Mail: ".$row["email"].
+					"<span id =name>".$row["fname"]." ".
+					$row["lname"]."</span>".
 					"<br>".
-					"First Name: ".$row["fname"].
-					"<br>".
-					"Last Name: ".$row["lname"].
-					"<br>"."User Type: ";
+					"<span id=email>".$row["email"]."</span>".
+					"<br>"."<span id =email>"."User Type: "."</span>";
 					if($row["user_type"] == 0){
-						echo "Customer";
+						echo "<span id =email>"."Customer"."</span>";
 					}
 					else{
-						echo "Market Administrator";
+						echo "<span id =email>"."Market Administrator"."</span>";
 					}
 				}
 			?>
@@ -187,11 +186,10 @@
 	</div>
 
 	<div id = "upload_pic" style = "display: none">
-		<h5>Accepted file formats are: png, jpg, jpeg</h5>
-		<h5>Maximum file size is 4 MB</h5>
-		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype = "multipart/form-data">
-			<input type = "file" name = "upload">
-			<input type = "submit" name = "up" value = "Upload">
+		<h5 class="cons">Accepted file formats are: png, jpg, jpeg<br>Maximum file size is 4 MB</h5>
+		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype = "multipart/form-data" class="mform">
+			<input type = "file" name = "upload" class="fload">
+			<input type = "submit" name = "up" value = "Upload" class="uload">
 		</form>
 		<button id = "magic2">
 			<h6>Cancel</h6>

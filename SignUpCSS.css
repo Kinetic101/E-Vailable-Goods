@@ -18,31 +18,44 @@ body{
 
 .error{
 	color: #FF0000;
+	position: absolute;
+	background-color: #211F1C;
+	padding: 3px 10px;
+	border-radius: 10px;
 }
 
 form{
+	background-color: #211F1C;
 	margin-left: 55%;
-	margin-top: 12vh;
+	margin-top: 10vh;
 	text-align: left;
 	color: white;
-	width: 40%;
+	width: 23%;
 	font-family: "Verdana";
 	font-size: 15px;
 	box-shadow: 20px;
 	padding: 20px; 
+	box-shadow: 16px 16px 16px 0px rgba(0,0,0,0.5);
 }
 
 input{
 	padding: 2px;
 	margin-bottom: 15px;
+	box-shadow:inset 0 0 5px #000;
+}
+
+input[type=radio]{
+	box-shadow: none;
+	outline: none;
+	border: none;
 }
 
 .field{
-	padding: 5px;
+	padding: 5px 10px;
 	width: 17.5vw;
 	outline: none;
 	border-radius: 7.5px;
-	border: none;
+	border: 2px solid #211F1C;
 }
 
 .field:focus{
