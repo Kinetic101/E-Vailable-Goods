@@ -7,6 +7,9 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
+	if($_SESSION["order_id"] == ""){
+		header("Orders.php");
+	}
 
 	$_SESSION["market"] = "";
 	$_SESSION["visit_user"] = "";
@@ -21,10 +24,11 @@
 		die("Connection Failed: ".$conn -> connect_error);
 	}
 
-	$get_num = "SELECT DISTINCT(`id`) 
-				FROM `orders` 
-				WHERE `username` = '$_SESSION[usern]' AND `state` = 0
-				ORDER BY `date_time` DESC";
+	$select = "SELECT *
+				FROM `orders`
+				WHERE `id` = '$_SESSION[order_id]'";
+	$res = $conn -> query($select);
+	$tot = 0;
 ?>
 <html>
 <head>
@@ -32,7 +36,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
-	<link rel = "stylesheet" href = "OrdersCSS.css"> 
+	<link rel = "stylesheet" href = "OrderDetailsCSS.css"> 
 	<link rel="stylesheet" type="text/css" href="OnlineCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -81,36 +85,43 @@
 		<!--Button here (Finished Orders) -->
 	</div>
 
-	<div id="orders">
-		<?php
-		$res_num = $conn -> query($get_num);
-		while($row_num = $res_num -> fetch_assoc()){
-			$select = "SELECT `productname`
-						FROM `orders`
-						WHERE `id` = '$row_num[id]'";
-			$res = $conn -> query($select);
-			$n = mysqli_fetch_array($conn -> query("SELECT COUNT(`productname`)
-														FROM `orders`
-														WHERE `id` = '$row_num[id]'"))[0];
-			$i = 0;
+	<div id="back">
+		<a href="Orders.php"><i class="fas fa-arrow-left"></i></a>
+	</div>
+
+	<div id="details">
+		<h2>Order ID#<?php echo $_SESSION["order_id"]; ?></h2>
+		<div class = "items">
+			<div class = "title">
+				<h4 id = "eman">Product</h4>
+				<h4 id = "quan">Quantity</h4>
+				<h4 id = "price">Price</h4>
+				<h4 id = "tprice">Total Price</h4>
+			</div>
+		<?php				
+			while($row = $res -> fetch_assoc()) {
 			?>
-			<a href="Reroute(Orders_to_OrderDetails).php?id=<?php echo $row_num["id"]; ?>">
-				<?php echo "Order ID#".$row_num["id"]; ?>
-				<br>
-				<?php
-				while($row = $res -> fetch_assoc()){
-					echo $row["productname"];
-					if($i < $n-1){
-						echo ", ";
-					}
-					$i++;
-				}
-				?>
-			</a>
+			<div class = "uni">
+				<div class = "eman"> <?php echo $row["productname"]; ?></div>
+				<div class = "unit">x</div>
+				<div class = "quan"> <?php echo $row["order_quantity"]." ".$row["unit"]; ?></div>
+				<div class = "unit">x</div>
+				<div class = "price">Php <?php echo $row["price_as_of_order"]; ?></div>
+				<div class = "unit">=</div>
+				<div class = "tprice">Php <?php echo $row["price_as_of_order"]*$row["order_quantity"]; ?></div>
+			</div>
+			<span id = "market">From Market: <?php echo $row["market"]; ?></span>
+			<br>
 			<br>
 			<?php
-		}
+			$tot += $row["price_as_of_order"]*$row["order_quantity"];
+			}
 		?>
+			<div class = "tamount">
+				<span id = "tamount">Total Amount:</span> 
+				<span id = "tantamount">Php <?php echo $tot; ?></span>
+			</div>
+		</div>
 	</div>
 
 	<div id="loading">

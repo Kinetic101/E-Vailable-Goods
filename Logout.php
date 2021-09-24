@@ -27,6 +27,7 @@
 	unset($_SESSION["buy_arr"]);
 	unset($_SESSION["notif_id"]);
 	unset($_SESSION["author"]);
+	unset($_SESSION["order_id"]);
 	session_destroy();
 	header("Location: Login.php");
 ?>

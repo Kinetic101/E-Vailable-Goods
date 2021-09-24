@@ -73,20 +73,6 @@
 					WHERE `username` = '$_SESSION[usern]' AND `productname` = '$row[productname]' AND `market` = '$row[market]'";
 		$conn -> query($update);
 	}
-	if($checkchange > 0){
-		?>
-		<script type = "text/javascript"> 
-			alert('Some products in your cart have quantities which are more than the maximum quantity available. We have already adjusted them for you!'); 
-		</script>
-		<?php
-	}
-	if($checkzero > 0){
-		?>
-		<script type = "text/javascript"> 
-			alert('Some products in your cart are out of stock. We have already removed them for you.'); 
-		</script>
-		<?php
-	}
 ?>
 <html>
 <head>
@@ -250,6 +236,28 @@
 </body>
 </html>
 <?php
+	if($checkchange > 0){
+		?>
+		<script type = "text/javascript"> 
+			swal({
+					title: "Changes In Your Cart", 
+					text: "Some products in your cart have quantities which are more than the maximum quantity available. We have already adjusted them for you!", 
+					icon: "warning"
+				});
+		</script>
+		<?php
+	}
+	if($checkzero > 0){
+		?>
+		<script type = "text/javascript"> 
+			swal({
+					title: "Out of Stock", 
+					text: "Some products in your cart are out of stock. We have already removed them for you!", 
+					icon: "warning"
+				});
+		</script>
+		<?php
+	}
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 		//If buy button is clicked.
@@ -290,7 +298,7 @@
 				<script type = "text/javascript"> 
 					swal({
 						title: "Redirecting", 
-						text: "You will now ne redirected to the confirmation page", 
+						text: "You will now be redirected to the confirmation page", 
 						icon: "warning"
 					})
 					.then(function(){

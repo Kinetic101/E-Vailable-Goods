@@ -23,7 +23,7 @@
 
 	$get_num = "SELECT DISTINCT(`id`) 
 				FROM `orders` 
-				WHERE `username` = '$_SESSION[usern]' AND `state` = 0
+				WHERE `username` = '$_SESSION[usern]' AND `state` = 1
 				ORDER BY `date_time` DESC";
 ?>
 <html>

@@ -35,7 +35,7 @@
 	$contact = $add = "";
 	$contactErr = $addErr = "";
 	$error = $input = False;
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
+	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["order"])){
 		$input = True;
 		if(isset($_POST["cancel"])){
 			unset($_SESSION["buy_arr"]);
@@ -56,60 +56,10 @@
 			else{
 				$add = test_input($_POST["add"]);
 			}
-			if($input){
-				if(!$error){
-					foreach($_SESSION["buy_arr"] as $key => $value) {
-						$prod = $value[1];
-						$mark = $value[2];
-						$ordr = $value[0];
-						$unit = $value[4];
-						$pric = $value[3];
-						$order_q = 0;
-
-						//Update Cart Table
-
-						$delete = "DELETE FROM `cart`
-										WHERE `username` = '$_SESSION[usern]' AND `market` = '$mark' AND `productname` = '$prod'";
-						$conn -> query($delete);
-
-						//Update Market Table
-
-						$know_pro_q = "SELECT `quantity` 
-										FROM `market` 
-										WHERE `market_name` = '$mark' AND `productname` = '$prod'";
-						$res_q = 0;
-						$temp = $conn -> query($know_pro_q);
-						while($row = $temp -> fetch_assoc()){
-							$res_q = $row["quantity"];
-						}
-						$res_q -= $ordr;						
-						$update = "UPDATE `market`
-									SET `quantity` = '$res_q'
-									WHERE `market_name` = '$mark' AND `productname` = '$prod'";
-						$conn -> query($update);
-
-						//Update Orders Table
-
-						$n = mysqli_fetch_array($conn -> query("SELECT COUNT(*) 
-																FROM `orders`"))[0];
-
-						$insert = "INSERT INTO `orders`
-									(`id`, `username`, `productname`, `order_quantity`, `unit`, `price_as_of_order`, `market`, `address`, `contact`, `state`)
-									VALUES ('$n', '$_SESSION[usern]', '$prod', '$ordr', '$unit', '$pric', '$mark', '$add', '$contact', 0)";
-						$n++; 
-						$conn ->query($insert);
-
-					}
-					unset($_SESSION["buy_arr"]);
-					?>
-					<script type = "text/javascript"> 
-						alert('Thank you for using our service!');
-						location.href  = 'Cart.php';
-					</script>
-					<?php
-				}
-			}
 		}
+	}
+	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cancel"])){
+		header("Location: Cart.php");
 	}
 
 ?>
@@ -123,6 +73,7 @@
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<title>Transaction Confirmation</title>
@@ -158,7 +109,7 @@
 		</ul>
 		
 	</header>
-		<div id = "prod">
+	<div id = "prod">
 		<h3 class = "disc">
 			You are about to make a legitimate transaction. An order will be made once you click the order button. 
 			All orders that have been already confirmed <span style = "color:#BF2722; font-weight:1000">CANNOT</span> be cancelled anymore. <br> 
@@ -168,41 +119,40 @@
 			<br> 
 			Below are the products that you are about to order:
 		</h3>
-			<hr>
+		<hr>
 		<div class = "items">
 			<div class = "title">
-			<h4 id = "eman">Product</h4>
-			<h4 id = "quan">Quantity</h4>
-			<h4 id = "price">Price</h4>
-			<h4 id = "tprice">Total Price</h4>
-		</div>
+				<h4 id = "eman">Product</h4>
+				<h4 id = "quan">Quantity</h4>
+				<h4 id = "price">Price</h4>
+				<h4 id = "tprice">Total Price</h4>
+			</div>
 		<?php			
 			$tot = 0;		
 			foreach ($_SESSION["buy_arr"] as $key => $value) {
-				?>
-				<div class = "uni">
-					<div class = "eman"> <?php echo $value[1]; ?></div>
-					<div class = "unit">x</div>
-					<div class = "quan"> <?php echo $value[0]." ".$value[4]; ?></div>
-					<div class = "unit">x</div>
-					<div class = "price">Php <?php echo $value[3]; ?></div>
-					<div class = "unit">=</div>
-					<div class = "tprice">Php <?php echo $value[3]*$value[0]; ?></div>
-				</div>
-				<span id = "market">From Market: <?php echo $value[2]; ?></span>
-				<br>
-				<br>
-				<?php
-				$tot += $value[3]*$value[0];
-			}
 			?>
-				<div class = "tamount">
-					<span id = "tamount">Total Amount to Pay:</span> 
-					<span id = "tantamount">Php <?php echo $tot; ?></span>
-				</div>
+			<div class = "uni">
+				<div class = "eman"> <?php echo $value[1]; ?></div>
+				<div class = "unit">x</div>
+				<div class = "quan"> <?php echo $value[0]." ".$value[4]; ?></div>
+				<div class = "unit">x</div>
+				<div class = "price">Php <?php echo $value[3]; ?></div>
+				<div class = "unit">=</div>
+				<div class = "tprice">Php <?php echo $value[3]*$value[0]; ?></div>
+			</div>
+			<span id = "market">From Market: <?php echo $value[2]; ?></span>
+			<br>
+			<br>
 			<?php
+			$tot += $value[3]*$value[0];
+			}
 		?>
+			<div class = "tamount">
+				<span id = "tamount">Total Amount to Pay:</span> 
+				<span id = "tantamount">Php <?php echo $tot; ?></span>
+			</div>
 		</div>
+
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			<div class = "cins">
 				<label id = "contact">Contact Number: </label>
@@ -241,3 +191,74 @@
 	
 </body>
 </html>
+<?php
+	if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["order"])){
+		if($input){
+			if(!$error){
+				$date = date("Y-m-d H:i:s");
+				$n = mysqli_fetch_array($conn -> query("SELECT COUNT(DISTINCT(`id`))
+															FROM `orders`"))[0]+1;
+				foreach($_SESSION["buy_arr"] as $key => $value){
+					$prod = $value[1];
+					$mark = $value[2];
+					$ordr = $value[0];
+					$unit = $value[4];
+					$pric = $value[3];
+					$order_q = 0;
+
+					//Update Cart Table
+					$delete = "DELETE FROM `cart`
+								WHERE `username` = '$_SESSION[usern]' AND `market` = '$mark' AND `productname` = '$prod'";
+					$conn -> query($delete);
+
+					//Update Market Table
+
+					$know_pro_q = "SELECT `quantity` 
+									FROM `market` 
+									WHERE `market_name` = '$mark' AND `productname` = '$prod'";
+					$res_q = 0;
+					$temp = $conn -> query($know_pro_q);
+					while($row = $temp -> fetch_assoc()){
+						$res_q = $row["quantity"];
+					}
+					$res_q -= $ordr;						
+					$update = "UPDATE `market`
+								SET `quantity` = '$res_q'
+								WHERE `market_name` = '$mark' AND `productname` = '$prod'";
+					$conn -> query($update);
+
+					//Update Orders Table
+
+					$insert = "INSERT INTO `orders`
+								(`id`, `username`, `productname`, `order_quantity`, `unit`, `price_as_of_order`, `market`, `address`, `contact`, `date_time`, `state`)
+								VALUES ('$n', '$_SESSION[usern]', '$prod', '$ordr', '$unit', '$pric', '$mark', '$add', '$contact', '$date', 0)";
+					$conn -> query($insert);
+
+				}
+				//Notify user
+
+				$p = mysqli_fetch_array($conn -> query("SELECT COUNT(*) 
+														FROM `notifications`"))[0]+1;
+				$title = "Your order with ID#".$n." has been confirmed";
+				$msg = "Your order with ID#".$n." has been confirmed, we will keep in touch with you by continuously updating you reagarding its status. You may receive an email or SMS regarding its updates. Thank you!";
+				$insert = "INSERT INTO `notifications`
+							(`id`, `username`, `notif_title`, `notif_msg`, `unread`)
+							VALUES ('$p', '$_SESSION[usern]', '$title', '$msg', 1)";
+				$conn -> query($insert);
+				$_SESSION["buy_arr"] = [];
+				?>
+				<script type = "text/javascript"> 
+					swal({
+						title: "Order Confirmed!", 
+						text: "Thank you for using our service!", 
+						icon: "success"
+					})
+					.then(function(){
+						location.href = "Cart.php";
+					});
+				</script>
+				<?php
+			}
+		}
+	}
+?>

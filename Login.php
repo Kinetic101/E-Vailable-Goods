@@ -23,6 +23,7 @@
 		unset($_SESSION["buy_arr"]);
 		unset($_SESSION["notif_id"]);
 		unset($_SESSION["author"]);
+		unset($_SESSION["order_id"]);
 	}
 
 	//Function to trim unnecessary characters from input
@@ -84,6 +85,7 @@
 						$_SESSION["notif_id"] = "";
 						$_SESSION["buy_arr"] = array();
 						$_SESSION["author"] = 0;
+						$_SESSION["order_id"] = 0;
 						$update = "UPDATE `credentials` SET `online` = 1 WHERE `email` = '$email'";
 				  		$conn -> query($update);
 				  		if($ust == 0){
