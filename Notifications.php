@@ -44,7 +44,7 @@
 		</nav>
 		<ul class="icons">
 			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
-			<li><a href="Notifications.php" title="Notifications" id="bello"><i class="fas fa-bell-slash"></i></a></li>
+			<li><a href="Notifications.php" title="Notifications" id="bello"><i class="fas fa-bell"></i></a></li>
 			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>

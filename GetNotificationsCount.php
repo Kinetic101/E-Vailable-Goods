@@ -26,7 +26,7 @@
 	}
 	else{
 		?>
-		<i class="fas fa-bell-slash" id="bell" title="You currently do not have notifications"></i>
+		<i class="fas fa-bell" id="bell" title="You currently do not have notifications"></i>
 		<?php
 	}
 ?>

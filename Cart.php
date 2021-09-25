@@ -105,7 +105,7 @@
 		</nav>
 		<ul class="icons">
 			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="press"></i></a></li>
-			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell-slash" id="bell"></i></a></li>
+			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell" id="bell"></i></a></li>
 			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
