@@ -191,6 +191,17 @@
 												}
 											}
 											inc();">+</button>
+							<script type="text/javascript">
+								function check_vals(){
+									if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
+										document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
+									}
+									else{
+										document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
+									}
+								}
+								setInterval(check_vals, 10);
+							</script>
 						</div>
 						<hr>
 						<?php
@@ -214,27 +225,26 @@
 							<button class = "minus" id = "minus2" type = "button"
 								onclick = "function dec(){
 												document.getElementById('<?php echo $idname2; ?>').stepDown();
-												if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
-													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-												}
-												else{
-													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: none;';
-												}
 											}
 											dec();">-
 							</button>
 							<button class = "plus" id = "plus2" type = "button"
 								onclick = "function inc(){
 												document.getElementById('<?php echo $idname2; ?>').stepUp();
-												if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
-													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-												}
-												else{
-													document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: none;';
-												}
 											}
 											inc();">+
 							</button>
+							<script type="text/javascript">
+								function check_vals(){
+									if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
+										document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
+									}
+									else{
+										document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: none;';
+									}
+								}
+								setInterval(check_vals, 10);
+							</script>
 						</div>
 						<hr>
 						<?php

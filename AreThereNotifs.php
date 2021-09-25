@@ -28,7 +28,7 @@
 	}
 	else{
 		?>
-		<i class="fas fa-bell-slash" id="press"></i>
+		<i class="fas fa-bell" id="press"></i>
 		<?php	
 	}
 ?>

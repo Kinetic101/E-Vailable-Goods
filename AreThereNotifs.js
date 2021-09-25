@@ -8,5 +8,5 @@ $(document).ready(function(){
 			}
 		});
 	}
-	setInterval(are_there_notifs, 1000);
+	setInterval(are_there_notifs, 100);
 });

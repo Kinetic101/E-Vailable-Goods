@@ -173,27 +173,26 @@
 								<button id = "minus" type = "button" 
 									onclick = "function dec(){
 													document.getElementById('<?php echo $idname; ?>').stepDown();
-													if(document.getElementById('<?php echo $idname; ?>').value > 0){
-														document.getElementById('<?php echo $idname; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-													}
-													else{
-														document.getElementById('<?php echo $idname; ?>').style.cssText = 'box-shadow: none;';
-													}
 												} 
 												dec();" >-
 								</button>
 								<button id = "plus" type = "button" 
 									onclick = "function inc(){
 													document.getElementById('<?php echo $idname; ?>').stepUp();
-													if(document.getElementById('<?php echo $idname; ?>').value > 0){
-														document.getElementById('<?php echo $idname; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-													}
-													else{
-														document.getElementById('<?php echo $idname; ?>').style.cssText = 'box-shadow: none;';
-													}
 												} 
 												inc();">+
 								</button>
+								<script type="text/javascript">
+									function check_vals(){
+										if(document.getElementById('<?php echo $idname; ?>').value > 0){
+											document.getElementById('<?php echo $idname; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
+										}
+										else{
+											document.getElementById('<?php echo $idname; ?>').style.cssText = 'box-shadow: none;';
+										}
+									}
+									setInterval(check_vals, 10);
+								</script>
 							</div>
 							<hr>
 							<?php

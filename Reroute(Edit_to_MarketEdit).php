@@ -63,7 +63,7 @@
 <body>
 
 	<a href="Edit.php"><i class="fa fa-arrow-left"></i></a>
-	<h4>For security purposes, you are to input the required security code to access the edit page for <?php echo $_SESSION["market"]; ?>. You only have 5 minutes and 3 attempts to do so. You will be logged out once you run out of attempts or the 5 minutes have passed. Reloading this page will redirect you back to the Edit Dashboard. Lastly, you can only access</h4>
+	<h4>For security purposes, you are to input the required security code to access the edit page for <?php echo $_SESSION["market"]; ?>. You only have 5 minutes and 3 attempts to do so. You will be logged out once you run out of attempts or the 5 minutes have passed. Reloading this page will redirect you back to the Edit Dashboard.</h4>
 	<form action="">
 		<input name="password" type="password" id="pw">
 		<button type="button" id="submit">Submit</button>

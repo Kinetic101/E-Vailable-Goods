@@ -288,7 +288,7 @@
 				?>
 				<script type="text/javascript"> 
 					swal({
-						title: "Warning", 
+						title: "Invalid", 
 						text: "Maximum file size has exceeded 4MB", 
 						icon: "error"
 					});
@@ -300,7 +300,7 @@
 			?>
 			<script type="text/javascript"> 
 				swal({
-						title: "Warning", 
+						title: "Invalid", 
 						text: "Invalid file format", 
 						icon: "error"
 					});
