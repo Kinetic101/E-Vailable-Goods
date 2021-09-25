@@ -19,15 +19,7 @@
 	
 	$update = "UPDATE `credentials` SET online = 0 WHERE `username` = '$_SESSION[usern]'";
 	$conn -> query($update);
-	unset($_SESSION["usern"]);
-	unset($_SESSION["market"]);
-	unset($_SESSION["visit_user"]);
-	unset($_SESSION["product"]);
-	unset($_SESSION["prof_pic"]);
-	unset($_SESSION["buy_arr"]);
-	unset($_SESSION["notif_id"]);
-	unset($_SESSION["author"]);
-	unset($_SESSION["order_id"]);
+	session_unset();
 	session_destroy();
 	header("Location: Login.php");
 ?>

@@ -16,15 +16,7 @@
 	if(isset($_SESSION["usern"])){
 		$update = "UPDATE `credentials` SET online = 0 WHERE `username` = '$_SESSION[usern]'";
 		$conn -> query($update);
-		unset($_SESSION["usern"]);
-		unset($_SESSION["market"]);
-		unset($_SESSION["visit_user"]);
-		unset($_SESSION["product"]);
-		unset($_SESSION["prof_pic"]);
-		unset($_SESSION["buy_arr"]);
-		unset($_SESSION["notif_id"]);
-		unset($_SESSION["author"]);
-		unset($_SESSION["order_id"]);
+		session_unset();
 	}
 
 	//Function to trim unnecessary characters from input
@@ -47,12 +39,12 @@
 		} 
 		else{
 		    $uname = test_input($_POST["uname"]);
-		    if(strlen($uname) > 16){
+		    if(strlen($pword) < 5 && strlen($uname) > 16){
 		    	$unameErr = "Nice try but try again";
       			$error = True;
 		    }
 		    else if(!preg_match('/^[a-zA-Z0-9]{5,}$/', $uname)){
-      			$unameErr = "White space is not allowed";
+      			$unameErr = "Invalid username format";
       			$error = True;
     		}
 		}
@@ -77,7 +69,7 @@
 		} 
 		else{
 			$pword = test_input($_POST["pword"]);
-			if(strlen($pword) > 25){
+			if(strlen($pword) < 8 && strlen($pword) > 25){
 		    	$pwordErr = "Nice try but try again";
       			$error = True;
 		    }
@@ -139,21 +131,14 @@
 				else{
 					$user = 0;
 				}
-				$insert = "INSERT INTO `credentials` 
-							(`username`, `email`, `pass`, `fname`, `lname`, `online`, `user_type`, `pic`) 
-							VALUES ('$uname', '$email', '$pword', '$fname', '$lname', 1, '$user', './ProfilePix/X5ksjijoa2i39aind239.jpg')";
-				$_SESSION["usern"] = $uname;
-				$_SESSION["prof_pic"] = "./ProfilePix/X5ksjijoa2i39aind239.jpg";
-				$_SESSION["market"] = "";
-				$_SESSION["visit_user"] = "";
-				$_SESSION["buy_arr"] = array();
-				$_SESSION["notif_id"] = "";
-				$_SESSION["author"] = 0;
-				$_SESSION["order_id"] = 0;
-				if($conn -> query($insert) == False){
-					die("Error: ".$insert."<br>".$conn -> error);
-				}
-				header("Location: Profile.php");
+				$_SESSION["uname"] = $uname;
+				$_SESSION["email"] = $email;
+				$_SESSION["fname"] = $fname;
+				$_SESSION["lname"] = $lname;
+				$_SESSION["pword"] = $pword;
+				$_SESSION["user_type"] = $user;
+				$_SESSION["otp"] = "";
+				header("Location: SendOTP.php");
 			}
 		}
 	}
@@ -191,9 +176,9 @@
 
 	<div class = "login"> 
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			Username: <br> <input type = "text" placeholder="Must not exceed 16 characters" name = "uname" class = "field" value = "<?php echo $uname?>" id="uname" maxlength="16"> <span class = "error" id="unameE">* <?php echo $unameErr;?></span> <br>
+			Username: <span style="font-size: 10px;">(must consist of alphanumeric characters)</span> <br> <input type = "text" placeholder="Must be between 5 and 16 characters" name = "uname" class = "field" value = "<?php echo $uname?>" id="uname" maxlength="16"> <span class = "error" id="unameE">* <?php echo $unameErr;?></span> <br>
 			E-Mail: <br>  <input type = "text" placeholder="Must not exceed 25 characters" name = "email" class = "field" value = "<?php echo $email?>"id="email" maxlength="25"> <span class = "error">* <?php echo $emailErr;?></span> <br>
-			Password: <br> <input type = "password" placeholder="Must not exceed 25 characters" name = "pword" class = "field" id="pword" maxlength="25"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
+			Password: <br> <input type = "password" placeholder="Must be between 8 and 16 characters" name = "pword" class = "field" id="pword" maxlength="25"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
 			First Name: <br> <input type = "text" placeholder="Must not exceed 16 characters" name = "fname" class = "field" value = "<?php echo $fname?>" id="fname" maxlength="16"> <span class = "error">* <?php echo $fnameErr;?></span> <br>
 			Last Name: <br> <input type = "text" placeholder="Must not exceed 16 characters" name = "lname" class = "field" value = "<?php echo $lname?>" id="lname" maxlength="16"> <span class = "error">* <?php echo $lnameErr;?></span> <br>
 			<input type = "radio" id = "admin" name = "user_type"  value = "admin" <?php if($admin != ""){echo "checked";}?>> Market Admin <span class = "error"> * <?php echo $adminErr; ?> </span> <br>
@@ -220,3 +205,4 @@
 	
 </body>
 </html>
+

@@ -8,7 +8,7 @@ $(document).ready(function(){
 			}
 		});
 	};
-	setInterval(const_reload_notif, 200);
+	setInterval(const_reload_notif, 1000);
 	
 	function const_reload_msg(){
 		$.ajax({
@@ -19,5 +19,5 @@ $(document).ready(function(){
 			}
 		});
 	}
-	setInterval(const_reload_msg, 200);
+	setInterval(const_reload_msg, 1000);
 });

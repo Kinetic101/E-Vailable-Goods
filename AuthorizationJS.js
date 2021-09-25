@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	var cnt = 0;
+	var time_cnt = 0;
 	$("#submit").click(function(){
 		var pass = $("#pw").val();
 		$.ajax({
@@ -12,6 +13,11 @@ $(document).ready(function(){
 				$("#message").html(html);
 				if($("#message").html().replace(/\s/g, '') == "<p>Incorrectsecuritycode</p>"){
 					cnt++;
+					swal({
+						title: "Incorrect", 
+						text: `You still have ${3-cnt} attempt(s) left`, 
+						icon: "warning"
+					})
 				}
 				else if($("#message").html().replace(/\s/g, '') == "<p>Authorized</p>"){
 					swal({
@@ -25,7 +31,7 @@ $(document).ready(function(){
 				}
 				if(cnt == 3){
 					swal({
-						title: "Unauthorized", 
+						title: "Too Many Attempts", 
 						text: "You have inputted too many incorrect attempts, you will now be logged out", 
 						icon: "error"
 					})
@@ -47,5 +53,20 @@ $(document).ready(function(){
 		}
 	}
 	setInterval(change_but, 10);
+
+	function timer(){
+		time_cnt++;
+		if(time_cnt >= 300){
+			swal({
+				title: "Time Out", 
+				text: "5 minutes has passed, you will now be logged out", 
+				icon: "error"
+			})
+			.then(function(){
+				location.href = 'Logout.php';
+			});
+		}
+	}
+	setInterval(timer, 1000);
 
 });

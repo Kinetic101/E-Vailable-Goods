@@ -15,15 +15,7 @@
 	if(isset($_SESSION["usern"])){
 		$update = "UPDATE `credentials` SET online = 0 WHERE `username` = '$_SESSION[usern]'";
 		$conn -> query($update);
-		unset($_SESSION["usern"]);
-		unset($_SESSION["market"]);
-		unset($_SESSION["visit_user"]);
-		unset($_SESSION["product"]);
-		unset($_SESSION["prof_pic"]);
-		unset($_SESSION["buy_arr"]);
-		unset($_SESSION["notif_id"]);
-		unset($_SESSION["author"]);
-		unset($_SESSION["order_id"]);
+		session_unset();
 	}
 
 	//Function to trim unnecessary characters from input
@@ -121,19 +113,19 @@
 	<title>Log In</title>
 </head>
 <body>
-<header>
-	<nav>
-	<ul class = "links">
-		<li><a href="Login.php" id = "press">Login</a></li>
-		<li><a href="Signup.php" class = "inactive">Signup</a></li>
-	</ul>
-	</nav>
-</header>
-
+	<header>
+		<nav>
+		<ul class = "links">
+			<li><a href="Login.php" id = "press">Login</a></li>
+			<li><a href="Signup.php" class = "inactive">Signup</a></li>
+		</ul>
+		</nav>
+	</header>
 
 	<div class = "header">
 		<h1 id = "evg">E-Vailable <br> Goods</h1>
 	</div>
+	
 	<div class = "login">
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			E-Mail: <br> <input type = "text" name = "email" class = "field" value = "<?php echo $email;?>" id="email" maxlength="25"> <span class = "error">* <?php echo $emailErr;?></span> <br>

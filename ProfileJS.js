@@ -14,7 +14,7 @@ $(document).ready(function(){
 	$("#magic2").click(showh);
 
 	function change_but(){
-		if(!$('#opassw').val().replace(/\s/g, '').length || !$('#npassw').val().replace(/\s/g, '').length || !$('#rnpassw').val().replace(/\s/g, '').length){
+		if($('#opassw').val().length < 8 || $('#npassw').val().length < 8 || $('#rnpassw').val().length < 8 || !$('#opassw').val().replace(/\s/g, '').length || !$('#npassw').val().replace(/\s/g, '').length || !$('#rnpassw').val().replace(/\s/g, '').length){
 			$('#changepass')[0].disabled = true;
 		}
 		else{

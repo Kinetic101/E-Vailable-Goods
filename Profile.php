@@ -45,7 +45,7 @@
 		    $error = True;
 		  } 
 		  else{
-		  	if(strlen($_POST["opw"]) > 25){
+		  	if(strlen($_POST["opw"]) < 8 && strlen($_POST["opw"]) > 25){
 		  		$opwErr = "Nice try but try again";
 		  		$error = True;
 		  	}
@@ -58,7 +58,7 @@
 		    $error = True;
 		  } 
 		  else{
-		  	if(strlen($_POST["npw"]) > 25){
+		  	if(strlen($_POST["npw"]) < 8 && strlen($_POST["npw"]) > 25){
 		  		$npwErr = "Nice try but try again";
 		  		$error = True;
 		  	}
@@ -71,7 +71,7 @@
 		    $error = True;
 		  } 
 		  else{
-		  	if(strlen($_POST["rnpw"]) > 25){
+		  	if(strlen($_POST["rnpw"]) < 8 && strlen($_POST["rnpw"]) > 25){
 		  		$rnpwErr = "Nice try but try again";
 		  		$error = True;
 		  	}
