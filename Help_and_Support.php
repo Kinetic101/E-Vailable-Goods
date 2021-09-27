@@ -7,13 +7,6 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
-	if($_SESSION["order_id"] == ""){
-		header("Orders.php");
-	}
-
-	$_SESSION["market"] = "";
-	$_SESSION["visit_user"] = "";
-	$_SESSION["author"] = 0;
 
 	$server = "localhost";
 	$usname = "root";
@@ -23,31 +16,26 @@
 	if($conn -> connect_error){
 		die("Connection Failed: ".$conn -> connect_error);
 	}
-
-	$select = "SELECT *
-				FROM `orders`
-				WHERE `id` = '$_SESSION[order_id]'";
-	$res = $conn -> query($select);
-	$tot = 0;
 ?>
 <html>
 <head>
-	<meta charset = "utf-8">
+	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="">
-	<link rel = "stylesheet" href = "OrderDetailsCSS.css"> 
-	<link rel="stylesheet" type="text/css" href="OnlineCSS.css">
+	<title>Help & Support</title>
+	<link rel="stylesheet" type="text/css" href="Help_and_SupportCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript" src="GetNotificationsJS.js"></script>
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>
-	<title>E-Vailable Goods</title>
+	<script type="text/javascript" src="GetNotificationsJS.js"></script>
+	<script type="text/javascript" src="Help_and_SupportJS.js"></script>
 </head>
 <body>
 
 	<header>
+
 		<nav>
 			<ul class="links">
 				<li><a href="Research.php">Buy</a></li>
@@ -60,8 +48,9 @@
 		<ul class="icons">
 			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
 			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell" id="bell"></i></a></li>
-			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt" id="press"></i></a></li>
+			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
 		</ul>
+		
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
 		<li class = "dropdown"><a href = "Profile.php" class="pic">
@@ -75,54 +64,33 @@
     	</div>
     	</li>
 		</ul>
+
 	</header>
 
-	<div id="ongoing">
-		<!--Button here (Ongoing Orders) -->
+	<div id = "help">
+		<div class="helpme" id="help1"><h4>How to Change Profile Picture?</h4></div>
+		<div class="helpme" id="help2"><h4>How Can I Access the Edit Page?</h4></div>
+		<div class="helpme" id="help3"><h4>How Can I Change My Name?</h4></div>
+		<div class="helpme" id="help4"><h4>Is Account Deletion Available?</h4></div>
+		<div class="helpme" id="help5"><h4>How To Order?</h4></div>
+		<div class="helpme" id="help6"><h4>How to Talk with Others?</h4></div>
+		<div class="helpme" id="help7"><h4>How to Cancel Pending Orders?</h4></div>
+		<div class="helpme" id="help8"><h4>How to Change Password?</h4></div>
+		<div class="helpme" id="help9"><h4>Who are The People Behind This Website?</h4></div>
 	</div>
 
-	<div id="finished">
-		<!--Button here (Finished Orders) -->
+	<div id = "chatbox">
+		<div id = "chat"></div>
 	</div>
 
-	<div id="back">
-		<a href="Orders.php"><i class="fas fa-arrow-left"></i></a>
+	<div id = "send">
+		<form action = "">
+			<input type = "text" name = "msg" placeholder = "Type your message here, the devs will respond shortly. Profanity is STRICTLY PROHIBITED!" id = "msg"/>
+			<button type = "button" id = "sendm"><i class="fas fa-location-arrow"></i></button>
+		</form>
 	</div>
 
-	<div id="details">
-		<h2>Order ID#<?php echo $_SESSION["order_id"]; ?></h2>
-		<div class = "items">
-			<div class = "title">
-				<h4 id = "eman">Product</h4>
-				<h4 id = "quan">Quantity</h4>
-				<h4 id = "price">Price</h4>
-				<h4 id = "tprice">Total Price</h4>
-			</div>
-		<?php				
-			while($row = $res -> fetch_assoc()) {
-			?>
-			<div class = "uni">
-				<div class = "eman"> <?php echo $row["productname"]; ?></div>
-				<div class = "unit">x</div>
-				<div class = "quan"> <?php echo $row["order_quantity"]." ".$row["unit"]; ?></div>
-				<div class = "unit">x</div>
-				<div class = "price">Php <?php echo $row["price_as_of_order"]; ?></div>
-				<div class = "unit">=</div>
-				<div class = "tprice">Php <?php echo $row["price_as_of_order"]*$row["order_quantity"]; ?></div>
-			</div>
-			<span id = "market">From Market: <?php echo $row["market"]; ?></span>
-			<br>
-			<br>
-			<?php
-			$tot += $row["price_as_of_order"]*$row["order_quantity"];
-			}
-		?>
-			<div class = "tamount">
-				<span id = "tamount">Total Amount:</span> 
-				<span id = "tantamount">Php <?php echo $tot; ?></span>
-			</div>
-		</div>
-	</div>
+	<!--Idk kung anong ilalagay right side-->
 
 	<div id="loading">
 		<div class="content">
@@ -137,6 +105,6 @@
 		</div>
 		<!--Credits to @Manoz from CodePen for the loading screen-->
 	</div>
-	
+
 </body>
 </html>

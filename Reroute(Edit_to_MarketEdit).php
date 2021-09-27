@@ -53,6 +53,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Authorization for <?php echo $_SESSION["market"]; ?> Edit</title>
 	<link rel="stylesheet" type="text/css" href="AuthorizationCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -69,6 +70,20 @@
 		<button type="button" id="submit">Submit</button>
 	</form>
 	<div id="message"></div>
+
+	<div id="loading">
+		<div class="content">
+			<div class="load-wrapp">
+				<div class="load">
+					<p>Loading</p>
+					<div class="line"></div>
+					<div class="line"></div>
+					<div class="line"></div>
+				</div>
+			</div>
+		</div>
+		<!--Credits to @Manoz from CodePen for the loading screen-->
+	</div>
 
 </body>
 </html>

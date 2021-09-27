@@ -13,7 +13,9 @@ $(document).ready(function(){
 
 	$("#msg").keypress(function(e){
 		if(e.keyCode == 13){
-			$("#sendm").click(send_message());
+			if($('#msg').val().replace(/\s/g, '').length){
+				$("#sendm").click(send_message());
+			}
 		}
 		else{
 			$("#msg").val($("#msg").val()+e.key);

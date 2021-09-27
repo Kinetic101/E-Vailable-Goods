@@ -79,7 +79,9 @@
 				<?php
 			}
 		}
-		echo "</div>";
+		?>
+		</div>
+		<?php
 		$update = "UPDATE `messages`
 					SET `unread` = 0
 					WHERE `to_user` = '$_SESSION[usern]' AND `from_user` = '$_SESSION[visit_user]'";

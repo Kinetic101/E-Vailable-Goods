@@ -66,7 +66,7 @@
 		</a>
 		<div class="dlinks">
       			<a href="Profile.php">Profile</a>
-      			<a href="#">Help & Support</a>
+      			<a href="Help_and_Support.php">Help & Support</a>
       			<a href="Logout.php">Logout</a>
     	</div>
     	</li>

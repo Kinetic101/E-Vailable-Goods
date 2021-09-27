@@ -54,7 +54,7 @@
 		</a>
 		<div class="dlinks">
       			<a href="Profile.php">Profile</a>
-      			<a href="#">Help & Support</a>
+      			<a href="Help_and_Support.php">Help & Support</a>
       			<a href="Logout.php">Logout</a>
     	</div>
     	</li>
@@ -77,6 +77,8 @@
 		 is a platform that virtually connects markets, buyers, government agencies, and even those unfortunate enough to have food on their table so that they would not have to venture out of their respective homes given the Philippines' current state.
 		<br><br>
 		Thousands if not, millions of kilograms of food are thrown to waste because of oversupply. However, even though there is a presence of oversupply, many of our fellow Filipinos regularly sleep with little to no food in their stomachs. With this, we do not just want to lessen food wastes but, also give a light of hope to our fellow countrymen who unfortunately do not have the ability to put food on their tables.
+		<br><br>
+		All Rights Reserved 2021 - Cian Joseph Catimbang, John Eric Estrada, Julius Christian Namata PSHS-BRC Batch 2k22
 	</p>
 	</div>
 
