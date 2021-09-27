@@ -63,7 +63,7 @@ $(document).ready(function(){
 	$("#help2").click(function(){
 		swal({
 			title: "How Can I Access the Edit Page?", 
-			text: "First, you should be a market administrator. You have to contact the developers for the passkey for each market. The developers will first verify your identity and then give you the passkey(s) if you are a legitimate market admin.", 
+			text: "First, you should be a market administrator. You have to contact the website administrators for you to have access to the pages. Verfication checks will then be done on you to ensure website security.", 
 			icon: "info"
 		});
 	})
@@ -79,7 +79,7 @@ $(document).ready(function(){
 	$("#help4").click(function(){
 		swal({
 			title: "Is Account Deletion Available?", 
-			text: "Yes but you'll have to contact the developers and they'll do it for you. However, account deletion is not possible if you have pending orders.", 
+			text: "Yes but you'll have to contact the website administrators and they'll do it for you. However, account deletion is not possible if you have pending orders.", 
 			icon: "info"
 		});
 	})

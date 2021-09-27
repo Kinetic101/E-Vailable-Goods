@@ -20,12 +20,6 @@
 	if($conn -> connect_error){
 		die("Connection Failed: ".$conn -> connect_error);
 	}
-	$_SESSION["cnt_re1"] = 0;
-	$_SESSION["cnt_re2"] = 0;
-	$_SESSION["cnt_re3"] = 0;
-	$_SESSION["cnt_re4"] = 0;
-	$_SESSION["cnt_re5"] = 0;
-	$_SESSION["cnt_re6"] = 0;
 ?>
 <html>
 <head>
