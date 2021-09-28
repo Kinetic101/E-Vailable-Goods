@@ -38,7 +38,7 @@
 <body>
 
 	<div id = "verify">
-		<h4>Please input the 6-digit OTP we have sent you through the email you provided. It will expire in 5 mins and once 5 mins have passed, you will automatically be redirected back to the Sign Up page. Moreover, you only have 5 attempts to input the corrrect OTP or else, you will also automatically be redirected back to the Sign Up page. Moreover, please DO NOT refresh the page, doing so will redirect you to the sign up page. Please check your spam folder.</h4>
+		<h4>Please input the 6-digit OTP we have sent you through the email you provided. It will expire in 5 mins and once 5 mins have passed, you will automatically be redirected back to the Sign Up page. Moreover, you only have 5 attempts to input the corrrect OTP or else, you will also automatically be redirected back to the Sign Up page. Moreover, please DO NOT refresh the page, doing so will redirect you to the sign up page. Please check your spam folder. Lastly, please do not hit enter on your keyboard to check the OTP as this will refresh the page. Thank You!</h4>
 		<form action = "">
 			OTP: <input type = "number" name = "otp" id="otp">
 			<br>

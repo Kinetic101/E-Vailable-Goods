@@ -47,15 +47,6 @@
 		else{
 		    $pword = test_input($_POST["pword"]);
 		}
-		if($input){
-			if(!$error){
-				$pass = "masterCats_6996";
-				if(md5($pword) == md5($pass)){
-					$_SESSION["admin"] = 1;
-					header("Location: Dashboard.php");
-				}
-			}
-		}
 	}
 ?>
 <!DOCTYPE html>
@@ -67,9 +58,11 @@
 	<meta name="description" content="">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel = "stylesheet" href = "LoginCSS.css"> 
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
+	<script type="text/javascript" src="LoginJS.js"></script>
 	<title>Admin Login</title>
 </head>
 <body>
@@ -80,11 +73,12 @@
 				<form class="login_form" method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 					<div class="login_field">
 						<i class="login_icon fas fa-user"></i>
-						<input type="text" name="uname" class="login_input" value="<?php echo $uname; ?>" placeholder="User Name"> 
+						<input type="text" name="uname" class="login_input" value="<?php echo $uname; ?>" placeholder="User Name" id="uname"> 
 					</div>
 					<div class="login_field">
 						<i class="login_icon fas fa-lock"></i>
-						<input type="password" name="pword" class="login_input" placeholder="Password">
+						<input type="password" name="pword" class="login_input" placeholder="Password" id="pword">
+						<button type="button" class="showp"><i id="showbutt" class="fas fa-eye-slash"></i></button>
 					</div>
 					<button class="submit">
 						<span class="button_text">Log In</span>
@@ -117,3 +111,40 @@
 
 </body>
 </html>
+<?php
+	if($input && !$error){
+		$pass = "masterCats_6996";
+		if(md5($pword) == md5($pass)){
+			$_SESSION["admin"] = 1;
+			$date = date("Y-m-d H:i:s");
+			$ip = $_SERVER["REMOTE_ADDR"];
+			$insert = "INSERT INTO `logs`
+						(`ip_add`, `time`)
+						VALUES ('$ip', '$date')";
+			$conn_admin -> query($insert);
+			?>
+			<script type="text/javascript">
+				swal({
+					title: "Login Successful",
+					text: "You are now logged in.",
+					icon: "success"
+				})
+				.then(function(){
+					location.href = "Dashboard.php";
+				});
+			</script>
+			<?php
+		}
+		else{
+			?>
+			<script type="text/javascript">
+				swal({
+					title: "Login Unsuccessful",
+					text: "You may have either inputted the incorrect username or password.",
+					icon: "error"
+				});
+			</script>
+			<?php
+		}
+	}
+?>

@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	var cnt_error = 0;
 	var curr_time = 0;
-	$("#submit").click(function(){
+	function check(){
 		var otp_in = $("#otp").val();
 		$.ajax({
 			url: "CheckOTP.php",
@@ -43,7 +43,7 @@ $(document).ready(function(){
 				return false;
 			}
 		});
-	});
+	}
 
 	function timer(){
 		curr_time++;
@@ -62,7 +62,7 @@ $(document).ready(function(){
 
 	$("#otp").keypress(function(e){
 		if(e.keyCode == 13){
-			$("#submit").click(send_message());
+			$("#submit").click(check());
 		}
 		else{
 			if($("#otp").val().length < 6 && e.keyCode >= 48 && e.keyCode <= 57){

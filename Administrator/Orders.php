@@ -35,7 +35,7 @@
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel = "stylesheet" href = "DashboardCSS.css"> 
+	<link rel = "stylesheet" href = "OrdersCSS.css"> 
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
@@ -54,7 +54,7 @@
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	            <ul class="navbar-nav ml-auto">
 	                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-	                <li class="nav-item active">
+	                <li class="nav-item">
 	                    <a class="nav-link" href="Dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
 	                </li>
 	                <li class="nav-item">
@@ -63,7 +63,7 @@
 	                <li class="nav-item">
 	                    <a class="nav-link" href="Notifications.php"><i class="fas fa-bell"></i>Notifications</a>
 	                </li>
-	                <li class="nav-item">
+	                <li class="nav-item active">
 	                    <a class="nav-link" href="Orders.php"><i class="fas fa-clipboard-list"></i>Orders</a>
 	                </li>
 	                <li class="nav-item">

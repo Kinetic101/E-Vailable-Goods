@@ -93,6 +93,7 @@ body {
 }
 
 .login_form{
+	flex: 1;
 	width: 320px;
 	padding: 30px;
 	padding-top: 156px;
@@ -143,13 +144,34 @@ body {
 	transition: .2s;
 }
 
-.submit:active, .submit:focus, .submit:hover{
+.submit:enabled:hover{
 	border-color: #4A7C59;
 	outline: none;
+}
+
+.submit:disabled{
+	border-color: gray;
+	color: gray;
+	cursor: auto;
 }
 
 .button_icon{
 	font-size: 24px;
 	margin-left: auto;
+}
+
+.submit:enabled > .button_icon{
 	color: #399534;
+}
+
+.showp{
+	border: none;
+	background: #FFF;
+	cursor: pointer;
+	color: #399534;
+}
+
+#pword{
+	width: 65%;
+	flex: 1;
 }

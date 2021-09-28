@@ -29,18 +29,12 @@
 			$lname = $_SESSION["lname"];
 			$pword = $_SESSION["pword"];
 			$user = $_SESSION["user_type"];
-			unset($_SESSION["uname"]);
-			unset($_SESSION["email"]);
-			unset($_SESSION["fname"]);
-			unset($_SESSION["lname"]);
-			unset($_SESSION["pword"]);
-			unset($_SESSION["user_type"]);
-			unset($_SESSION["otp"]);
-			unset($_SESSION["cnt_re"]);
+			$_SESSION["cnt_re"] = 0;
 			$insert = "INSERT INTO `credentials` 
 									(`username`, `email`, `pass`, `fname`, `lname`, `online`, `user_type`, `pic`, `m1`, `m2`, `m3`, `m4`, `m5`, `m6`) 
 									VALUES ('$uname', '$email', '$pword', '$fname', '$lname', 1, '$user', './ProfilePix/X5ksjijoa2i39aind239.jpg', 0, 0, 0, 0, 0, 0)";
 			$conn -> query($insert);
+			session_unset();
 			$_SESSION["usern"] = $uname;
 			$_SESSION["prof_pic"] = "./ProfilePix/X5ksjijoa2i39aind239.jpg";
 			$_SESSION["market"] = "";

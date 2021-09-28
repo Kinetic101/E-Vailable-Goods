@@ -35,7 +35,7 @@
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel = "stylesheet" href = "DashboardCSS.css"> 
+	<link rel = "stylesheet" href = "EditCSS.css"> 
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
@@ -54,7 +54,7 @@
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	            <ul class="navbar-nav ml-auto">
 	                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-	                <li class="nav-item active">
+	                <li class="nav-item">
 	                    <a class="nav-link" href="Dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
 	                </li>
 	                <li class="nav-item">
@@ -69,7 +69,7 @@
 	                <li class="nav-item">
 	                    <a class="nav-link" href="Messages.php"><i class="fas fa-inbox"></i>Messages</a>
 	                </li>
-	                <li class="nav-item">
+	                <li class="nav-item active">
 	                    <a class="nav-link" href="Edit.php"><i class="fas fa-edit"></i>Edit</a>
 	                </li>
 	                <li class="nav-item">

@@ -9,8 +9,6 @@ $(document).ready(function(){
 		return false;
 	}
 
-	$("#sendm").click(send_message);
-
 	$("#msg").keypress(function(e){
 		if(e.keyCode == 13){
 			if($('#msg').val().replace(/\s/g, '').length){
