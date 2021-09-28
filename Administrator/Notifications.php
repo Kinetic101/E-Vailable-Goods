@@ -20,7 +20,44 @@
 		die("Connection Failed: ".$conn_admin -> connect_error);
 	}
 
+	//Function to trim unnecessary characters from input
+
+	function test_input($data){
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	}
+
 	$_SESSION["user"] = "";
+
+	$unameErr = $titleErr = $msgErr = "";
+	$uname = $title = $msg = "";
+	$error = $input = False;
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		$input = True;
+		if(empty($_POST["uname"])){
+		    $unameErr = "Username is required";
+		    $error = True;
+		} 
+		else{
+		    $uname = test_input($_POST["uname"]);
+		}
+		if(empty($_POST["title"])){
+		    $titleErr = "Title is required";
+		    $error = True;
+		} 
+		else{
+		    $title = test_input($_POST["title"]);
+		}
+		if(empty($_POST["msg"])){
+		    $msgErr = "Message is required";
+		    $error = True;
+		} 
+		else{
+		    $msg = test_input($_POST["msg"]);
+		}
+	}
 ?>
 
 <!DOCTYPE html>
@@ -36,11 +73,13 @@
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel = "stylesheet" href = "NotificationsCSS.css"> 
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
+	<script type="text/javascript" src="NotificationsJS.js"></script>
 	<title>Admin Dashboard</title>
 </head>
 <body>
@@ -80,6 +119,36 @@
 	    </nav>
 	</header>
 
+	<div id="searchuser">
+		<h3 style="padding-left: 10px">Search User</h3>
+		<i class="fas fa-search" id="inpicon"></i>
+		<input type="text" placeholder="Search for user here." id="inp">
+		<hr>
+		<div class="userss">
+		<?php
+			$select = "SELECT `username`, `fname`, `lname`
+						FROM `credentials`";
+			$res = $conn_user -> query($select);
+			while($row = $res -> fetch_assoc()){
+				echo "<h5>".$row["username"].": ".$row["fname"]." ".$row["lname"]."<hr></h5>";
+			}
+		?>
+		</div>
+	</div>
+
+	<div id="addnotif">
+		<h3 style="padding-left: .1%">Send Notification to User</h3>
+		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+			Username: <br> <input type="text" name="uname" value="<?php echo $uname; ?>"> <span class = "error">* <?php echo $unameErr;?></span>
+			<br>
+			Title: <br> <textarea type="text" id="title" name="title" rows="4" cols="50" value="<?php echo $title; ?>"></textarea> <span class = "error">* <?php echo $titleErr;?></span>
+			<br>
+			Message: <br> <textarea type="text" id="msg" name="msg" rows="8" cols="50" value="<?php echo $msg; ?>"></textarea> <span class = "error">* <?php echo $msgErr;?></span>
+			<br>
+			<input type="submit" name="submit" value="Notify User">
+		</form>
+	</div>
+
 	<div id="loading">
 		<div class="content">
 			<div class="load-wrapp">
@@ -96,3 +165,60 @@
 
 </body>
 </html>
+<?php
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		if($titleErr == ""){
+			?>
+			<script type="text/javascript">
+				$("#title").val('<?php echo $title; ?>');
+			</script>
+			<?php
+		}
+		if($msgErr == ""){
+			?>
+			<script type="text/javascript">
+				$("#msg").val('<?php echo $msg; ?>');
+			</script>
+			<?php
+		}
+
+		if($input){
+			if(!$error){
+				$check = "SELECT * FROM `credentials` WHERE `username` = '$uname'";
+				$res = $conn_user -> query($check);
+				if($res -> num_rows > 0){
+					$p = mysqli_fetch_array($conn_user -> query("SELECT COUNT(*) 
+														FROM `notifications`"))[0]+1;
+					$insert = "INSERT INTO `notifications`
+								(`id`, `username`, `notif_title`, `notif_msg`, `unread`)
+								VALUES ('$p', '$uname', '$title', '$msg', 1)";
+					$conn_user -> query($insert);
+					?>
+					<script type="text/javascript">
+						var uname = '<?php echo $uname; ?>';
+						swal({
+							icon: "success",
+							title: `User ${uname} has been notified`
+						})
+						.then(function(){
+							location.href = "Notifications.php";
+						})
+					</script>
+					<?php
+				}
+				else{
+					$unameErr = "Username does not exist!";
+					?>
+					<script type="text/javascript">
+						swal({
+							icon: "error",
+							title: "Username is Non-Existent",
+							message: "The username you entered is non-existent, please input an existing username."
+						})
+					</script>
+					<?php
+				}
+			}
+		}
+	}
+?>

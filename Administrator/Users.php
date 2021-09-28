@@ -36,6 +36,7 @@
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel = "stylesheet" href = "UsersCSS.css"> 
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
@@ -100,6 +101,7 @@
 				<th>Market 4</th>
 				<th>Market 5</th>
 				<th>Market 6</th>
+				<th>Delete User</th>
 			</tr>
 			<?php
 			$select = "SELECT *
@@ -299,6 +301,36 @@
 									<span class="slider round"></span>
 								</label>
 							</td>
+							<td class="delete"><i class="fas fa-trash" id="<?php echo $id; ?>"></i></td>
+							<script type="text/javascript">
+								$("#"+'<?php echo $id; ?>').click(function(){
+									var uname = '<?php echo $row["username"]; ?>';
+									swal({
+										icon: "warning",
+										text: `Do you want to delete user ${uname}?`,
+										dangerMode: true,
+										buttons: {
+											cancel: true,
+											confirm: "Delete User"
+										}
+									})
+									.then(function(resp){
+										if(resp == true){
+											$.ajax({
+												url: "DeleteUser.php",
+												cache: false,
+												method: "POST",
+												data: {
+													uname: uname
+												},
+												success: function(){
+													location.href = "Users.php";
+												}
+											})
+										}
+									})
+								})
+							</script>
 						<?php
 						}
 						else{

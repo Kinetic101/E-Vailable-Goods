@@ -23,8 +23,4 @@ $(document).ready(function(){
 			}
 		})
 	})
-
-	$("#sres").blur(function(){
-		$("#sres")[0].style.display = "none";
-	})
 })

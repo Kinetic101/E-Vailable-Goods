@@ -48,6 +48,25 @@
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
 					<i class="fas fa-search"></i>
+					<div id="sres">
+						<?php
+						$select = "SELECT `username`, `fname`, `lname`, `pic`
+									FROM `credentials`
+									WHERE `username` != '$_SESSION[usern]'
+									ORDER BY `username` ASC";
+						$res = $conn -> query($select);
+						while($row = $res -> fetch_assoc()){
+							?>
+							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
+								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
+								<h5>
+								<?php echo $row["fname"]." ".$row["lname"]; ?>
+								</h5>
+							</a>
+							<?php
+						}
+						?>
+					</div>
 				</li>
 			</ul>
 		</nav>
@@ -72,27 +91,7 @@
 		</ul>
 
 	</header>
-
-	<div id="sres">
-		<?php
-		$select = "SELECT `username`, `fname`, `lname`, `pic`
-					FROM `credentials`
-					WHERE `username` != '$_SESSION[usern]'
-					ORDER BY `username` ASC";
-		$res = $conn -> query($select);
-		while($row = $res -> fetch_assoc()){
-			?>
-			<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-				<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-				<h5>
-				<?php echo $row["fname"]." ".$row["lname"]; ?>
-				</h5>
-			</a>
-			<?php
-		}
-		?>
-	</div>
-
+	
 	<div id = "help">
 		<div class="helpme" id="help1"><h4>How to Change Profile Picture?</h4></div>
 		<div class="helpme" id="help2"><h4>How Can I Access the Edit Page?</h4></div>

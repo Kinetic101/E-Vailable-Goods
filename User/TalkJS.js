@@ -8,7 +8,7 @@ $(document).ready(function(){
 		$("#chat").animate({scrollTop: $("#chat")[0].scrollHeight - 20}, "normal");
 		return false;
 	}
-	$("#submit").click(send_message);
+	$("#sendm").click(send_message);
 
 	$("#msg").keypress(function(e){
 		if(e.keyCode == 13){

@@ -32,6 +32,16 @@ tr:nth-child(even) > td{
     text-align: center;
 }
 
+.delete{
+    text-align: center;
+    color: red;
+    font-size: 30px;
+}
+
+.delete i{
+    cursor: pointer;
+}
+
 
 /* Toggle Switch */
 .switch {

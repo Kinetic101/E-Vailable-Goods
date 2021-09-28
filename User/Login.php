@@ -128,7 +128,7 @@
 	
 	<div class = "login">
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			E-Mail: <br> <input type = "text" name = "email" class = "field" value = "<?php echo $email;?>" id="email" maxlength="25"> <span class = "error">* <?php echo $emailErr;?></span> <br>
+			E-Mail: <br> <input type = "email" name = "email" class = "field" value = "<?php echo $email;?>" id="email" maxlength="25"> <span class = "error">* <?php echo $emailErr;?></span> <br>
 			Password: <br> <input type = "password" name = "pword" class = "field" id="pword" maxlength="25"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
 			<br>
 			<input type = "submit" value = "Log In" class = "button" id="submit">
