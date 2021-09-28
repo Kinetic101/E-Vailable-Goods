@@ -20,6 +20,7 @@
 		die("Connection Failed: ".$conn_admin -> connect_error);
 	}
 
+	$_SESSION["user"] = "";
 ?>
 
 <!DOCTYPE html>

@@ -5,6 +5,10 @@ body{
 	font-family: 'Raleway', sans-serif;
 }
 
+header{
+	z-index: 10;
+}
+
 a:hover{
 	color: white;
 }

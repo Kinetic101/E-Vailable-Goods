@@ -19,6 +19,8 @@
 	if($conn_admin -> connect_error){
 		die("Connection Failed: ".$conn_admin -> connect_error);
 	}
+
+	$_SESSION["user"] = "";
 ?>
 
 <!DOCTYPE html>
@@ -38,9 +40,9 @@
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
-	<script type="text/javascript" src="DashboardJS.js"></script>
+	<script type="text/javascript" src="UsersJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
-	<title>Admin Dashboard</title>
+	<title>Users</title>
 </head>
 <body>
 
@@ -79,12 +81,14 @@
 	    </nav>
 	</header>
 
-	<br>
-
+	<i class="fas fa-search" id="inpicon"></i>
+	<input type="text" placeholder="Search here. You can search for any of the categories below but you cannot join two or more categories to search (e.g. searching for first and last name at the same time)." id="inp">
+	
 	<div id="user">
 		<table>
 			<tr>
 				<th>User Name</th>
+				<th>Email</th>
 				<th>First Name</th>
 				<th>Last Name</th>
 				<th>Online</th>
@@ -107,11 +111,12 @@
 				?>
 				<div class="user_creds">
 					<tr>
-						<td><?php echo $row["username"]; ?></td>
+						<td><a href="Messages.php?user=<?php echo $row["username"]; ?>"><?php echo $row["username"]; ?></a></td>
+						<td><?php echo $row["email"]; ?></td>
 						<td><?php echo $row["fname"]; ?></td>
 						<td><?php echo $row["lname"]; ?></td>
 						<?php 
-							if($row["online"] == 0){
+							if($row["online"] == 1){
 							?>
 								<td><span class="ol">Online</span></td>
 							<?php

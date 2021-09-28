@@ -14,7 +14,7 @@
 		die("Connection Failed: ".$conn -> connect_error);
 	}
 
-	if(!empty($_POST["msg"])){	
+	if(!empty($_POST["msg"]) && $_SESSION["visit_user"] != ""){	
 		$date = date("Y-m-d H:i:s");
 		$insert = "INSERT INTO `messages`
 					(`from_user`, `to_user`, `message`, `time`, `unread`)

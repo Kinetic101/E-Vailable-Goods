@@ -20,6 +20,7 @@
 		die("Connection Failed: ".$conn_admin -> connect_error);
 	}
 
+	$_SESSION["user"] = "";
 ?>
 
 <!DOCTYPE html>
@@ -39,9 +40,9 @@
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
-	<script type="text/javascript" src="DashboardJS.js"></script>
+	<script type="text/javascript" src="OrdersJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
-	<title>Admin Dashboard</title>
+	<title>Orders</title>
 </head>
 <body>
 
@@ -79,6 +80,70 @@
 	        </div>
 	    </nav>
 	</header>
+
+	<i class="fas fa-search" id="inpicon"></i>
+	<input type="text" placeholder="Search here. You can search for any of the categories below but you cannot join two or more categories to search (e.g. searching for user name and order id at the same time)." id="inp">
+
+	<div id="orders">
+		<table>
+			<tr>
+				<th>Order ID</th>
+				<th>User Name</th>
+				<th>From Market</th>
+				<th>Address</th>
+				<th>Contact</th>
+				<th>Date & Time</th>
+				<th>Order State</th>
+			</tr>
+			<?php
+			$select = "SELECT DISTINCT(`id`), `username`, `market`, `address`, `contact`, `date_time`, `state`
+						FROM `orders`
+						ORDER BY `id` DESC";
+			$res = $conn_user -> query($select);
+			$i = 0;
+			while($row = $res -> fetch_assoc()){
+				$id = "id".$i++;
+				?>
+				<div class="order_dets">
+					<tr>
+						<td><?php echo "ID#".$row["id"]; ?></td>
+						<td><?php echo $row["username"]; ?></td>
+						<td><?php echo $row["market"]; ?></td>
+						<td><?php echo $row["address"]; ?></td>
+						<td><?php echo $row["contact"]; ?></td>
+						<td><?php echo $row["date_time"]; ?></td>
+						<td class="sw">
+							<label class="switch">
+								<input type="checkbox" <?php if($row["state"] == 1) echo "checked"; ?> <?php if($row["state"] == 1) echo "disabled"; ?>  id = "<?php echo $id."1"; ?>"
+									onclick="function clicky(){
+												var uname = '<?php echo $row["username"]; ?>';
+												var check = 1;
+												if($('#'+'<?php echo $id; ?>'+'1')[0].checked == true){
+													$('#'+'<?php echo $id; ?>'+'1')[0].disabled = true;
+													check = 0;
+														$.ajax({
+														url: 'ModifyOrder.php',
+														cache: false,
+														method: 'POST',
+														data: {
+															uname: uname,
+															id: '<?php echo $row["id"]; ?>'
+														}
+													})
+												}
+											}
+											clicky();"
+								>
+								<span class="slider round"></span>
+							</label>
+						</td>
+					</tr>
+				</tr>
+				<?php
+			}
+			?>
+		</table>
+	</div>
 
 	<div id="loading">
 		<div class="content">

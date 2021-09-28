@@ -20,6 +20,9 @@
 		die("Connection Failed: ".$conn_admin -> connect_error);
 	}
 
+	if(isset($_GET["user"])){
+		$_SESSION["user"] = $_GET["user"];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -79,6 +82,21 @@
 	        </div>
 	    </nav>
 	</header>
+
+	<div id = "contacts"></div>
+
+	<div id = "chatbox">
+		<div id = "chat"></div>
+	</div>
+
+	<div id = "send">
+		<form action = "">
+			<input type = "text" name = "msg" placeholder = "Type your message here. Sadly, we do not YET support emojis; but, will in our future updates." id = "msg"/>
+			<button type = "button" id = "sendm"><i class="fas fa-location-arrow"></i></button>
+		</form>
+	</div>
+
+	<div id = "active"></div>   
 
 	<div id="loading">
 		<div class="content">

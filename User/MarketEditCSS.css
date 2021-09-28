@@ -160,7 +160,7 @@ ul{
 	border-radius: 50px;
 }
 
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+.product_table input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -197,7 +197,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	opacity: 0.8;
 }
 
-input[type=number] {
+.product_table input[type=number] {
   -moz-appearance: textfield;
 	text-align: center;
  	padding: 2px 4px;
@@ -319,7 +319,7 @@ label{
 	text-align: justify;
 }
 
-input[type=text]{
+.product_table input[type=text]{
 	padding: 2px 4px;
  	color: #171614;
  	border: 1.5px solid #171614;

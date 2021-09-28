@@ -20,6 +20,7 @@
 		die("Connection Failed: ".$conn_admin -> connect_error);
 	}
 
+	$_SESSION["user"] = "";
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +40,6 @@
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
-	<script type="text/javascript" src="DashboardJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
 	<title>Admin Dashboard</title>
 </head>

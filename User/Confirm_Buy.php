@@ -71,11 +71,13 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" type="text/css" href="Confirm_BuyCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
+	<link rel="stylesheet" type="text/css" href="SearchCSS.css">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>
+	<script type="text/javascript" src="SearchJS.js"></script>
 	<title>Transaction Confirmation</title>
 </head>
 <body>
@@ -87,6 +89,10 @@
 				<li><a href="Edit.php">Edit</a></li>
 				<li><a href="Suggest.php">Suggest</a></li>
 				<li><a href="About.php">About</a></li>
+				<li class="search-bar">
+					<input type="text" placeholder="Search for others" class="inp">
+					<i class="fas fa-search"></i>
+				</li>
 			</ul>
 		</nav>
 		<ul class="icons">
@@ -109,6 +115,27 @@
 		</ul>
 		
 	</header>
+
+	<div id="sres">
+		<?php
+		$select = "SELECT `username`, `fname`, `lname`, `pic`
+					FROM `credentials`
+					WHERE `username` != '$_SESSION[usern]'
+					ORDER BY `username` ASC";
+		$res = $conn -> query($select);
+		while($row = $res -> fetch_assoc()){
+			?>
+			<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
+				<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
+				<h5>
+				<?php echo $row["fname"]." ".$row["lname"]; ?>
+				</h5>
+			</a>
+			<?php
+		}
+		?>
+	</div>
+
 	<div id = "prod">
 		<h3 class = "disc">
 			You are about to make a legitimate transaction. An order will be made once you click the order button. 

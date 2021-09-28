@@ -116,6 +116,7 @@
 		$pass = "masterCats_6996";
 		if(md5($pword) == md5($pass)){
 			$_SESSION["admin"] = 1;
+			$_SESSION["user"] = "";
 			$date = date("Y-m-d H:i:s");
 			$ip = $_SERVER["REMOTE_ADDR"];
 			$insert = "INSERT INTO `logs`
