@@ -131,6 +131,9 @@ ul{
 
 .error{
 	color: red;
+	display: inline-block;
+	position: relative;
+	font-size: 10px;
 }
 
 .disc{
@@ -142,7 +145,7 @@ ul{
 	font-size: 15px;
 }
 
-hr{
+#fhr{
 	width: 90%;
 	margin-left: 5%;
 }
@@ -268,7 +271,7 @@ form{
 
 
 input[type=text]{
-	display: inline;
+	display: inline-block;
 	margin-top: 5px;
 	padding: 2px 4px;
  	color: #171614;
@@ -277,21 +280,53 @@ input[type=text]{
  	outline: none;
 }
 
+#cn, #st{
+	margin: 0% 4% 4% 4%;
+	width: 96%;
+	display: block;
+	padding: 5px 10px;
+ 	color: #171614;
+ 	border: 1.5px solid #ccc;
+ 	border-radius: 5px;
+ 	outline: none;
+ 	text-align: left;
+ 	font-family: "Verdana";
+ 	font-size: 13.25px;
+}
+
+#cn:focus, #st:focus{
+	border-color: #4A7C59;
+	background-color: #F2F7F4;
+}
+
+select{
+	margin: 0% 4% 4% 4%;
+	width: 96%;
+	display: block;
+	padding: 5px 10px;
+ 	color: #171614;
+ 	border: 1.5px solid #ccc;
+ 	border-radius: 5px;
+ 	outline: none;
+ 	text-align: left;
+ 	font-family: "Verdana";
+ 	font-size: 13.25px;
+}
+
+select:focus{
+	border-color: #4A7C59;
+	background-color: #F2F7F4;
+}
+
 label{
-	margin-left: 40vw;	
-	font-family: "Arial";
-	font-size: 16px;
-	color: #171614;
+	display: block;
+	float: left;
+	padding: 2.5px 5px;
+	margin-left: 1vw;
+	margin-bottom: 1%;
+	font-size: 14px;
 	font-weight: 750;
-}
-
-#cn{
-	margin-left: 11px;
-	width: 9vw;
-}
-
-#al{
-	width: 21vw;
+	font-family: "Arial";
 }
 
 input[type=submit]{
@@ -324,6 +359,42 @@ input[type=submit]{
 input[type=submit]:hover{
 	box-shadow: 8px 16px 32px -8px rgba(0,0,0,0.2);
 	opacity: 0.9;
+}
+
+#cins{
+	width:  25%;
+	height:  50%;
+	margin-left: 37.5%;
+	background-color: white;
+	position: fixed;
+	top:  100px;
+	border:  1px solid #ccc;
+	font-family: "Verdana";
+	font-size: 1em;
+	text-align: justify;
+	padding: 2% 2% 5% 0;
+	box-shadow: 0px 0px 1000px 1000px rgba(0,0,0,0.2);
+}
+
+#show{
+	z-index: 5;
+	position: fixed;
+	text-align: left;
+	color: #171614;
+	padding: 8px 15px 8px 15px;
+	border:none;
+	outline: none;
+	font-size: 15px;
+	cursor: pointer;
+	font-family: "Arial";
+	bottom: 12px;
+	right: 30vw;
+	background-color: #FFFCF2;
+	transition: all 0.3s ease 0s;
+}
+
+#show:hover{
+	opacity: 0.7;
 }
 
 

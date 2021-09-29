@@ -75,6 +75,7 @@
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" src="Confirm_BuyJS.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="SearchJS.js"></script>
@@ -145,7 +146,7 @@
 			<br> 
 			Below are the products that you are about to order:
 		</h3>
-		<hr>
+		<hr id = "fhr">
 		<div class = "items">
 			<div class = "title">
 				<h4 id = "eman">Product</h4>
@@ -180,25 +181,37 @@
 		</div>
 
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			<div class = "cins">
-				<label id = "contact">Contact Number: </label>
-				<input type = "text" name = "contact" class = "field" id = "cn" value = "<?php echo $contact;?>"> <span class = "error">* <?php echo $contactErr;?></span>
-
-				<!--Palitan natin to, instead na address/location lang iseparate natin into Town (towns sa Partido) tas respective brgys. ng kada town gawin mo lang yung dropdown inputs tas ako na dun sa nagapalit palit, yung pareho sa lazada/shopee so bale:
-
-				Municipality (drodown)
-				Brgy (dropdow)
-				Street Address (simple text box)-->
-
-				<label id = "add">Address/Location: </label>
-				<input type = "text" name = "add" class = "field" id = "al" value = "<?php echo $add;?>"> <span class = "error">* <?php echo $addErr;?></span><br> 
+			<div id = "cins" style="display:block">
+				<label for = "contact">Contact Number </label><span class = "error">* <?php echo $contactErr;?></span>
+				<input placeholder=" ex. 09*********"type = "text" name = "contact" class = "field" id = "cn" value = "<?php echo $contact;?>"> 
+				<label for = "town">Town/Municipality </label><span class = "error">* </span>
+				<select name = "town" id = "town">
+					<option value = "" selected disabled hidden>ex. Caramoan</option>
+					<option value = "caramoan">Caramoan</option>
+					<option value = "garchitorena">Garchitorena</option>
+					<option value = "goa">Goa</option>
+					<option value = "lagonoy">Lagonoy</option>
+					<option value = "presentacion">Presentacion</option>
+					<option value = "sagnay">Sagnay</option>
+					<option value = "sjose">San Jose</option>
+					<option value = "siruma">Siruma</option>
+					<option value = "tigaon">Tigaon</option>
+					<option value = "tinambac">Tinambac</option>
+				</select>
+				<label for = "brgy">Barangay </label><span class = "error">* </span>
+				<select name = "brgy" id = "brgy">
+					<option value = "" selected disabled hidden>ex. Agaas</option>
+				</select>
+				<label for = "street">Street Address </label><span class = "error">* </span>
+				<input placeholder=" ex. San Isidro Street" type = "text" name = "street" class = "field" id = "st" value = ""> 
+				
 			</div>
-
-			
+			<div class = "butts">
 			<input type = "submit" value = "Cancel" id = "cancel" name = "cancel">
 			<input type = "submit" value = "Order" id = "order" name = "order">
-			<div class = "butts"></div>
+			</div>
 		</form>
+			<button type = "button" id = "show">Set Address <i class="fas fa-chevron-right"></i> </button>
 	</div>
 
 	<div id="loading">
