@@ -280,7 +280,7 @@ input[type=text]{
  	outline: none;
 }
 
-#cn, #st{
+#cn, #st, #bry{
 	margin: 0% 4% 4% 4%;
 	width: 96%;
 	display: block;
@@ -294,7 +294,7 @@ input[type=text]{
  	font-size: 13.25px;
 }
 
-#cn:focus, #st:focus{
+#cn:focus, #st:focus, #bry:focus{
 	border-color: #4A7C59;
 	background-color: #F2F7F4;
 }

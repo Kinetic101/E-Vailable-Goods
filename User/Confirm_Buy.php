@@ -181,12 +181,11 @@
 		</div>
 
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			<div id = "cins" style="display:block">
+			<div id = "cins" style="display:none">
 				<label for = "contact">Contact Number </label><span class = "error">* <?php echo $contactErr;?></span>
-				<input placeholder=" ex. 09*********"type = "text" name = "contact" class = "field" id = "cn" value = "<?php echo $contact;?>"> 
+				<input placeholder="ex. 09*********"type = "text" name = "contact" class = "field" id = "cn" value = "<?php echo $contact;?>"> 
 				<label for = "town">Town/Municipality </label><span class = "error">* </span>
-				<select name = "town" id = "town">
-					<option value = "" selected disabled hidden>ex. Caramoan</option>
+				<select name = "town" id = "town" autocomplete="off">
 					<option value = "caramoan">Caramoan</option>
 					<option value = "garchitorena">Garchitorena</option>
 					<option value = "goa">Goa</option>
@@ -199,11 +198,330 @@
 					<option value = "tinambac">Tinambac</option>
 				</select>
 				<label for = "brgy">Barangay </label><span class = "error">* </span>
-				<select name = "brgy" id = "brgy">
-					<option value = "" selected disabled hidden>ex. Agaas</option>
-				</select>
+				<input list = "caramoan_list" type="text" id = "bry" placeholder = "ex. Agaas" autocomplete="off">
+				<datalist id = "caramoan_list" style="height:5.1em;overflow:hidden">
+						<!-- Start of Caramoan Barangays -->
+					<option value = "Agaas">
+					<option value = "Antolon">
+					<option value = "Bacgong">
+					<option value = "Bahay">
+					<option value = "Bikal">
+					<option value = "Binanuahan">
+					<option value = "Cabacongan">
+					<option value = "Cadong">
+					<option value = "Canatuan">
+					<option value = "Caputatan">
+					<option value = "Calongcogong">
+					<option value = "Daraga">
+					<option value = "Gata">
+					<option value = "Gibgos">
+					<option value = "Gogon">
+					<option value = "Guijalo">
+					<option value = "Hanopol">
+					<option value = "Hanoy">
+					<option value = "Haponan">
+					<option value = "Ilawod">
+					<option value = "Ili-Centro">
+					<option value = "Lidong">
+					<option value = "Lubas">
+					<option value = "Malabog">
+					<option value = "Maligaya">
+					<option value = "Mampirao">
+					<option value = "Mandiclum">
+					<option value = "Maqueda">
+					<option value = "Minalaba">
+					<option value = "Oring">
+					<option value = "Oroc-Osoc">
+					<option value = "Pagolinan">
+					<option value = "Pandanan">
+					<option value = "Paniman">
+					<option value = "Patag-Belen">
+					<option value = "Pili-Centro">
+					<option value = "Pili-Tabiguian">
+					<option value = "Poloan">
+					<option value = "Salvacion">
+					<option value = "San Roque">
+					<option value = "San Vicente">
+					<option value = "Santa Cruz">
+					<option value = "Solnopan">
+					<option value = "Tabgon">
+					<option value = "Tabiguian">
+					<option value = "Tabog">
+					<option value = "Tawog">
+					<option value = "Terogo">
+					<option value = "Toboan">
+						<!-- End of Caramoan Barangays -->
+						<!-- Start of Garchitorena Barangays -->
+					<option value = "Ason">
+					<option value = "Bahi">
+					<option value = "Barangay I">
+					<option value = "Barangay II">
+					<option value = "Barangay III">
+					<option value = "Barangay IV">
+					<option value = "Binagasbasan">
+					<option value = "Burabod">
+					<option value = "Cagamutan">
+					<option value = "Cagnipa">
+					<option value = "Canlong">
+					<option value = "Dangla">
+					<option value = "Del Pilar">
+					<option value = "Denrica">
+					<option value = "Harrison">
+					<option value = "Mansangat">
+					<option value = "Pambuhan">
+					<option value = "Sagrada">
+					<option value = "Salvacion">
+					<option value = "San Vicente">
+					<option value = "Sumaoy">
+					<option value = "Tamiawon">
+					<option value = "Toytoy">
+						<!-- End of Garchitorena Barangays -->
+						<!-- Start of Goa Barangays -->
+					<option value = "Abucayan">
+					<option value = "Bagumbayan Grande">
+					<option value = "Bagumbayan Pequeño">
+					<option value = "Balaynan">
+					<option value = "Belen">
+					<option value = "Buyo">
+					<option value = "Cagaycay">
+					<option value = "Catagbacan">
+					<option value = "Digdigon">
+					<option value = "Gimaga">
+					<option value = "Halawig-Gogon">
+					<option value = "Hiwacloy">
+					<option value = "La Purisima">
+					<option value = "Lamon">
+					<option value = "Matacla">
+					<option value = "Maymatan">
+					<option value = "Maysalay">
+					<option value = "Napawon">
+					<option value = "Panday">
+					<option value = "Payatan">
+					<option value = "Pinaglabanan">
+					<option value = "Salog">
+					<option value = "San Benito">
+					<option value = "San Isidro">
+					<option value = "San Isidro West">
+					<option value = "San Jose">
+					<option value = "San Juan Bautista">
+					<option value = "San Juan Evangelista">
+					<option value = "San Pedro">
+					<option value = "Scout Fuentebella">
+					<option value = "Tabgon">
+					<option value = "Tagongtong">
+					<option value = "Tamban">
+					<option value = "Taytay">
+						<!-- End of Goa Barangays -->
+						<!-- Start of Lagonoy Barangays -->
+					<option value = "Agosais">
+					<option value = "Agpo-Camagong-Tabog">
+					<option value = "Amoguis">
+					<option value = "Balaton">
+					<option value = "Binanuahan">
+					<option value = "Bocogan">
+					<option value = "Burabod">
+					<option value = "Cabotonan">
+					<option value = "Dahat">
+					<option value = "Del Carmen">
+					<option value = "Gimagtocon">
+					<option value = "Ginorangan">
+					<option value = "Gubat">
+					<option value = "Guibahoy">
+					<option value = "Himanag">
+					<option value = "Kinahologan">
+					<option value = "Loho">
+					<option value = "Manamoc">
+					<option value = "Mangogon">
+					<option value = "Mapid">
+					<option value = "Olas">
+					<option value = "Omalo">
+					<option value = "Panagan">
+					<option value = "Panicuan">
+					<option value = "Pinamihagan">
+					<option value = "San Fancisco">
+					<option value = "San Isidro">
+					<option value = "San Isidro Norte">
+					<option value = "San Isidro Sur">
+					<option value = "San Rafael">
+					<option value = "San Ramon">
+					<option value = "San Roque">
+					<option value = "San Sebastian">
+					<option value = "San Vicente">
+					<option value = "Santa Cruz">
+					<option value = "Santa Maria">
+					<option value = "Saripongpong">
+					<option value = "Sipaco">
+						<!-- End of Lagonoy Barangays -->
+						<!-- Start of Presentacion Barangays -->
+					<option value = "Ayugao">
+					<option value = "Bagong Sirang">
+					<option value = "Baliguian">
+					<option value = "Bantugan">
+					<option value = "Bicalen">
+					<option value = "Bitaogan">
+					<option value = "Buenavista">
+					<option value = "Bulalacao">
+					<option value = "Cagnipa">
+					<option value = "Lagha">
+					<option value = "Lidong">
+					<option value = "Liwacsa">
+					<option value = "Maangas">
+					<option value = "Pagsangahan">
+					<option value = "Patrocinio">
+					<option value = "Pili">
+					<option value = "Santa Maria">
+					<option value = "Tanawan">
+						<!-- End of Presentacion Barangays -->
+						<!-- Start of Sagnay Barangays -->
+					<option value = "Aniog">
+					<option value = "Atulayan">
+					<option value = "Bongalon">
+					<option value = "Buracan">
+					<option value = "Catalotoan">
+					<option value = "Del Carmen">
+					<option value = "Kilantaao">
+					<option value = "Kilomaon">
+					<option value = "Mabca">
+					<option value = "Minadongjol">
+					<option value = "Nato">
+					<option value = "Patitinan">
+					<option value = "San Antonio">
+					<option value = "San Isidro">
+					<option value = "San Roque">
+					<option value = "Santo Niño">
+					<option value = "Sibaguan">
+					<option value = "Tinorongan">
+					<option value = "Turague">
+						<!-- End of Sagnay Barangays -->
+						<!-- Start of San Jose Barangays -->
+					<option value = "Adiangao">
+					<option value = "Bagacay">
+					<option value = "Bahay">
+					<option value = "Boclod">
+					<option value = "Calalahan">
+					<option value = "Calawit">
+					<option value = "Camagong">
+					<option value = "Catalotoan">
+					<option value = "Danlog">
+					<option value = "Del Carmen">
+					<option value = "Dolo">
+					<option value = "Kinalansan">
+					<option value = "Mampirao">
+					<option value = "Manzana">
+					<option value = "Minoro">
+					<option value = "Palale">
+					<option value = "Ponglon">
+					<option value = "Pugay">
+					<option value = "Sabang">
+					<option value = "Salogon">
+					<option value = "San Antonio">
+					<option value = "San Juan">
+					<option value = "San Vicente">
+					<option value = "Santa Cruz">
+					<option value = "Soledad">
+					<option value = "Tagas">
+					<option value = "Tambangan">
+					<option value = "Telegrafo">
+					<option value = "Tominawog">
+						<!-- End of San Jose Barangays -->
+						<!-- Start of Siruma Barangays -->
+					<option value = "Bagong Sirang">
+					<option value = "Bahao">
+					<option value = "Boboan">
+					<option value = "Butawanan">
+					<option value = "Cabugao">
+					<option value = "Fundado">
+					<option value = "Homestead">
+					<option value = "La Purisima">
+					<option value = "Mabuhay">
+					<option value = "Malaconini">
+					<option value = "Matandang Siruma">
+					<option value = "Nalayahan">
+					<option value = "Pamintan-Bantilan">
+					<option value = "Pinitan">
+					<option value = "Poblacion">
+					<option value = "Salvacion">
+					<option value = "San Andres">
+					<option value = "San Ramon">
+					<option value = "Sulpa">
+					<option value = "Tandoc">
+					<option value = "Tongo-Bantigue">
+					<option value = "Vito">
+						<!-- End of Siruma Barangays -->
+						<!-- Start of Tigaon Barangays -->
+					<option value = "Abo">
+					<option value = "Cabalinadan">
+					<option value = "Caraycayon">
+					<option value = "Casuna">
+					<option value = "Consocep">
+					<option value = "Coyaoyao">
+					<option value = "Gaao">
+					<option value = "Gingaroy">
+					<option value = "Gubat">
+					<option value = "Huyonhuyon">
+					<option value = "Libod">
+					<option value = "Mabalodbalod">
+					<option value = "May-Anao">
+					<option value = "Panagan">
+					<option value = "Poblacion">
+					<option value = "Salvacion">
+					<option value = "San Antonio">
+					<option value = "San Francisco">
+					<option value = "San Miguel">
+					<option value = "San Rafael">
+					<option value = "Talojongon">
+					<option value = "Tinawagan">
+					<option value = "Vinagre">
+						<!-- End of Tigaon Barangays -->
+						<!-- Start of Tinambac Barangays -->
+					<option value = "Agay-Ayan">
+					<option value = "Antipolo">
+					<option value = "Bagacay">
+					<option value = "Banga">
+					<option value = "Bani">
+					<option value = "Bataan">
+					<option value = "Binalay">
+					<option value = "Bolaobalite">
+					<option value = "Buenavista">
+					<option value = "Buyo">
+					<option value = "Cagliliog">
+					<option value = "Caloco">
+					<option value = "Camagong">
+					<option value = "Canayonan">
+					<option value = "Cawaynan">
+					<option value = "Daligan">
+					<option value = "Filarca">
+					<option value = "La Medalla">
+					<option value = "La Purisima">
+					<option value = "Lupi">
+					<option value = "Magsaysay">
+					<option value = "Magtang">
+					<option value = "Mananao">
+					<option value = "New Caaluan">
+					<option value = "Olag Grande">
+					<option value = "Olag Pequeño">
+					<option value = "Old Caaluan">
+					<option value = "Pag-asa">
+					<option value = "Pantat">
+					<option value = "Sagrada">
+					<option value = "Salvacion">
+					<option value = "Salvacion Poblacion">
+					<option value = "San Antonio">
+					<option value = "San Isidro">
+					<option value = "San Jose">
+					<option value = "San Pascual">
+					<option value = "San Ramon">
+					<option value = "San Roque">
+					<option value = "San Vicente">
+					<option value = "Santa Cruz">
+					<option value = "Sogod">
+					<option value = "Tambang">
+					<option value = "Tierra Nevada">
+					<option value = "Union">
+						<!-- End of Tinambac Barangays -->
+				</datalist>
 				<label for = "street">Street Address </label><span class = "error">* </span>
-				<input placeholder=" ex. San Isidro Street" type = "text" name = "street" class = "field" id = "st" value = ""> 
+				<input placeholder="ex. San Isidro Street" type = "text" name = "street" class = "field" id = "st" value = ""> 
 				
 			</div>
 			<div class = "butts">
