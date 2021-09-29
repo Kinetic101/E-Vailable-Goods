@@ -23,6 +23,12 @@
 	if($conn -> connect_error){
 		die("Connection Failed: ".$conn -> connect_error);
 	}
+	$p = mysqli_fetch_array($conn -> query("SELECT COUNT(*) 
+													FROM `notifications`
+													WHERE `username` = '$_SESSION[usern]' AND `id` = '$_SESSION[order_id]'"))[0];
+	if($p == 0){
+		header("Location: Orders.php");
+	}
 
 	$select = "SELECT *
 				FROM `orders`
@@ -45,7 +51,7 @@
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="SearchJS.js"></script>
-	<title>E-Vailable Goods</title>
+	<title>Order Details - ID#<?php echo $_SESSION["order_id"]?></title>
 </head>
 <body>
 
@@ -62,12 +68,12 @@
 					<i class="fas fa-search"></i>
 					<div id="sres">
 						<?php
-						$select = "SELECT `username`, `fname`, `lname`, `pic`
+						$selecto = "SELECT `username`, `fname`, `lname`, `pic`
 									FROM `credentials`
 									WHERE `username` != '$_SESSION[usern]'
 									ORDER BY `username` ASC";
-						$res = $conn -> query($select);
-						while($row = $res -> fetch_assoc()){
+						$reso = $conn -> query($selecto);
+						while($row = $reso -> fetch_assoc()){
 							?>
 							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
 								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>

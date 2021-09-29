@@ -50,7 +50,7 @@
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="SearchJS.js"></script>
-	<title>Notifications</title>
+	<title>Notification Details</title>
 
 </head>
 <body>

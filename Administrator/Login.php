@@ -117,6 +117,8 @@
 		if(md5($pword) == md5($pass)){
 			$_SESSION["admin"] = 1;
 			$_SESSION["user"] = "";
+			$_SESSION["order_id"] = "";
+			$_SESSION["market"] = "";
 			$date = date("Y-m-d H:i:s");
 			$ip = $_SERVER["REMOTE_ADDR"];
 			$insert = "INSERT INTO `logs`

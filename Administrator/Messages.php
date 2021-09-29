@@ -44,7 +44,7 @@
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="MessagesJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
-	<title>Admin Messages</title>
+	<title>Admin - Messages</title>
 </head>
 <body>
 

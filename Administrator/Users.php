@@ -43,7 +43,7 @@
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="UsersJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
-	<title>Users</title>
+	<title>Admin - Users</title>
 </head>
 <body>
 
@@ -307,7 +307,7 @@
 									var uname = '<?php echo $row["username"]; ?>';
 									swal({
 										icon: "warning",
-										text: `Do you want to delete user ${uname}?`,
+										text: `Are you sure you want to delete user ${uname}?`,
 										dangerMode: true,
 										buttons: {
 											cancel: true,

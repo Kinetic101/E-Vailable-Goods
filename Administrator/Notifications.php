@@ -80,7 +80,7 @@
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
 	<script type="text/javascript" src="NotificationsJS.js"></script>
-	<title>Admin Dashboard</title>
+	<title>Admin - Notifications</title>
 </head>
 <body>
 

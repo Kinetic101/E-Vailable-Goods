@@ -1,29 +1,35 @@
+<!DOCTYPE html>
 <?php
-	//Connect to SQL database
-	session_start();
 
-	if($_SESSION["admin"] == ""){
-		header("Location: Login.php");
+	//Connect to SQL database
+
+	session_start();
+	if($_SESSION["usern"] == ''){
+		header("Location: SignUp.php");
 	}
+	if($_SESSION["order_id"] == ""){
+		header("Orders.php");
+	}
+
+	$_SESSION["market"] = "";
+	$_SESSION["visit_user"] = "";
+	$_SESSION["author"] = 0;
 
 	$server = "localhost";
 	$usname = "root";
 	$pass = "";
-	$dbname_user = "user";
-	$dbname_admin = "admin";
-	$conn_user = new mysqli($server, $usname, $pass, $dbname_user);
-	$conn_admin = new mysqli($server, $usname, $pass, $dbname_admin);
-	if($conn_user -> connect_error){
-		die("Connection Failed: ".$conn_user -> connect_error);
-	}
-	if($conn_admin -> connect_error){
-		die("Connection Failed: ".$conn_admin -> connect_error);
+	$dbname = "user";
+	$conn = new mysqli($server, $usname, $pass, $dbname);
+	if($conn -> connect_error){
+		die("Connection Failed: ".$conn -> connect_error);
 	}
 
-	$_SESSION["user"] = "";
+	$select = "SELECT *
+				FROM `orders`
+				WHERE `id` = '$_SESSION[order_id]'";
+	$res = $conn -> query($select);
+	$tot = 0;
 ?>
-
-<!DOCTYPE html>
 <html>
 <head>
 	<meta charset = "utf-8">
@@ -36,13 +42,12 @@
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-	<link rel = "stylesheet" href = "DashboardCSS.css"> 
+	<link rel = "stylesheet" href = "OrderDetailsCSS.css"> 
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
-	<script type="text/javascript" src="DashboardJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
-	<title>Admin - Dashboard</title>
+	<title>Order Details - ID#<?php echo $_SESSION["order_id"]?></title>
 </head>
 <body>
 
@@ -55,7 +60,7 @@
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	            <ul class="navbar-nav ml-auto">
 	                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
-	                <li class="nav-item active">
+	                <li class="nav-item">
 	                    <a class="nav-link" href="Dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
 	                </li>
 	                <li class="nav-item">
@@ -64,7 +69,7 @@
 	                <li class="nav-item">
 	                    <a class="nav-link" href="Notifications.php"><i class="fas fa-bell"></i>Notifications</a>
 	                </li>
-	                <li class="nav-item">
+	                <li class="nav-item active">
 	                    <a class="nav-link" href="Orders.php"><i class="fas fa-clipboard-list"></i>Orders</a>
 	                </li>
 	                <li class="nav-item">
@@ -81,6 +86,53 @@
 	    </nav>
 	</header>
 
+	<div id="ongoing">
+		<!--Button here (Ongoing Orders) -->
+	</div>
+
+	<div id="finished">
+		<!--Button here (Finished Orders) -->
+	</div>
+
+	<div id="back">
+		<a href="Orders.php"><i class="fas fa-arrow-left"></i></a>
+	</div>
+
+	<div id="details">
+		<h2>Order ID#<?php echo $_SESSION["order_id"]; ?></h2>
+		<div class = "items">
+			<div class = "title">
+				<h4 id = "eman">Product</h4>
+				<h4 id = "quan">Quantity</h4>
+				<h4 id = "price">Price</h4>
+				<h4 id = "tprice">Total Price</h4>
+			</div>
+		<?php				
+			while($row = $res -> fetch_assoc()) {
+			?>
+			<div class = "uni">
+				<div class = "eman"> <?php echo $row["productname"]; ?></div>
+				<div class = "unit">x</div>
+				<div class = "quan"> <?php echo $row["order_quantity"]." ".$row["unit"]; ?></div>
+				<div class = "unit">x</div>
+				<div class = "price">Php <?php echo $row["price_as_of_order"]; ?></div>
+				<div class = "unit">=</div>
+				<div class = "tprice">Php <?php echo $row["price_as_of_order"]*$row["order_quantity"]; ?></div>
+			</div>
+			<span id = "market">From Market: <?php echo $row["market"]; ?></span>
+			<br>
+			<br>
+			<?php
+			$tot += $row["price_as_of_order"]*$row["order_quantity"];
+			}
+		?>
+			<div class = "tamount">
+				<span id = "tamount">Total Amount:</span> 
+				<span id = "tantamount">Php <?php echo $tot; ?></span>
+			</div>
+		</div>
+	</div>
+
 	<div id="loading">
 		<div class="content">
 			<div class="load-wrapp">
@@ -94,6 +146,6 @@
 		</div>
 		<!--Credits to @Manoz from CodePen for the loading screen-->
 	</div>
-
+	
 </body>
 </html>

@@ -28,13 +28,13 @@
 					SET `state` = 1
 					WHERE `id` = '$id' AND `username` = '$username'";
 		$conn_user -> query($update);
-		$title = "Your order with ID#".$id." has been accomplished.";
+		$title = "Your order with ID#".$id." has been accomplished";
 		$msg = "Your order with ID#".$id." has been accomplished. Thank you for using our platform. You have also helped curb food oversupply! Thanks again!";
 		$p = mysqli_fetch_array($conn_user -> query("SELECT COUNT(*) 
 														FROM `notifications`"))[0]+1;
 		$insert = "INSERT INTO `notifications`
 					(`id`, `username`, `notif_title`, `notif_msg`, `unread`)
 					VALUES ('$p', '$username', '$title', '$msg', 1)";
-		//$conn_user -> query($insert);
+		$conn_user -> query($insert);
 	}
 ?>	

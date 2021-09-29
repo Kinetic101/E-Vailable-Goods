@@ -4,24 +4,31 @@
 	//Connect to SQL database
 
 	session_start();
-	if($_SESSION["usern"] == ''){
-		header("Location: SignUp.php");
+	if($_SESSION["admin"] == ''){
+		header("Location: Login.php");
 	}
 
 	else if($_SESSION["market"] == ""){
-		header("Location: Research.php");
+		header("Location: Edit.php");
 	}
 
-	$_SESSION["visit_user"] = "";
 
+	if($_SESSION["admin"] == ""){
+		header("Location: Login.php");
+	}
 
 	$server = "localhost";
 	$usname = "root";
 	$pass = "";
-	$dbname = "user";
-	$conn = new mysqli($server, $usname, $pass, $dbname);
-	if($conn -> connect_error){
-		die("Connection Failed: ".$conn -> connect_error);
+	$dbname_user = "user";
+	$dbname_admin = "admin";
+	$conn_user = new mysqli($server, $usname, $pass, $dbname_user);
+	$conn_admin = new mysqli($server, $usname, $pass, $dbname_admin);
+	if($conn_user -> connect_error){
+		die("Connection Failed: ".$conn_user -> connect_error);
+	}
+	if($conn_admin -> connect_error){
+		die("Connection Failed: ".$conn_admin -> connect_error);
 	}
 
 	function test_input($data){
@@ -42,77 +49,60 @@
 <html>
 <head>
 
-	<meta charset="utf-8">
+	<meta charset = "utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
-	<link rel="stylesheet" type="text/css" href="MarketEditCSS.css">
-	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
-	<link rel="stylesheet" type="text/css" href="SearchCSS.css">
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-	<script type="text/javascript" src="MarketEditJS.js"></script>
-	<script type="text/javascript" src="GetNotificationsJS.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
+	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel = "stylesheet" href = "MarketEditCSS.css"> 
+	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
+	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
-	<script type="text/javascript" src="SearchJS.js"></script>
+	<script type="text/javascript" src="NavBarJS.js"></script>
+	<script type="text/javascript" src="MarketEditJS.js"></script>
 	<title><?php echo $_SESSION["market"]?> Edit</title>
 
 </head>	
 <body>
 	<header>
-		<nav>
-			<ul class="links">
-				<li><a href="Research.php">Buy</a></li>
-				<li id="here"><a href="Talk.php">Talk</a></li>
-				<li><a href="Edit.php">Edit</a></li>
-				<li><a href="Suggest.php">Suggest</a></li>
-				<li><a href="About.php">About</a></li>
-				<li class="search-bar">
-					<input type="text" placeholder="Search for others" class="inp">
-					<i class="fas fa-search"></i>
-					<div id="sres">
-						<?php
-						$selecto = "SELECT `username`, `fname`, `lname`, `pic`
-									FROM `credentials`
-									WHERE `username` != '$_SESSION[usern]'
-									ORDER BY `username` ASC";
-						$res = $conn -> query($selecto);
-						while($row = $res -> fetch_assoc()){
-							?>
-							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-								<h5>
-								<?php echo $row["fname"]." ".$row["lname"]; ?>
-								</h5>
-							</a>
-							<?php
-						}
-						?>
-					</div>
-				</li>
-			</ul>
-		</nav>
-		<ul class="icons">
-			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
-			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell" id="bell"></i></a></li>
-			<li><a href="Orders.php" title="Orders"><i class="fas fa-receipt"></i></a></li>
-		</ul>
-		
-		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
-		<ul>
-		<li class = "dropdown"><a href = "Profile.php" class="pic">
-			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
-			</div>
-		</a>
-		<div class="dlinks">
-      			<a href="Profile.php">Profile</a>
-      			<a href="Help_and_Support.php">Help & Support</a>
-      			<a href="Logout.php">Logout</a>
-    	</div>
-    	</li>
-		</ul>
-
+		<nav class="navbar navbar-expand-custom navbar-mainbg">
+	        <a class="navbar-brand navbar-logo" href="#">E-Vailable Goods - Administration Website</a>
+	        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	        <i class="fas fa-bars text-white"></i>
+	        </button>
+	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	            <ul class="navbar-nav ml-auto">
+	                <div class="hori-selector"><div class="left"></div><div class="right"></div></div>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="Dashboard.php"><i class="fas fa-tachometer-alt"></i>Dashboard</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="Users.php"><i class="far fa-address-book"></i>Users</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="Notifications.php"><i class="fas fa-bell"></i>Notifications</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="Orders.php"><i class="fas fa-clipboard-list"></i>Orders</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="Messages.php"><i class="fas fa-inbox"></i>Messages</a>
+	                </li>
+	                <li class="nav-item active">
+	                    <a class="nav-link" href="Edit.php"><i class="fas fa-edit"></i>Edit</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a class="nav-link" href="Logout.php"><i class="fas fa-sign-out-alt"></i>Log Out</a>
+	                </li>
+	            </ul>
+	        </div>
+	    </nav>
 	</header>
 
 	<div class = "buyp">
@@ -124,7 +114,7 @@
 			<h3>Product Name</h3>
 			<hr id ="fhr">
 			<?php
-				$res = $conn -> query($select);
+				$res = $conn_user -> query($select);
 				while($row = $res->fetch_assoc()) {
 					?>
 					<div class = "filler"><?php echo $row["productname"]; ?></div>
@@ -138,7 +128,7 @@
 			<h3>Quantity</h3>
 			<hr id ="fhr">
 			<?php
-				$res = $conn -> query($select);
+				$res = $conn_user -> query($select);
 				while($row = $res->fetch_assoc()) {
 					?>
 					<div class = "filler"><?php echo $row["quantity"]; ?></div>
@@ -152,7 +142,7 @@
 			<h3>Unit</h3>
 			<hr id ="fhr">
 			<?php
-				$res = $conn -> query($select);
+				$res = $conn_user -> query($select);
 				while($row = $res->fetch_assoc()) {
 					?>
 					<div class = "filler"><?php echo $row["unit"]; ?></div>
@@ -166,7 +156,7 @@
 			<h3>Price</h3>
 			<hr id ="fhr">
 			<?php
-				$res = $conn -> query($select);
+				$res = $conn_user -> query($select);
 				while($row = $res->fetch_assoc()) {
 					?>
 					<div class = "filler">Php <?php echo $row["price"]; ?></div>
@@ -182,7 +172,7 @@
 				<?php
 					$i  = 0;
 					$arr = [];
-					$res = $conn -> query($select);
+					$res = $conn_user -> query($select);
 					while($row = $res -> fetch_assoc()){
 						$idname1 = "num1".strval($i);
 						$temp_var1 = "a".$row["productname"];
@@ -236,7 +226,7 @@
 			<hr id ="fhr">
 				<?php
 					$i  = 0;
-					$res = $conn -> query($select);
+					$res = $conn_user -> query($select);
 					while($row = $res -> fetch_assoc()){
 						$idname2 = "num2".strval($i);
 						$temp_var2 = "b".$row["productname"];
@@ -307,25 +297,8 @@
 </body>
 </html>
 <?php 
-	$on = mysqli_fetch_array($conn -> query("SELECT COUNT(*)
-												FROM `credentials`
-												WHERE `username` = '$_SESSION[usern]' AND `user_type` = 1"))[0];
-	if($on == 0){
-		?>
-		<script type = "text/javascript">
-			swal({
-					title: "Unauthorized", 
-					text: "You do not have market admin priviliges.", 
-					icon: "error"
-				})
-				.then(function(){
-					location.href = 'Research.php';
-				});
-		</script>
-		<?php
-	}
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		$res = $conn -> query($select);
+		$res = $conn_user -> query($select);
 		$i = $cnt = 0;
 		if(empty($_POST["prodname"])){
 			$cnt++;
@@ -361,7 +334,7 @@
 				$insert = "INSERT INTO `market`
 							(`productname`, `quantity`, `unit`, `price`, `market_name`)
 							VALUES ('$prodname', '$quan', '$unit', '$price', '$_SESSION[market]')";
-				$conn -> query($insert);
+				$conn_user -> query($insert);
 				echo $prodname." ".$quan." ".$price." ".$unit;																		 
 			}
 			while($row = $res -> fetch_assoc()){
@@ -371,12 +344,12 @@
 					$update = "UPDATE `market` 
 								SET `quantity` = '$temp_var' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
-					$conn -> query($update);
+					$conn_user -> query($update);
 					$temp_var = $_POST["b".$row["productname"]];
 					$update = "UPDATE `market` 
 								SET `price` = '$temp_var' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
-					$conn -> query($update);
+					$conn_user -> query($update);
 					
 				}
 				$i++;

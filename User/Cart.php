@@ -228,7 +228,7 @@
 						<input type = "hidden" name = "<?php echo $mar_roxas; ?>" value = <?php echo $row["market"]; ?>>
 						<input type = "hidden" name = "<?php echo $pr; ?>" value = <?php echo $row["price"]; ?>>
 						<input type = "hidden" name = "<?php echo $un; ?>" value = <?php echo $row["unit"]; ?>>
-						<div class = "priceid">Price: <?php echo $row["price"]; ?></div>
+						<div class = "priceid">Price: Php <?php echo $row["price"]; ?></div>
 						<div class = "fmarket">From: <?php echo $row["market"]; ?></div>
 					</div>
 					<?php

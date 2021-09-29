@@ -40,9 +40,9 @@
 	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<script type="text/javascript" src="LoadingJS.js"></script>
-	<script type="text/javascript" src="OrdersJS.js"></script>
 	<script type="text/javascript" src="NavBarJS.js"></script>
-	<title>Orders</title>
+	<script type="text/javascript" src="OrdersJS.js"></script>
+	<title>Admin - Orders</title>
 </head>
 <body>
 
@@ -89,14 +89,16 @@
 			<tr>
 				<th>Order ID</th>
 				<th>User Name</th>
-				<th>From Market</th>
+				<th>Product(s)</th>
+				<th>From Market(s)</th>
+				<th>Total Price</th>
 				<th>Address</th>
 				<th>Contact</th>
 				<th>Date & Time</th>
 				<th>Order State</th>
 			</tr>
 			<?php
-			$select = "SELECT DISTINCT(`id`), `username`, `market`, `address`, `contact`, `date_time`, `state`
+			$select = "SELECT DISTINCT `id`, `username`, `address`, `contact`, `date_time`, `state`
 						FROM `orders`
 						ORDER BY `id` DESC";
 			$res = $conn_user -> query($select);
@@ -106,9 +108,57 @@
 				?>
 				<div class="order_dets">
 					<tr>
-						<td><?php echo "ID#".$row["id"]; ?></td>
+						<td><a href="Reroute(Orders_to_OrderDetails).php?id=<?php echo $row["id"]; ?>"><?php echo "ID#".$row["id"]; ?></a></td>
 						<td><?php echo $row["username"]; ?></td>
-						<td><?php echo $row["market"]; ?></td>
+						<?php
+						$n = mysqli_fetch_array($conn_user -> query("SELECT COUNT(DISTINCT(`productname`))
+																			FROM `orders`
+																			WHERE `id` = '$row[id]'"))[0];
+						$selecto = "SELECT DISTINCT(`productname`)
+									FROM `orders`
+									WHERE `id` = '$row[id]'";
+						$reso = $conn_user -> query($selecto);
+						$sum = "";
+						$pop = 0;
+						while($rowo = $reso -> fetch_assoc()){
+							$sum .= $rowo["productname"];
+							if($pop < $n - 1){
+								$sum .= ", ";
+							}
+							$pop++;
+						}
+						?>
+						<td><?php echo $sum; ?></td>
+						<?php
+						$n = mysqli_fetch_array($conn_user -> query("SELECT COUNT(DISTINCT(`market`))
+																			FROM `orders`
+																			WHERE `id` = '$row[id]'"))[0];
+						$selecto = "SELECT DISTINCT(`market`)
+									FROM `orders`
+									WHERE `id` = '$row[id]'";
+						$reso = $conn_user -> query($selecto);
+						$sum = "";
+						$pop = 0;
+						while($rowo = $reso -> fetch_assoc()){
+							$sum .= $rowo["market"];
+							if($pop < $n - 1){
+								$sum .= ", ";
+							}
+							$pop++;
+						}
+						?>
+						<td><?php echo $sum; ?></td>
+						<?php
+						$selecto = "SELECT `order_quantity`, `price_as_of_order`
+									FROM `orders`
+									WHERE `id` = '$row[id]'";
+						$reso = $conn_user -> query($selecto);
+						$sum = 0;
+						while($rowo = $reso -> fetch_assoc()){
+							$sum += $rowo["order_quantity"]*$rowo["price_as_of_order"];
+						}
+						?>
+						<td>Php <?php echo $sum; ?></td>
 						<td><?php echo $row["address"]; ?></td>
 						<td><?php echo $row["contact"]; ?></td>
 						<td><?php echo $row["date_time"]; ?></td>

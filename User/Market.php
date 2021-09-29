@@ -167,7 +167,7 @@
 				$res = $conn -> query($select);
 				while($row = $res->fetch_assoc()) {
 					?>
-					<div class = "filler"><?php echo $row["price"]; ?></div>
+					<div class = "filler">Php <?php echo $row["price"]; ?></div>
 					<hr>
 					<?php
 				}
