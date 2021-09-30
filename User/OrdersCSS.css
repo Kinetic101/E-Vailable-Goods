@@ -136,3 +136,78 @@ ul{
 
 /* End of Nav Bar*/
 
+.button{
+	display: flex;
+	justify-content: center;
+	margin-top: 5vh;
+}
+
+button{
+	background-color: #FFFCF2;
+	outline: none;
+	border-bottom: 2px solid #ccc;
+	border-left: none;
+	border-right: none;
+	border-top: none;
+	width: 175px;
+	padding: 7px 10px 12px 10px;
+	font-family: "Verdana";
+	font-size: 15px;
+	cursor: pointer;
+	transition: all 0.3s ease 0s;
+}
+
+#og_orders{
+	border-right: 1px solid #ccc;
+	border-bottom: 2px solid #4A7C59;
+}
+
+#fs_orders{
+	border-left: 1px solid #ccc;
+	border-bottom: 2px solid #ccc;	
+}
+
+#og_orders:hover, #fs_orders:hover{
+	opacity: 0.6;
+}
+
+#orders{
+	width: 60%;
+	background-color: #FFFCF2;
+	margin-left: 20%;
+  	box-shadow: 8px 16px 50px 0px rgba(0,0,0,0.2);
+  	padding: 3vh 10vw 5vh 10vw;
+  	height: auto;
+  	border-radius: 10px;
+}
+
+.orderlink{
+	display: block;
+	padding: 15px 0;
+}
+
+.orderlink:hover{
+	background-color: #FFF5d6;
+}
+
+.br{
+	display: block;
+	height: 10px;
+}
+
+.oid{
+	font-family: "Arial";
+	font-weight: 750;
+	font-size: 18px;
+	text-align: left;
+	color: #766A56;
+	margin-left: 5%;
+}
+
+.olist{
+	font-family: "Verdana";
+	font-weight: 100;
+	color: black;
+	font-size: 15px;
+	padding: 0 15%; 
+}

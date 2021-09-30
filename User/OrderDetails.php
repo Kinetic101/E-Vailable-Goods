@@ -130,13 +130,13 @@
 
 	<div id="back">
 		<a href="Orders.php"><i class="fas fa-arrow-left"></i></a>
-	</div>
-
-	<div id="details">
 		<h2>Order ID#<?php echo $_SESSION["order_id"]; ?></h2>
-		<br>
-		<h6>Time and Date of Order: <?php echo $date; ?></h6>
-		<h6>Deliver to: <?php echo $add; ?></h6>
+	</div>
+	<div class="deets">
+		<h6 id = "tad"><span style="color:#365940">Time and Date of Order: </span><?php echo $date; ?></h6>
+		<h6 id = "deladd"><span style="color:#365940">Deliver to: </span><?php echo $add; ?></h6>
+		</div>
+	<div id="details">
 		<div class = "items">
 			<div class = "title">
 				<h4 id = "eman">Product</h4>
