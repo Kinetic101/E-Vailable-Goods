@@ -35,6 +35,17 @@
 				WHERE `id` = '$_SESSION[order_id]'";
 	$res = $conn -> query($select);
 	$tot = 0;
+
+	$sdate = "SELECT DISTINCT `date_time`,  `address`
+				FROM `orders`
+				WHERE `id` = '$_SESSION[order_id]'";
+	$rdate = $conn -> query($sdate);
+	$date = "";
+	$add = "";
+	while($rowdate = $rdate -> fetch_assoc()){
+		$date = $rowdate["date_time"];
+		$add = $rowdate["address"];
+	}
 ?>
 <html>
 <head>
@@ -123,6 +134,9 @@
 
 	<div id="details">
 		<h2>Order ID#<?php echo $_SESSION["order_id"]; ?></h2>
+		<br>
+		<h6>Time and Date of Order: <?php echo $date; ?></h6>
+		<h6>Deliver to: <?php echo $add; ?></h6>
 		<div class = "items">
 			<div class = "title">
 				<h4 id = "eman">Product</h4>
