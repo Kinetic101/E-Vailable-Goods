@@ -124,22 +124,6 @@
 				$error = True;
 				$emailErr = "Email is already being used";
 			}
-			if(!$error){
-				if($admin != ""){
-					$user = 1;
-				}
-				else{
-					$user = 0;
-				}
-				$_SESSION["uname"] = $uname;
-				$_SESSION["email"] = $email;
-				$_SESSION["fname"] = $fname;
-				$_SESSION["lname"] = $lname;
-				$_SESSION["pword"] = $pword;
-				$_SESSION["user_type"] = $user;
-				$_SESSION["otp"] = "";
-				header("Location: SendOTP.php");
-			}
 		}
 	}
 ?>
@@ -205,4 +189,43 @@
 	
 </body>
 </html>
+<?php
+	if($_SERVER["REQUEST_METHOD"] == "POST" && !$error && $input){
+		if($admin != ""){
+			$user = 1;
+		}
+		else{
+			$user = 0;
+		}
+		$_SESSION["uname"] = $uname;
+		$_SESSION["email"] = $email;
+		$_SESSION["fname"] = $fname;
+		$_SESSION["lname"] = $lname;
+		$_SESSION["pword"] = $pword;
+		$_SESSION["user_type"] = $user;
+		$_SESSION["otp"] = "45";
+		$_SESSION["cnt_re"] = "";
+		?>
+		<script type="text/javascript">
+			var email = '<?php echo $email; ?>';
+			var fname = '<?php echo $fname; ?>';
+			var lname = '<?php echo $lname; ?>';
+			$.ajax({
+				url: "SendOTP.php",
+				cache: false,
+				method: "POST",
+				data: {
+					email: email,
+					fname: fname,
+					lname: lname,
+				},
+				success: function(response){
+					location.href = "Verify.php";
+				}
+			})
+		</script>
+		<?php
+		echo $_SESSION['otp'];
+	}
+?>
 

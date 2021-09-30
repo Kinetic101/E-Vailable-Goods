@@ -17,9 +17,9 @@
 
 	use PHPMailer\PHPMailer\PHPMailer;
 
-	if(isset($_SESSION["email"]) && isset($_SESSION["fname"]) && isset($_SESSION["lname"])){
-		$name = $_SESSION["fname"]." ".$_SESSION["lname"];
-		$email = $_SESSION["email"];
+	if(isset($_POST["email"]) && isset($_POST["fname"]) && isset($_POST["lname"])){
+		$name = $_POST["fname"]." ".$_POST["lname"];
+		$email = $_POST["email"];
 		$otp = strval(rand(0, 999999));
 		for($i = strlen($otp); $i < 6; $i++){
 			$otp = "0".$otp;
@@ -58,7 +58,6 @@
 			$response = "OTP sent";
 			$_SESSION["otp"] = $otp;
 			$_SESSION["cnt_re"] = 0;
-			header("Location: Verify.php");
 		}
 		else{
 			$status = "error";

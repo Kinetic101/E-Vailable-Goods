@@ -44,13 +44,14 @@ $(document).ready(function(){
 			}
 		});
 	}
+	$("#submit").click(check);
 
 	function timer(){
 		curr_time++;
 		if(curr_time >= 300){
 			swal({
 				title: "OTP Expired", 
-				text: "5 minutes has passed therefore, the OTP we provided you has now expired", 
+				text: "5 minutes have passed therefore, the OTP we provided you has now expired", 
 				icon: "error"
 			})
 			.then(function(){
