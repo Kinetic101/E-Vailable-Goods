@@ -252,10 +252,6 @@ h4{
 
 #back{
 	background-color: #FFFCF2;
-	display: flex;
-	justify-content: flex;
-	align-items: center;
-	height: 45px;
 }
 
 #back i{
@@ -276,7 +272,6 @@ h4{
 	font-family: "Verdana";
 	font-size: 19px;
 	font-weight: 100;
-	cursor: default;
 }
 
 .deets{

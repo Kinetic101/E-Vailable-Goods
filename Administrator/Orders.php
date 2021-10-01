@@ -164,26 +164,8 @@
 						<td><?php echo $row["date_time"]; ?></td>
 						<td class="sw">
 							<label class="switch">
-								<input type="checkbox" <?php if($row["state"] == 1) echo "checked"; ?> <?php if($row["state"] == 1) echo "disabled"; ?>  id = "<?php echo $id."1"; ?>"
-									onclick="function clicky(){
-												var uname = '<?php echo $row["username"]; ?>';
-												var check = 1;
-												if($('#'+'<?php echo $id; ?>'+'1')[0].checked == true){
-													$('#'+'<?php echo $id; ?>'+'1')[0].disabled = true;
-													check = 0;
-														$.ajax({
-														url: 'ModifyOrder.php',
-														cache: false,
-														method: 'POST',
-														data: {
-															uname: uname,
-															id: '<?php echo $row["id"]; ?>'
-														}
-													})
-												}
-											}
-											clicky();"
-								>
+								<input type="checkbox" <?php if($row["state"] == 1) echo "checked"; ?> <?php if($row["state"] == 1) echo "disabled"; ?>  id = "<?php echo $id; ?>"
+									onclick="update_order('<?php echo $row["username"]; ?>', '<?php echo $id; ?>', '<?php echo $row["id"]?>');">
 								<span class="slider round"></span>
 							</label>
 						</td>

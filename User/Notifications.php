@@ -87,12 +87,8 @@
 		</ul>
 	</header>
 
+	<!--Palagay ng Mark All as Read-->
 	<div id="notifs">
-		<div class = "taas">
-		<h3 class="notift">Your Notifications</h3>
-		<button type="button" id = "mread">Mark all as read</button>
-		</div>
-		<div class = "notif_list">
 		<?php
 			$select = "SELECT *
 						FROM `notifications`
@@ -101,28 +97,25 @@
 			$res = $conn -> query($select);
 			while($row = $res -> fetch_assoc()){
 			?>
-				
+				<div class="notif_box">
 					<a href="Reroute(Notifications_to_NotifMessage).php?id=<?php echo $row["id"]; ?>">
-						<div class="notif_box">
 						<?php
 						if($row["unread"] == 0){
 						?>
-							<h3 style="font-weight: 100;" id="notift"><?php echo $row["notif_title"]; ?></h3>
+							<h3 style="font-weight: normal;"><?php echo $row["notif_title"]; ?></h3>
 						<?php
 						}
 						else{
 						?>
-							<h3 style="font-weight: 1000;" id="notift"><?php echo $row["notif_title"]; ?></h3>
+							<h3 style="font-weight: bold;"><?php echo $row["notif_title"]; ?></h3>
 						<?php
 						}
 						?>
-					</div>
 					</a>
-				<hr id="nhr">
+				</div>
 			<?php
 			}
 		?>
-		</div>
 	</div>
 
 	<div id="loading">

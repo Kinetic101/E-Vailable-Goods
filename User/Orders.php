@@ -99,12 +99,12 @@
 	</header>
 	<div class = "button">
 	<div id="ongoing">
-		<button type="button" id="og_orders">Ongoing</button>
+		<button type="button" id="clickedd" class="og_orders">Ongoing</button>
 	</div>
 
-	<div id="finished">
-		<button type="button" id="fs_orders">Finished</button>
-	</div>
+	<a href="OrdersF.php"><div id="finished">
+		<button type="button" id="nclickedd" class="fs_orders">Finished</button>
+	</div></a>
 	</div>
 
 	<div id="orders">

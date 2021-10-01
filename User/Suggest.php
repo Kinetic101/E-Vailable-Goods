@@ -35,6 +35,17 @@
 	$suggErr = "";
 	$sugg = "";
 	$error = $input = False;
+
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
+		$input = True;
+		if(empty($_POST["sugg"])){
+		    $suggErr = "Suggestion is required";
+		    $error = True;
+		} 
+		else{
+		    $sugg = test_input($_POST["sugg"]);
+		}
+	}
 ?>
 
 <html>
@@ -152,19 +163,22 @@
 </html>
 <?php
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
-		$input = True;
-		if(empty($_POST["sugg"])){
-		    $suggErr = "Suggestion is required";
-		    $error = True;
-		} 
-		else{
-		    $sugg = test_input($_POST["sugg"]);
-		}
 		if($input){
 			if(!$error){
 				$insert = "INSERT INTO `suggestions` (`entry`) VALUES ('$sugg')";
 				$conn -> query($insert);	
-				header("Location: Suggest.php");
+				?>
+				<script type = "text/javascript">
+					swal({
+							title: "Success", 
+							text: "Your suggestion has been recorded!", 
+							icon: "success"
+						})
+						.then(function(){
+							location.href = 'Suggest.php';
+						});
+				</script>
+				<?php
 			}
 		}
 	}

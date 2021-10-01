@@ -110,7 +110,6 @@
 
 	<div id="back">
 		<a href="Notifications.php"><i class="fas fa-arrow-left"></i></a>
-		<p>Go back</p>
 	</div>
 
 	<div id="notifff">

@@ -81,6 +81,13 @@
 	    </nav>
 	</header>
 
+	<!--Mga ilalagay sa page na to:
+			*logs nung naglogin sa admin page
+			*logs nung mga tigedit sa market, both user and admin
+			*listahan ng suggestions
+		Last feature na to
+	-->
+
 	<div id="loading">
 		<div class="content">
 			<div class="load-wrapp">
