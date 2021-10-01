@@ -98,12 +98,14 @@
 		</ul>
 	</header>
 
-	<div id="ongoing">
-		<!--Button here (Ongoing Orders) -->
-	</div>
+	<div class = "button">
+	<a href="Orders.php"><div id="ongoing">
+		<button type="button" id="nclickedd" class="og_orders">Ongoing</button>
+	</div></a>
 
 	<div id="finished">
-		<!--Button here (Finished Orders) -->
+		<button type="button" id="clickedd" class="fs_orders">Finished</button>
+	</div>
 	</div>
 
 	<div id="orders">
@@ -119,9 +121,9 @@
 														WHERE `id` = '$row_num[id]'"))[0];
 			$i = 0;
 			?>
-			<a href="Reroute(Orders_to_OrderDetails).php?id=<?php echo $row_num["id"]; ?>">
-				<?php echo "Order ID#".$row_num["id"]; ?>
-				<br>
+			<a href="Reroute(Orders_to_OrderDetails).php?id=<?php echo $row_num["id"]; ?>" class="orderlink">
+				<span class = "oid"><?php echo "Order ID#".$row_num["id"]; ?></span><br><div class = "br"></div>
+				<span class = "olist">
 				<?php
 				while($row = $res -> fetch_assoc()){
 					echo $row["productname"];
@@ -131,8 +133,8 @@
 					$i++;
 				}
 				?>
-			</a>
-			<br>
+			</span></a>
+			<hr>
 			<?php
 		}
 		?>

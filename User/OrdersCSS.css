@@ -157,13 +157,19 @@ button{
 	transition: all 0.3s ease 0s;
 }
 
-#og_orders{
+.og_orders{
 	border-right: 1px solid #ccc;
+}
+
+.fs_orders{
+	border-left: 1px solid #ccc;
+}
+
+#clickedd{
 	border-bottom: 2px solid #4A7C59;
 }
 
-#fs_orders{
-	border-left: 1px solid #ccc;
+#nclickedd{
 	border-bottom: 2px solid #ccc;	
 }
 
