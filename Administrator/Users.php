@@ -301,20 +301,7 @@
 									<span class="slider round"></span>
 								</label>
 							</td>
-						<?php
-						}
-						else{
-							?>
-							<td class="sw">N/A</td>
-							<td class="sw">N/A</td>
-							<td class="sw">N/A</td>
-							<td class="sw">N/A</td>
-							<td class="sw">N/A</td>
-							<td class="sw">N/A</td>
-							<?php
-						}
-						?>
-						<td class="delete"><i class="fas fa-trash" id="<?php echo $id; ?>"></i></td>
+							<td class="delete"><i class="fas fa-trash" id="<?php echo $id; ?>"></i></td>
 							<script type="text/javascript">
 								$("#"+'<?php echo $id; ?>').click(function(){
 									var uname = '<?php echo $row["username"]; ?>';
@@ -344,6 +331,19 @@
 									})
 								})
 							</script>
+						<?php
+						}
+						else{
+							?>
+							<td class="sw">N/A</td>
+							<td class="sw">N/A</td>
+							<td class="sw">N/A</td>
+							<td class="sw">N/A</td>
+							<td class="sw">N/A</td>
+							<td class="sw">N/A</td>
+							<?php
+						}
+						?>
 					</tr>
 				</div>
 				<?php
