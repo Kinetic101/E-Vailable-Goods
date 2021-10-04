@@ -110,7 +110,9 @@
 	<div id="orders">
 		<?php
 		$res_num = $conn -> query($get_num);
+		$k = 0;
 		while($row_num = $res_num -> fetch_assoc()){
+			$k++;
 			$select = "SELECT `productname`
 						FROM `orders`
 						WHERE `id` = '$row_num[id]'";
@@ -134,6 +136,11 @@
 				?>
 			</span></a>
 			<hr>
+			<?php
+		}
+		if($k == 0){
+			?>
+			<span class = "oid">You currently do not have ongoing orders.</span>
 			<?php
 		}
 		?>

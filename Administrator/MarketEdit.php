@@ -337,20 +337,25 @@
 				$conn_user -> query($insert);
 				echo $prodname." ".$quan." ".$price." ".$unit;																		 
 			}
+			$date = date("Y-m-d H:i:s");
 			while($row = $res -> fetch_assoc()){
 				if($_POST["b".$row["productname"]] != $row["price"] || $_POST["a".$row["productname"]] != $row["quantity"]){
 					$cnt++;
-					$temp_var = $_POST["a".$row["productname"]];
+					$newq = $_POST["a".$row["productname"]];
 					$update = "UPDATE `market` 
-								SET `quantity` = '$temp_var' 
+								SET `quantity` = '$newq' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
 					$conn_user -> query($update);
-					$temp_var = $_POST["b".$row["productname"]];
+					$newp = $_POST["b".$row["productname"]];
 					$update = "UPDATE `market` 
-								SET `price` = '$temp_var' 
+								SET `price` = '$newp' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
 					$conn_user -> query($update);
-					
+					$msgee = "Its_The_D3VS_That_Did_This";
+					$add = "INSERT INTO `edit_logs`
+							(`productname`, `market`, `username`, `oquantity`, `nquantity`, `unit`, `oprice`, `nprice`, `time`)
+							VALUES ('$row[productname]', '$_SESSION[market]', '$msgee', '$row[quantity]', '$newq', '$row[unit]', '$row[price]', '$newp', '$date')";
+					$conn_admin -> query($add);
 				}
 				$i++;
 			}

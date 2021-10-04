@@ -86,6 +86,7 @@
 			*logs nung mga tigedit sa market, both user and admin
 			*listahan ng suggestions
 		Last feature na to
+		Palagays na lang ng layout muna, yung logs table yung style tas yung suggestions simpleng listahan lang 
 	-->
 
 	<div id="loading">

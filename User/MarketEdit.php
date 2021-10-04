@@ -20,7 +20,11 @@
 	$pass = "";
 	$dbname = "user";
 	$conn = new mysqli($server, $usname, $pass, $dbname);
+	$admin = new mysqli($server, $usname, $pass, "admin");
 	if($conn -> connect_error){
+		die("Connection Failed: ".$conn -> connect_error);
+	}
+	if($admin -> connect_error){
 		die("Connection Failed: ".$conn -> connect_error);
 	}
 
@@ -364,20 +368,24 @@
 				$conn -> query($insert);
 				echo $prodname." ".$quan." ".$price." ".$unit;																		 
 			}
+			$date = date("Y-m-d H:i:s");
 			while($row = $res -> fetch_assoc()){
 				if($_POST["b".$row["productname"]] != $row["price"] || $_POST["a".$row["productname"]] != $row["quantity"]){
 					$cnt++;
-					$temp_var = $_POST["a".$row["productname"]];
+					$newq = $_POST["a".$row["productname"]];
 					$update = "UPDATE `market` 
-								SET `quantity` = '$temp_var' 
+								SET `quantity` = '$newq' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
 					$conn -> query($update);
-					$temp_var = $_POST["b".$row["productname"]];
+					$newp = $_POST["b".$row["productname"]];
 					$update = "UPDATE `market` 
-								SET `price` = '$temp_var' 
+								SET `price` = '$newp' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
 					$conn -> query($update);
-					
+					$add = "INSERT INTO `edit_logs`
+							(`productname`, `market`, `username`, `oquantity`, `nquantity`, `unit`, `oprice`, `nprice`, `time`)
+							VALUES ('$row[productname]', '$_SESSION[market]', '$_SESSION[usern]', '$row[quantity]', '$newq', '$row[unit]', '$row[price]', '$newp', '$date')";
+					$admin -> query($add);
 				}
 				$i++;
 			}
