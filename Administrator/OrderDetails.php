@@ -7,6 +7,9 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
+	if(isset($_GET["id"])){
+		$_SESSION["order_id"] = $_GET["id"];
+	}
 	if($_SESSION["order_id"] == ""){
 		header("Orders.php");
 	}

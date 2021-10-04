@@ -7,8 +7,10 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
-
-	else if($_SESSION["market"] == ""){
+	if(isset($_GET["market"])){
+		$_SESSION["market"] = $_GET["market"];
+	}
+	if($_SESSION["market"] == ""){
 		header("Location: Research.php");
 	}
 
@@ -34,7 +36,6 @@
 		$data = htmlspecialchars($data);
 		return $data;
 	}
-
 	$select = "SELECT * 
 				FROM `market` 
 				WHERE `market_name` = '$_SESSION[market]'";
@@ -75,25 +76,7 @@
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
 					<i class="fas fa-search"></i>
-					<div id="sres">
-						<?php
-						$selecto = "SELECT `username`, `fname`, `lname`, `pic`
-									FROM `credentials`
-									WHERE `username` != '$_SESSION[usern]'
-									ORDER BY `username` ASC";
-						$res = $conn -> query($selecto);
-						while($row = $res -> fetch_assoc()){
-							?>
-							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-								<h5>
-								<?php echo $row["fname"]." ".$row["lname"]; ?>
-								</h5>
-							</a>
-							<?php
-						}
-						?>
-					</div>
+					<div id="sres"></div>
 				</li>
 			</ul>
 		</nav>
@@ -194,29 +177,8 @@
 						?>
 						<div class = "filler">
 							<input id = "<?php echo $idname1; ?>" type = "number"  name = "<?php echo $temp_var1; ?>" value = "<?php echo $row["quantity"]; ?>" min = 0>
-							<button class = "minus" id = "minus1" type = "button" 
-								onclick = "function dec(){
-												document.getElementById('<?php echo $idname1; ?>').stepDown();
-												if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-												}
-												else{
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
-												}
-											}
-											dec();"
-											>-</button>
-							<button class = "plus" id = "plus1" type = "button"
-								onclick = "function inc(){
-												document.getElementById('<?php echo $idname1; ?>').stepUp();
-												if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-												}
-												else{
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
-												}
-											}
-											inc();">+</button>
+							<button class = "minus" id = "minus1" type = "button" onclick = "dec('<?php echo $idname1; ?>');">-</button>
+							<button class = "plus" id = "plus1" type = "button" onclick = "inc('<?php echo $idname1; ?>');">+</button>
 							<script type="text/javascript">
 								function check_vals(){
 									if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
@@ -248,18 +210,8 @@
 						?>
 						<div class = "filler">
 							<input id = "<?php echo $idname2; ?>" type = "number"  name = "<?php echo $temp_var2; ?>" value = "<?php echo $row["price"]; ?>" min = 0>
-							<button class = "minus" id = "minus2" type = "button"
-								onclick = "function dec(){
-												document.getElementById('<?php echo $idname2; ?>').stepDown();
-											}
-											dec();">-
-							</button>
-							<button class = "plus" id = "plus2" type = "button"
-								onclick = "function inc(){
-												document.getElementById('<?php echo $idname2; ?>').stepUp();
-											}
-											inc();">+
-							</button>
+							<button class = "minus" id = "minus2" type = "button" onclick = "dec('<?php echo $idname2; ?>');">-</button>
+							<button class = "plus" id = "plus2" type = "button" onclick = "inc('<?php echo $idname2; ?>');">+</button>
 							<script type="text/javascript">
 								function check_vals(){
 									if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
@@ -311,6 +263,194 @@
 </body>
 </html>
 <?php 
+	if(isset($_GET["market"])){
+		if($_GET["market"] == "market1"){
+			$select = "SELECT `m1`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$ok = 0;
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m1"];
+			}
+			if($ok == 1){
+				?>
+				<script type="text/javascript">
+					location.href = "MarketEdit.php";
+				</script>
+				<?php
+			}
+			else{
+				?>
+				<script type="text/javascript">
+					swal({
+						title: "Unauthorized Access", 
+						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
+						icon: "error"
+					})
+					.then(function(){
+						location.href = 'Help_and_Support.php';
+					});
+				</script>
+				<?php
+			}
+		}
+		else if($_GET["market"] == "market2"){
+			$select = "SELECT `m2`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$ok = 0;
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m2"];
+			}
+			if($ok == 1){
+				?>
+				<script type="text/javascript">
+					location.href = "MarketEdit.php";
+				</script>
+				<?php
+			}
+			else{
+				?>
+				<script type="text/javascript">
+					swal({
+						title: "Unauthorized Access", 
+						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
+						icon: "error"
+					})
+					.then(function(){
+						location.href = 'Help_and_Support.php';
+					});
+				</script>
+				<?php
+			}		
+		}
+		else if($_GET["market"] == "market3"){
+			$select = "SELECT `m3`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$ok = 0;
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m3"];
+			}
+			if($ok == 1){
+				?>
+				<script type="text/javascript">
+					location.href = "MarketEdit.php";
+				</script>
+				<?php
+			}
+			else{
+				?>
+				<script type="text/javascript">
+					swal({
+						title: "Unauthorized Access", 
+						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
+						icon: "error"
+					})
+					.then(function(){
+						location.href = 'Help_and_Support.php';
+					});
+				</script>
+				<?php
+			}		
+		}
+		else if($_GET["market"] == "market4"){
+			$select = "SELECT `m4`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$ok = 0;
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m4"];
+			}
+			if($ok == 1){
+				?>
+				<script type="text/javascript">
+					location.href = "MarketEdit.php";
+				</script>
+				<?php
+			}
+			else{
+				?>
+				<script type="text/javascript">
+					swal({
+						title: "Unauthorized Access", 
+						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
+						icon: "error"
+					})
+					.then(function(){
+						location.href = 'Help_and_Support.php';
+					});
+				</script>
+				<?php
+			}		
+		}
+		else if($_GET["market"] == "market5"){
+			$select = "SELECT `m5`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$ok = 0;
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m5"];
+			}
+			if($ok == 1){
+				?>
+				<script type="text/javascript">
+					location.href = "MarketEdit.php";
+				</script>
+				<?php
+			}
+			else{
+				?>
+				<script type="text/javascript">
+					swal({
+						title: "Unauthorized Access", 
+						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
+						icon: "error"
+					})
+					.then(function(){
+						location.href = 'Help_and_Support.php';
+					});
+				</script>
+				<?php
+			}		
+		}
+		else if($_GET["market"] == "market6"){
+			$select = "SELECT `m6`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$ok = 0;
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m6"];
+			}
+			if($ok == 1){
+				?>
+				<script type="text/javascript">
+					location.href = "MarketEdit.php";
+				</script>
+				<?php
+			}
+			else{
+				?>
+				<script type="text/javascript">
+					swal({
+						title: "Unauthorized Access", 
+						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
+						icon: "error"
+					})
+					.then(function(){
+						location.href = 'Help_and_Support.php';
+					});
+				</script>
+				<?php
+			}		
+		}
+	}
 	$on = mysqli_fetch_array($conn -> query("SELECT COUNT(*)
 												FROM `credentials`
 												WHERE `username` = '$_SESSION[usern]' AND `user_type` = 1"))[0];

@@ -12,7 +12,8 @@
 	if($conn -> connect_error){
 		die("Connection Failed: ".$conn->connect_error);
 	}
-	$_SESSION["author"] = 0;
+	$_SESSION["market"] = "";
+	$_SESSION["visit_user"] = "";
 ?>
 <html>
 <head>
@@ -46,25 +47,7 @@
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
 					<i class="fas fa-search"></i>
-					<div id="sres">
-						<?php
-						$select = "SELECT `username`, `fname`, `lname`, `pic`
-									FROM `credentials`
-									WHERE `username` != '$_SESSION[usern]'
-									ORDER BY `username` ASC";
-						$res = $conn -> query($select);
-						while($row = $res -> fetch_assoc()){
-							?>
-							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-								<h5>
-								<?php echo $row["fname"]." ".$row["lname"]; ?>
-								</h5>
-							</a>
-							<?php
-						}
-						?>
-					</div>
+					<div id="sres"></div>
 				</li>
 			</ul>
 		</nav>
@@ -103,7 +86,7 @@
 			while($row = $res -> fetch_assoc()){
 			?>
 				
-					<a href="Reroute(Notifications_to_NotifMessage).php?id=<?php echo $row["id"]; ?>">
+					<a href="NotifMessage.php?id=<?php echo $row["id"]; ?>">
 						<div class="notif_box">
 						<?php
 						if($row["unread"] == 0){

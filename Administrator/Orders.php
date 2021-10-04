@@ -108,7 +108,7 @@
 				?>
 				<div class="order_dets">
 					<tr>
-						<td><a href="Reroute(Orders_to_OrderDetails).php?id=<?php echo $row["id"]; ?>"><?php echo "ID#".$row["id"]; ?></a></td>
+						<td><a href="OrderDetails.php?id=<?php echo $row["id"]; ?>"><?php echo "ID#".$row["id"]; ?></a></td>
 						<td><?php echo $row["username"]; ?></td>
 						<?php
 						$n = mysqli_fetch_array($conn_user -> query("SELECT COUNT(DISTINCT(`productname`))

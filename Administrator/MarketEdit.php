@@ -8,7 +8,11 @@
 		header("Location: Login.php");
 	}
 
-	else if($_SESSION["market"] == ""){
+	if(isset($_GET["market"])){
+		$_SESSION["market"] = $_GET["market"];
+	}
+
+	if($_SESSION["market"] == ""){
 		header("Location: Edit.php");
 	}
 

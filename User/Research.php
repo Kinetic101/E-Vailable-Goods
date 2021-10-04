@@ -10,7 +10,6 @@
 
 	$_SESSION["market"] = "";
 	$_SESSION["visit_user"] = "";
-	$_SESSION["author"] = 0;
 
 	$server = "localhost";
 	$usname = "root";
@@ -55,25 +54,7 @@
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
 					<i class="fas fa-search"></i>
-					<div id="sres">
-						<?php
-						$select = "SELECT `username`, `fname`, `lname`, `pic`
-									FROM `credentials`
-									WHERE `username` != '$_SESSION[usern]'
-									ORDER BY `username` ASC";
-						$res = $conn -> query($select);
-						while($row = $res -> fetch_assoc()){
-							?>
-							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-								<h5>
-								<?php echo $row["fname"]." ".$row["lname"]; ?>
-								</h5>
-							</a>
-							<?php
-						}
-						?>
-					</div>
+					<div id="sres"></div>
 				</li>
 			</ul>
 		</nav>
@@ -101,42 +82,42 @@
 		<h1 id = "mhead">LOCAL MARKETS NEAR YOU</h1>
 		<hr> 
 
-		<a href="Reroute(Dashboard_to_Market).php?market=market1">
+		<a href="Market.php?market=market1">
 		<div class = "marketsa">
 			<h2 class = "md">Market 1</h2>
 			<img src="pal.png">
 		</div>
 		</a>
 
-		<a href="Reroute(Dashboard_to_Market).php?market=market2">
+		<a href="Market.php?market=market2">
 		<div class = "marketsa">
 			<h2 class = "md">Market 2</h2>
 			<img src="default.jpg">
 		</div>
 		</a>
 
-		<a href="Reroute(Dashboard_to_Market).php?market=market3">
+		<a href="Market.php?market=market3">
 		<div class = "marketsa">
 			<h2 class = "md">Market 3</h2>
 			<img src="default.jpg">
 		</div>
 		</a>
 
-		<a href="Reroute(Dashboard_to_Market).php?market=market4">
+		<a href="Market.php?market=market4">
 		<div class = "marketsa">
 			<h2 class = "md">Market 4</h2>
 			<img src="default.jpg">
 		</div>
 		</a>
 
-		<a href="Reroute(Dashboard_to_Market).php?market=market5">
+		<a href="Market.php?market=market5">
 		<div class = "marketsa">
 			<h2 class = "md">Market 5</h2>
 			<img src="default.jpg">
 		</div>
 		</a>
 
-		<a href="Reroute(Dashboard_to_Market).php?market=market6">
+		<a href="Market.php?market=market6">
 		<div class = "marketsa">
 			<h2 class = "md">Market 6</h2>
 			<img src="default.jpg">

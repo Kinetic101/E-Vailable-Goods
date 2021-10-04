@@ -85,42 +85,42 @@
 		<h1 id = "mhead">EDIT MARKETS</h1>
 		<hr>
 
-		<a href="Reroute(Edit_to_MarketEdit).php?market=market1">
+		<a href="MarketEdit.php?market=market1">
 		<div class = "marketsa">
 			<h2 class = "md">Market 1</h2>
 			<img src="default.jpg">
 		</div>
 		</a>
 
-		<a href="Reroute(Edit_to_MarketEdit).php?market=market2">
+		<a href="MarketEdit.php?market=market2">
 		<div class = "marketsa">
 			<h2 class = "md">Market 2</h2>
 			<img src="pal.png">
 		</div>
 		</a>
 
-		<a href="Reroute(Edit_to_MarketEdit).php?market=market3">
+		<a href="MarketEdit.php?market=market3">
 		<div class = "marketsa">
 			<h2 class = "md">Market 3</h2>
 			<img src="default.jpg">
 		</div>
 		</a>
 
-		<a href="Reroute(Edit_to_MarketEdit).php?market=market4">
+		<a href="MarketEdit.php?market=market4">
 		<div class = "marketsa">
 			<h2 class = "md">Market 4</h2>
 			<img src="default.jpg">
 		</div>
 		</a>
 
-		<a href="Reroute(Edit_to_MarketEdit).php?market=market5">
+		<a href="MarketEdit.php?market=market5">
 		<div class = "marketsa">
 			<h2 class = "md">Market 5</h2>
 			<img src="default.jpg">
 		</div>
 		</a>
 
-		<a href="Reroute(Edit_to_MarketEdit).php?market=market6">
+		<a href="MarketEdit.php?market=market6">
 		<div class = "marketsa">
 			<h2 class = "md">Market 6</h2>
 			<img src="default.jpg">

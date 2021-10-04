@@ -10,7 +10,6 @@
 	$_SESSION["market"] = "";
 	$_SESSION["product"] = "";
 	$_SESSION["visit_user"] = "";
-	$_SESSION["author"] = 0;
 
 	if(empty($_SESSION["buy_arr"])){
 		header("Location: Cart.php");
@@ -48,13 +47,25 @@
 			}
 			else{
 				$contact = test_input($_POST["contact"]);
+				$flag = false;
+				$arr = str_split($contact);
 				if(strlen($contact) == 11){
-					if($contact[0] != '0' || $contact[1] != '9'){
+					for($i = 0; $i < sizeof($arr); $i++){
+						if(!is_numeric($arr[$i])){
+							$flag = true;
+						}
+					}
+					if($contact[0] != '0' || $contact[1] != '9' || $flag){
 						$contactErr = "Invalid contact number!";
 						$error = true;
 					}
 				}
 				else if(strlen($contact) == 13){
+					for($i = 1; $i < sizeof($arr); $i++){
+						if(!is_numeric($arr[$i])){
+							$flag = true;
+						}
+					}
 					if($contact[0] != '+' || $contact[1] != '6'){
 						$contactErr = "Invalid contact number!";
 						$error = true;
@@ -153,25 +164,7 @@
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
 					<i class="fas fa-search"></i>
-					<div id="sres">
-						<?php
-						$select = "SELECT `username`, `fname`, `lname`, `pic`
-									FROM `credentials`
-									WHERE `username` != '$_SESSION[usern]'
-									ORDER BY `username` ASC";
-						$res = $conn -> query($select);
-						while($row = $res -> fetch_assoc()){
-							?>
-							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-								<h5>
-								<?php echo $row["fname"]." ".$row["lname"]; ?>
-								</h5>
-							</a>
-							<?php
-						}
-						?>
-					</div>
+					<div id="sres"></div>
 				</li>
 			</ul>
 		</nav>
@@ -647,7 +640,7 @@
 					$conn -> query($update);
 
 					//Update Orders Table
-					$add = $town.", ".$brgy.", ".$add;
+					$add = $add.", ".$brgy.", ".$town;
 					$insert = "INSERT INTO `orders`
 								(`id`, `username`, `productname`, `order_quantity`, `unit`, `price_as_of_order`, `market`, `address`, `contact`, `date_time`, `state`)
 								VALUES ('$n', '$_SESSION[usern]', '$prod', '$ordr', '$unit', '$pric', '$mark', '$add', '$contact', '$date', 0)";

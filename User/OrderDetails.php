@@ -7,13 +7,15 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
+	if(isset($_GET["id"])){
+		$_SESSION["order_id"] = $_GET["id"];
+	}
 	if($_SESSION["order_id"] == ""){
 		header("Orders.php");
 	}
 
 	$_SESSION["market"] = "";
 	$_SESSION["visit_user"] = "";
-	$_SESSION["author"] = 0;
 
 	$server = "localhost";
 	$usname = "root";
@@ -77,25 +79,7 @@
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
 					<i class="fas fa-search"></i>
-					<div id="sres">
-						<?php
-						$selecto = "SELECT `username`, `fname`, `lname`, `pic`
-									FROM `credentials`
-									WHERE `username` != '$_SESSION[usern]'
-									ORDER BY `username` ASC";
-						$reso = $conn -> query($selecto);
-						while($row = $reso -> fetch_assoc()){
-							?>
-							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-								<h5>
-								<?php echo $row["fname"]." ".$row["lname"]; ?>
-								</h5>
-							</a>
-							<?php
-						}
-						?>
-					</div>
+					<div id="sres"></div>
 				</li>
 
 			</ul>
