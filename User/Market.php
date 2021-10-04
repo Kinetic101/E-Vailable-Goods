@@ -28,7 +28,8 @@
 
 	$select = "SELECT * 
 				FROM `market` 
-				WHERE `market_name` = '$_SESSION[market]'";
+				WHERE `market_name` = '$_SESSION[market]'
+				ORDER BY `productname` ASC";
 	$n = mysqli_fetch_array($conn -> query("
 										SELECT COUNT(*) 
 										FROM `market` 
@@ -50,7 +51,7 @@
 	<link rel="stylesheet" type="text/css" href="MarketCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<link rel="stylesheet" type="text/css" href="SearchCSS.css">
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
@@ -178,8 +179,7 @@
 							$temp_var = $row["productname"];
 							?>
 							<div class = filler>
-								<input id = "<?php echo $idname; ?>" type = "number" name = "<?php echo $row["productname"]; ?>" 
-									value = "<?php echo $arr[$temp_var]; ?>" min = 0 max = "<?php echo $row["quantity"]; ?>" />
+								<input id = "<?php echo $idname; ?>" type = "number" name = "<?php echo $row["productname"]; ?>" value = "<?php echo $arr[$temp_var]; ?>" min = 0 max = "<?php echo $row["quantity"]; ?>" />
 								<button id = "minus" type = "button" onclick = "dec('<?php echo $idname; ?>');" >-</button>
 								<button id = "plus" type = "button" onclick = "inc('<?php echo $idname; ?>');">+</button>
 								<script type="text/javascript">

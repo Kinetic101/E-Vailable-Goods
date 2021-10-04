@@ -25,7 +25,7 @@
 	<link rel="stylesheet" type="text/css" href="AboutCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<link rel="stylesheet" type="text/css" href="SearchCSS.css">
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>

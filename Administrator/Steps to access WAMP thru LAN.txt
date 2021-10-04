@@ -1,0 +1,18 @@
+1. kung may antivirus, pa off nung firewall ng antivirus
+2. open "Windows Defender Firewall with Advanced Security", search niyo lang sa win10
+3. click inbound rules sa left side
+4. click new rule sa right side
+5. select port then next
+6. select TCP then select specific local ports then type 80 dun sa input bar then next
+7. select allow the connection then next
+8. select all then next
+9. kayo bahala kung anong ipangalan niyo then finish
+10. i copy paste niyo yung httpd-vhosts.conf sa Administrator folder papunta sa C:\wamp64\bin\apache\apache2.4.46\conf\extra, i replace file
+11. sa device except sa laptop na ginamit para isetup yung preceeding rules, itype sa browser yung ip address ng laptop na naglalaman nung evailable goods website then /E-Vailable-Goods/User
+    since tigconfigure ko para di maaccess ng client yung buong E-Vailable Goods folder for security, hanapin niyo na langs yung Login.php or SignUp.php
+    e.g. 192.168.0.101//E-Vailable-Goods/User
+12. wag kalimutan i on yung firewall tas idisable yung rule
+
+*para malaman yung ip in case di kayo marunong, type ipconfig sa cmd sa laptop na may wamp tas hanapin niyo yung IPv4 Address na may value
+*accessible yung site sa lahat ng devices
+*yan langs adios

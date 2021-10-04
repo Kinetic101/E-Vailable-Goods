@@ -55,7 +55,7 @@
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<link rel="stylesheet" type="text/css" href="SearchCSS.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="MarketEditJS.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
@@ -264,191 +264,81 @@
 </html>
 <?php 
 	if(isset($_GET["market"])){
+		$ok = 0;
 		if($_GET["market"] == "market1"){
 			$select = "SELECT `m1`
 						FROM `credentials`
 						WHERE `username` = '$_SESSION[usern]'";
-			$ok = 0;
 			$res = $conn -> query($select);
 			while($row = $res -> fetch_assoc()){
 				$ok = $row["m1"];
-			}
-			if($ok == 1){
-				?>
-				<script type="text/javascript">
-					location.href = "MarketEdit.php";
-				</script>
-				<?php
-			}
-			else{
-				?>
-				<script type="text/javascript">
-					swal({
-						title: "Unauthorized Access", 
-						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
-						icon: "error"
-					})
-					.then(function(){
-						location.href = 'Help_and_Support.php';
-					});
-				</script>
-				<?php
 			}
 		}
 		else if($_GET["market"] == "market2"){
 			$select = "SELECT `m2`
 						FROM `credentials`
 						WHERE `username` = '$_SESSION[usern]'";
-			$ok = 0;
 			$res = $conn -> query($select);
 			while($row = $res -> fetch_assoc()){
 				$ok = $row["m2"];
-			}
-			if($ok == 1){
-				?>
-				<script type="text/javascript">
-					location.href = "MarketEdit.php";
-				</script>
-				<?php
-			}
-			else{
-				?>
-				<script type="text/javascript">
-					swal({
-						title: "Unauthorized Access", 
-						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
-						icon: "error"
-					})
-					.then(function(){
-						location.href = 'Help_and_Support.php';
-					});
-				</script>
-				<?php
 			}		
 		}
 		else if($_GET["market"] == "market3"){
 			$select = "SELECT `m3`
 						FROM `credentials`
 						WHERE `username` = '$_SESSION[usern]'";
-			$ok = 0;
 			$res = $conn -> query($select);
 			while($row = $res -> fetch_assoc()){
 				$ok = $row["m3"];
 			}
-			if($ok == 1){
-				?>
-				<script type="text/javascript">
-					location.href = "MarketEdit.php";
-				</script>
-				<?php
-			}
-			else{
-				?>
-				<script type="text/javascript">
-					swal({
-						title: "Unauthorized Access", 
-						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
-						icon: "error"
-					})
-					.then(function(){
-						location.href = 'Help_and_Support.php';
-					});
-				</script>
-				<?php
-			}		
 		}
 		else if($_GET["market"] == "market4"){
 			$select = "SELECT `m4`
 						FROM `credentials`
 						WHERE `username` = '$_SESSION[usern]'";
-			$ok = 0;
 			$res = $conn -> query($select);
 			while($row = $res -> fetch_assoc()){
 				$ok = $row["m4"];
-			}
-			if($ok == 1){
-				?>
-				<script type="text/javascript">
-					location.href = "MarketEdit.php";
-				</script>
-				<?php
-			}
-			else{
-				?>
-				<script type="text/javascript">
-					swal({
-						title: "Unauthorized Access", 
-						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
-						icon: "error"
-					})
-					.then(function(){
-						location.href = 'Help_and_Support.php';
-					});
-				</script>
-				<?php
 			}		
 		}
 		else if($_GET["market"] == "market5"){
 			$select = "SELECT `m5`
 						FROM `credentials`
 						WHERE `username` = '$_SESSION[usern]'";
-			$ok = 0;
 			$res = $conn -> query($select);
 			while($row = $res -> fetch_assoc()){
 				$ok = $row["m5"];
-			}
-			if($ok == 1){
-				?>
-				<script type="text/javascript">
-					location.href = "MarketEdit.php";
-				</script>
-				<?php
-			}
-			else{
-				?>
-				<script type="text/javascript">
-					swal({
-						title: "Unauthorized Access", 
-						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
-						icon: "error"
-					})
-					.then(function(){
-						location.href = 'Help_and_Support.php';
-					});
-				</script>
-				<?php
 			}		
 		}
 		else if($_GET["market"] == "market6"){
 			$select = "SELECT `m6`
 						FROM `credentials`
 						WHERE `username` = '$_SESSION[usern]'";
-			$ok = 0;
 			$res = $conn -> query($select);
 			while($row = $res -> fetch_assoc()){
 				$ok = $row["m6"];
-			}
-			if($ok == 1){
-				?>
-				<script type="text/javascript">
-					location.href = "MarketEdit.php";
-				</script>
-				<?php
-			}
-			else{
-				?>
-				<script type="text/javascript">
-					swal({
-						title: "Unauthorized Access", 
-						text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
-						icon: "error"
-					})
-					.then(function(){
-						location.href = 'Help_and_Support.php';
-					});
-				</script>
-				<?php
 			}		
+		}
+		if($ok == 1){
+			?>
+			<script type="text/javascript">
+				location.href = "MarketEdit.php";
+			</script>
+			<?php
+		}
+		else{
+			?>
+			<script type="text/javascript">
+				swal({
+					title: "Unauthorized Access", 
+					text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
+					icon: "error"
+				})
+				.then(function(){
+					location.href = 'Help_and_Support.php';
+				});
+			</script>
+			<?php
 		}
 	}
 	$on = mysqli_fetch_array($conn -> query("SELECT COUNT(*)
