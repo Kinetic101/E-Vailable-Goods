@@ -13,20 +13,3 @@ $(document).ready(function(){
 		}
 	});
 })
-
-function update_order(uname, div_id, id){
-	var check = 1;
-	if($('#'+div_id)[0].checked == true){
-		$('#'+div_id)[0].disabled = true;
-		check = 0;
-		$.ajax({
-			url: 'ModifyOrder.php',
-			cache: false,
-			method: 'POST',
-			data: {
-				uname: uname,
-				id: id
-			}
-		})
-	}
-}

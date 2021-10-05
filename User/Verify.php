@@ -38,12 +38,20 @@
 <body>
 
 	<div id = "verify">
-		<h4>Please input the 6-digit OTP we have sent you through the email you provided. It will expire in 5 mins and once 5 mins have passed, you will automatically be redirected back to the Sign Up page. Moreover, you only have 5 attempts to input the corrrect OTP or else, you will also automatically be redirected back to the Sign Up page. Moreover, please DO NOT refresh the page, doing so will redirect you to the sign up page. Please check your spam folder. Lastly, please do not hit enter on your keyboard to check the OTP as this will refresh the page. Thank You!</h4>
+		<h1>Verification</h1>
+		<h4>Please input the 6-digit OTP we have sent you through the email you provided.<br><br>It will expire in 5 mins and once 5 mins have passed, 
+			you will automatically be redirected back to the Sign Up page. Moreover, you only have <span id = "warning">5 attempts</span> 
+			to input the corrrect OTP or else, you will also automatically be redirected back to the Sign Up page. Moreover, please 
+			<span id = "warning">DO NOT refresh the page</span>, doing so will redirect 
+			you to the sign up page. <span style="color:#241F19; font-weight: 1000">Please check your spam folder.</span> Lastly, please do not hit enter on your keyboard 
+			to check the OTP as this will refresh the page. Thank You!</h4>
+		<div class = "ent">
 		<form action = "">
-			OTP: <input type = "number" name = "otp" id="otp" maxlength="6">
+			<input type = "number" name = "otp" id="otp" maxlength="6">
 			<br>
 			<button type="button" id="submit">Check OTP</button>
 		</form>
+		</div>
 	</div>
 
 	<div id="loading">

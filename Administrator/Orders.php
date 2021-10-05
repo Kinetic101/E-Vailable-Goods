@@ -32,7 +32,7 @@
 	<meta name="description" content="">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -108,7 +108,7 @@
 				?>
 				<div class="order_dets">
 					<tr>
-						<td><a href="OrderDetails.php?id=<?php echo $row["id"]; ?>"><?php echo "ID#".$row["id"]; ?></a></td>
+						<td><a href="Reroute(Orders_to_OrderDetails).php?id=<?php echo $row["id"]; ?>"><?php echo "ID#".$row["id"]; ?></a></td>
 						<td><?php echo $row["username"]; ?></td>
 						<?php
 						$n = mysqli_fetch_array($conn_user -> query("SELECT COUNT(DISTINCT(`productname`))
@@ -164,8 +164,26 @@
 						<td><?php echo $row["date_time"]; ?></td>
 						<td class="sw">
 							<label class="switch">
-								<input type="checkbox" <?php if($row["state"] == 1) echo "checked"; ?> <?php if($row["state"] == 1) echo "disabled"; ?>  id = "<?php echo $id; ?>"
-									onclick="update_order('<?php echo $row["username"]; ?>', '<?php echo $id; ?>', '<?php echo $row["id"]?>');">
+								<input type="checkbox" <?php if($row["state"] == 1) echo "checked"; ?> <?php if($row["state"] == 1) echo "disabled"; ?>  id = "<?php echo $id."1"; ?>"
+									onclick="function clicky(){
+												var uname = '<?php echo $row["username"]; ?>';
+												var check = 1;
+												if($('#'+'<?php echo $id; ?>'+'1')[0].checked == true){
+													$('#'+'<?php echo $id; ?>'+'1')[0].disabled = true;
+													check = 0;
+														$.ajax({
+														url: 'ModifyOrder.php',
+														cache: false,
+														method: 'POST',
+														data: {
+															uname: uname,
+															id: '<?php echo $row["id"]; ?>'
+														}
+													})
+												}
+											}
+											clicky();"
+								>
 								<span class="slider round"></span>
 							</label>
 						</td>

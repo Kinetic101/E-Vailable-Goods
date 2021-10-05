@@ -1,6 +1,96 @@
+body{
+	background-color: #f1f1f1;
+	color: white;
+	font-family: "Verdana";
+	margin: 0;
+}
 
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+#verify{
+	margin-top: 5%;
+	background-color: #f1f1f1;
+	width: 50%;
+	margin-left: 25%;
+	text-align: center;
+}
+
+#verify h1{
+	color: #4A7C59;
+	font-family: "Verdana";
+	font-size: 50px;
+	font-weight: 1000;
+	margin-bottom: 1%;
+}
+
+#verify h4{
+	color: #766B56;
+	font-family: "Verdana";
+	font-weight: 100;
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 2%;
+}
+
+#warning{
+	color:#BF2722; 
+	font-weight:1000
+}
+
+.ent{
+	width: 80%;
+	margin: 1% 10%;
+	background-color: #FFFCF2;
+	padding: 2%;
+	border-radius: 10px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+#otp{
+	outline: none;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	background-color: #FFFCF2;
+	width: 60%;
+	min-height: 5vh;
+	font-size: 65px;
+	font-family: "Arial";
+	font-weight: 1000;
+}
+
+#otp:hover, #otp:focus{
+	background-color: #FFF5d6;
+}
+
+#submit{
+	margin: 2% 25% 1% 25%;
+	border-radius: 15px;
+	padding: 5px;
+	width: 50%;
+	background-color: #4A7C59;
+	text-align: center;
+	transition: all 0.3s ease 0s;
+	text-align: center;
+	outline: none;
+	border: none;
+	color: white;
+	font-family: "Verdana";
+	font-size: 14px;
+}
+
+#submit:hover{
+	opacity: 0.8;
+	cursor: pointer;
 }

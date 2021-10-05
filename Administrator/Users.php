@@ -32,7 +32,7 @@
 	<meta name="description" content="">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -153,37 +153,151 @@
 							?>
 							<td class="sw">
 								<label class="switch">
-									<input type="checkbox" <?php if($row["m1"] == 1) echo "checked"; ?> id = "<?php echo $id."1"; ?>" onclick="update_market_access('<?php echo $row["username"]; ?>', '<?php echo $id; ?>', '1')">
+									<input type="checkbox" <?php if($row["m1"] == 1) echo "checked"; ?> id = "<?php echo $id."1"; ?>"
+										onclick="function clicky(){
+													var uname = '<?php echo $row["username"]; ?>';
+													var check = 1;
+													if($('#'+'<?php echo $id; ?>'+'1')[0].checked == true){
+														check = 0;
+													}
+													$.ajax({
+														url: 'ModifyUser.php',
+														cache: false,
+														method: 'POST',
+														data: {
+															uname: uname,
+															market: '1',
+															check: check
+														}
+													})
+												}
+												clicky();"
+									>
 									<span class="slider round"></span>
 								</label>
 							</td>
 							<td class="sw">
 								<label class="switch">
-									<input type="checkbox" <?php if($row["m2"] == 1) echo "checked"; ?> id = "<?php echo $id."2"; ?>" onclick="update_market_access('<?php echo $row["username"]; ?>', '<?php echo $id; ?>', '2')">
+									<input type="checkbox" <?php if($row["m2"] == 1) echo "checked"; ?> id = "<?php echo $id."2"; ?>"
+										onclick="function clicky(){
+													var uname = '<?php echo $row["username"]; ?>';
+													var check = 1;
+													if($('#'+'<?php echo $id; ?>'+'2')[0].checked == true){
+														check = 0;
+													}
+													$.ajax({
+														url: 'ModifyUser.php',
+														cache: false,
+														method: 'POST',
+														data: {
+															uname: uname,
+															market: '2',
+															check: check
+														}
+													})
+												}
+												clicky();"
+									>
 									<span class="slider round"></span>
 								</label>
 							</td>
 							<td class="sw">
 								<label class="switch">
-									<input type="checkbox" <?php if($row["m3"] == 1) echo "checked"; ?> id = "<?php echo $id."3"; ?>" onclick="update_market_access('<?php echo $row["username"]; ?>', '<?php echo $id; ?>', '3')">
+									<input type="checkbox" <?php if($row["m3"] == 1) echo "checked"; ?> id = "<?php echo $id."3"; ?>"
+										onclick="function clicky(){
+													var uname = '<?php echo $row["username"]; ?>';
+													var check = 1;
+													if($('#'+'<?php echo $id; ?>'+'3')[0].checked == true){
+														check = 0;
+													}
+													$.ajax({
+														url: 'ModifyUser.php',
+														cache: false,
+														method: 'POST',
+														data: {
+															uname: uname,
+															market: '3',
+															check: check
+														}
+													})
+												}
+												clicky();"
+									>
 									<span class="slider round"></span>
 								</label>
 							</td>
 							<td class="sw">
 								<label class="switch">
-									<input type="checkbox" <?php if($row["m4"] == 1) echo "checked"; ?> id = "<?php echo $id."4"; ?>" onclick="update_market_access('<?php echo $row["username"]; ?>', '<?php echo $id; ?>', '4')">
+									<input type="checkbox" <?php if($row["m4"] == 1) echo "checked"; ?> id = "<?php echo $id."4"; ?>"
+										onclick="function clicky(){
+													var uname = '<?php echo $row["username"]; ?>';
+													var check = 1;
+													if($('#'+'<?php echo $id; ?>'+'4')[0].checked == true){
+														check = 0;
+													}
+													$.ajax({
+														url: 'ModifyUser.php',
+														cache: false,
+														method: 'POST',
+														data: {
+															uname: uname,
+															market: '4',
+															check: check
+														}
+													})
+												}
+												clicky();"
+									>
 									<span class="slider round"></span>
 								</label>
 							</td>
 							<td class="sw">
 								<label class="switch">
-									<input type="checkbox" <?php if($row["m5"] == 1) echo "checked"; ?> id = "<?php echo $id."5"; ?>" onclick="update_market_access('<?php echo $row["username"]; ?>', '<?php echo $id; ?>', '5')"> 
+									<input type="checkbox" <?php if($row["m5"] == 1) echo "checked"; ?> id = "<?php echo $id."5"; ?>"
+										onclick="function clicky(){
+													var uname = '<?php echo $row["username"]; ?>';
+													var check = 1;
+													if($('#'+'<?php echo $id; ?>'+'5')[0].checked == true){
+														check = 0;
+													}
+													$.ajax({
+														url: 'ModifyUser.php',
+														cache: false,
+														method: 'POST',
+														data: {
+															uname: uname,
+															market: '5',
+															check: check
+														}
+													})
+												}
+												clicky();"
+									>
 									<span class="slider round"></span>
 								</label>
 							</td>
 							<td class="sw">
 								<label class="switch">
-									<input type="checkbox" <?php if($row["m6"] == 1) echo "checked"; ?> id = "<?php echo $id."6"; ?>" onclick="update_market_access('<?php echo $row["username"]; ?>', '<?php echo $id; ?>', '6')">
+									<input type="checkbox" <?php if($row["m6"] == 1) echo "checked"; ?> id = "<?php echo $id."6"; ?>"
+										onclick="function clicky(){
+													var uname = '<?php echo $row["username"]; ?>';
+													var check = 1;
+													if($('#'+'<?php echo $id; ?>'+'6')[0].checked == true){
+														check = 0;
+													}
+													$.ajax({
+														url: 'ModifyUser.php',
+														cache: false,
+														method: 'POST',
+														data: {
+															uname: uname,
+															market: '6',
+															check: check
+														}
+													})
+												}
+												clicky();"
+									>
 									<span class="slider round"></span>
 								</label>
 							</td>
@@ -200,7 +314,36 @@
 							<?php
 						}
 						?>
-						<td class="delete"><i class="fas fa-trash" id="<?php echo $id; ?>" onclick="del_user('<?php echo $row["username"]; ?>', '<?php echo $id; ?>')"></i></td>
+						<td class="delete"><i class="fas fa-trash" id="<?php echo $id; ?>"></i></td>
+							<script type="text/javascript">
+								$("#"+'<?php echo $id; ?>').click(function(){
+									var uname = '<?php echo $row["username"]; ?>';
+									swal({
+										icon: "warning",
+										text: `Are you sure you want to delete user ${uname}?`,
+										dangerMode: true,
+										buttons: {
+											cancel: true,
+											confirm: "Delete User"
+										}
+									})
+									.then(function(resp){
+										if(resp == true){
+											$.ajax({
+												url: "DeleteUser.php",
+												cache: false,
+												method: "POST",
+												data: {
+													uname: uname
+												},
+												success: function(){
+													location.href = "Users.php";
+												}
+											})
+										}
+									})
+								})
+							</script>
 					</tr>
 				</div>
 				<?php
