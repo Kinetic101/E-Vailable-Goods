@@ -131,12 +131,14 @@ input:checked + .slider:before {
     box-sizing: border-box;
     background-position: 14px 12px;
     background-repeat: no-repeat;
-    font-size: 16px;
+    font-size: 15px;
     padding: 14px 20px 12px 10px;
     border: none;
     border-bottom: 1px solid #ddd;
-    width: 97%;
+    width: 94%;
     margin-top: 3px;
+    display: inline-block;
+    height: 50px;
 }
 
 #inp:focus{
@@ -144,6 +146,7 @@ input:checked + .slider:before {
 }
 
 #inpicon{
+    display: inline-block;
     font-size: 20px;
-    padding-left: 10px;
+    padding-left: 2%;
 }

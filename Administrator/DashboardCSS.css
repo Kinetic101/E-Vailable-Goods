@@ -1,0 +1,124 @@
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 3px;
+}
+
+th{
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  word-wrap: break-word;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+tr:nth-child(even) > td{
+  border: 1px solid #FFF;
+}
+
+.loginLogs{
+  margin: 10px 0;
+  width: 20%;
+  display: inline-block;
+  max-height: 50%;
+}
+
+.loginLogs table {
+  width: 100%;
+}
+
+.loginLogs td{
+  text-align: center;
+}
+
+.loginLogs h2{
+  font-family: "Verdana";
+  text-align: center;
+  font-size: 25px;
+  font-weight: 1000;
+}
+
+.editLogs{
+  margin: 10px 0 5px 10px;
+  width: 79%;
+  flex: 1;
+  display: inline-block;
+  max-height: 50%;
+  overflow: auto;
+}
+
+.editLogs table {
+  width: 100%;
+}
+
+.editLogs td{
+  text-align: center;
+}
+
+.editLogs h2{
+  font-family: "Verdana";
+  text-align: center;
+  font-size: 25px;
+  font-weight: 1000;
+}
+
+.row1{
+  display: flex;
+  justify-content: space-between;
+  max-height: 50%;
+}
+
+.row2{
+  max-width: 100%;
+}
+
+#suggList{
+}
+
+#suggBox{
+  float: left;
+  background-color: #f1f1f1;
+  border-radius: 15px;
+  max-width: 23%;
+  height: 25vh;
+  overflow: auto;
+  padding: 10px;
+  margin-left: 1.6%;
+  margin-bottom: 1.5%;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+  border: 0.5px solid #ccc;
+}
+
+#suggBox p{
+  font-family: "Verdana";
+  font-size: 14px;
+}
+
+.row2 h2{
+    font-family: "Verdana";
+    font-size: 30px;
+    margin-left: 3%;
+}

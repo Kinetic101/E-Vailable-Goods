@@ -87,7 +87,57 @@
 	        </div>
 	    </nav>
 	</header>
-
+	<div class = "row1">
+	<div class = "loginLogs">
+	<h2>Login Logs</h2>
+	<table>
+		<tr>
+			<th>IP Address</th>
+			<th>Time</th>
+		</tr>
+		<tr>
+			<td><!--Insert necessary code-->127.0.0.1</td>
+			<td><!--Insert necessary code-->2021-08-31 21:14:35</td>
+		</tr>
+	</table>
+	</div>
+	<div class = "editLogs">
+	<h2>Edit Logs</h2>
+	<table>
+		<tr>
+			<th>Product Name</th>
+			<th>Market</th>
+			<th>Username</th>
+			<th>Old Quantity</th>
+			<th>New Quantity</th>
+			<th>Unit</th>
+			<th>Old Price</th>
+			<th>New Price</th>
+			<th>Time</th>
+		</tr>
+		<tr>
+			<td><!--Insert necessary code-->Frosh</td>
+			<td><!--Insert necessary code-->Market 1</td>
+			<td><!--Insert necessary code-->Username</td>
+			<td><!--Insert necessary code-->900</td>
+			<td><!--Insert necessary code-->9</td>
+			<td><!--Insert necessary code-->sachet(s)</td>
+			<td><!--Insert necessary code-->Php2500</td>
+			<td><!--Insert necessary code-->Php2499</td>
+			<td><!--Insert necessary code-->2021-08-31 21:32:12</td>
+		</tr>
+	</table>
+	</div>
+	</div>
+	<hr>
+	<div class="row2">
+		<h2>Suggestions</h2>
+		<div id = "suggList">
+			<div id="suggBox">
+			<p><!--Insert necessary code-->Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+			</div>
+		</div>
+	</div>
 	<!--Mga ilalagay sa page na to:
 			*logs nung naglogin sa admin page
 			*logs nung mga tigedit sa market, both user and admin
