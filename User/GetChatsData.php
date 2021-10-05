@@ -18,7 +18,9 @@
 				FROM `messages`
 				WHERE `from_user` = '$_SESSION[usern]' OR `to_user` = '$_SESSION[usern]' ORDER BY `time` DESC";
 	$res = $conn -> query($select);
+	$k = 0;
 	while($row = $res -> fetch_assoc()){
+		$k++;
 		if($row["from_user"] == $_SESSION["usern"]){
 			if(!array_key_exists($row["to_user"], $check)){
 				$check_unr = mysqli_fetch_array($conn -> query("SELECT COUNT(*)
@@ -146,5 +148,14 @@
 			}
 			$check[$row["from_user"]] = True;
 		}
+	}
+	if($k == 0){
+		?>
+		<div class = "cmate">
+			<h4 style="font-weight: normal;"> 
+				It's lonely isn't it?
+			</h4>
+		</div>
+		<?php
 	}
 ?>

@@ -8,7 +8,11 @@
 		header("Location: Login.php");
 	}
 
-	else if($_SESSION["market"] == ""){
+	if(isset($_GET["market"])){
+		$_SESSION["market"] = $_GET["market"];
+	}
+
+	if($_SESSION["market"] == ""){
 		header("Location: Edit.php");
 	}
 
@@ -55,7 +59,7 @@
 	<meta name="description" content="">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
@@ -70,6 +74,15 @@
 
 </head>	
 <body>
+
+	<div id="wait">
+		<div class="wait">
+			<i class="fa fa-spinner fa-pulse"></i>
+			<h5>Loading...</h5>
+			<h5>Please Wait</h5>
+		</div>
+	</div>
+
 	<header>
 		<nav class="navbar navbar-expand-custom navbar-mainbg">
 	        <a class="navbar-brand navbar-logo" href="#">E-Vailable Goods - Administration Website</a>
@@ -180,29 +193,8 @@
 						?>
 						<div class = "filler">
 							<input id = "<?php echo $idname1; ?>" type = "number"  name = "<?php echo $temp_var1; ?>" value = "<?php echo $row["quantity"]; ?>" min = 0>
-							<button class = "minus" id = "minus1" type = "button" 
-								onclick = "function dec(){
-												document.getElementById('<?php echo $idname1; ?>').stepDown();
-												if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-												}
-												else{
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
-												}
-											}
-											dec();"
-											>-</button>
-							<button class = "plus" id = "plus1" type = "button"
-								onclick = "function inc(){
-												document.getElementById('<?php echo $idname1; ?>').stepUp();
-												if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-												}
-												else{
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
-												}
-											}
-											inc();">+</button>
+							<button class = "minus" id = "minus1" type = "button" onclick = "dec('<?php echo $idname1; ?>');">-</button>
+							<button class = "plus" id = "plus1" type = "button" onclick = "inc('<?php echo $idname1; ?>');">+</button>
 							<script type="text/javascript">
 								function check_vals(){
 									if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
@@ -234,18 +226,8 @@
 						?>
 						<div class = "filler">
 							<input id = "<?php echo $idname2; ?>" type = "number"  name = "<?php echo $temp_var2; ?>" value = "<?php echo $row["price"]; ?>" min = 0>
-							<button class = "minus" id = "minus2" type = "button"
-								onclick = "function dec(){
-												document.getElementById('<?php echo $idname2; ?>').stepDown();
-											}
-											dec();">-
-							</button>
-							<button class = "plus" id = "plus2" type = "button"
-								onclick = "function inc(){
-												document.getElementById('<?php echo $idname2; ?>').stepUp();
-											}
-											inc();">+
-							</button>
+							<button class = "minus" id = "minus2" type = "button" onclick = "dec('<?php echo $idname2; ?>');">-</button>
+							<button class = "plus" id = "plus2" type = "button" onclick = "inc('<?php echo $idname2; ?>');">+</button>
 							<script type="text/javascript">
 								function check_vals(){
 									if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
@@ -279,20 +261,6 @@
 		</form>
 	</div>
 	<button type = "button" id = "show">Add Products</button>
-
-	<div id="loading">
-		<div class="content">
-			<div class="load-wrapp">
-				<div class="load">
-					<p>Loading</p>
-					<div class="line"></div>
-					<div class="line"></div>
-					<div class="line"></div>
-				</div>
-			</div>
-		</div>
-		<!--Credits to @Manoz from CodePen for the loading screen-->
-	</div>
 
 </body>
 </html>
@@ -337,20 +305,25 @@
 				$conn_user -> query($insert);
 				echo $prodname." ".$quan." ".$price." ".$unit;																		 
 			}
+			$date = date("Y-m-d H:i:s");
 			while($row = $res -> fetch_assoc()){
 				if($_POST["b".$row["productname"]] != $row["price"] || $_POST["a".$row["productname"]] != $row["quantity"]){
 					$cnt++;
-					$temp_var = $_POST["a".$row["productname"]];
+					$newq = $_POST["a".$row["productname"]];
 					$update = "UPDATE `market` 
-								SET `quantity` = '$temp_var' 
+								SET `quantity` = '$newq' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
 					$conn_user -> query($update);
-					$temp_var = $_POST["b".$row["productname"]];
+					$newp = $_POST["b".$row["productname"]];
 					$update = "UPDATE `market` 
-								SET `price` = '$temp_var' 
+								SET `price` = '$newp' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
 					$conn_user -> query($update);
-					
+					$msgee = "Its_The_D3VS_That_Did_This";
+					$add = "INSERT INTO `edit_logs`
+							(`productname`, `market`, `username`, `oquantity`, `nquantity`, `unit`, `oprice`, `nprice`, `time`)
+							VALUES ('$row[productname]', '$_SESSION[market]', '$msgee', '$row[quantity]', '$newq', '$row[unit]', '$row[price]', '$newp', '$date')";
+					$conn_admin -> query($add);
 				}
 				$i++;
 			}

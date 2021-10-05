@@ -30,9 +30,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -45,6 +44,14 @@
 	<title>Admin - Dashboard</title>
 </head>
 <body>
+
+	<div id="wait">
+		<div class="wait">
+			<i class="fa fa-spinner fa-pulse"></i>
+			<h5>Loading...</h5>
+			<h5>Please Wait</h5>
+		</div>
+	</div>
 
 	<header>
 		<nav class="navbar navbar-expand-custom navbar-mainbg">
@@ -81,19 +88,13 @@
 	    </nav>
 	</header>
 
-	<div id="loading">
-		<div class="content">
-			<div class="load-wrapp">
-				<div class="load">
-					<p>Loading</p>
-					<div class="line"></div>
-					<div class="line"></div>
-					<div class="line"></div>
-				</div>
-			</div>
-		</div>
-		<!--Credits to @Manoz from CodePen for the loading screen-->
-	</div>
+	<!--Mga ilalagay sa page na to:
+			*logs nung naglogin sa admin page
+			*logs nung mga tigedit sa market, both user and admin
+			*listahan ng suggestions
+		Last feature na to
+		Palagays na lang ng layout muna, yung logs table yung style tas yung suggestions simpleng listahan lang 
+	-->
 
 </body>
 </html>

@@ -37,14 +37,21 @@
 </head>
 <body>
 
+	<div id="wait">
+		<div class="wait">
+			<i class="fa fa-spinner fa-pulse"></i>
+			<h5>Loading...</h5>
+			<h5>Please Wait</h5>
+		</div>
+	</div>
+
 	<div id = "verify">
 		<h1>Verification</h1>
 		<h4>Please input the 6-digit OTP we have sent you through the email you provided.<br><br>It will expire in 5 mins and once 5 mins have passed, 
 			you will automatically be redirected back to the Sign Up page. Moreover, you only have <span id = "warning">5 attempts</span> 
 			to input the corrrect OTP or else, you will also automatically be redirected back to the Sign Up page. Moreover, please 
 			<span id = "warning">DO NOT refresh the page</span>, doing so will redirect 
-			you to the sign up page. <span style="color:#241F19; font-weight: 1000">Please check your spam folder.</span> Lastly, please do not hit enter on your keyboard 
-			to check the OTP as this will refresh the page. Thank You!</h4>
+			you to the sign up page. <span style="color:#241F19; font-weight: 1000">Lastly, please check your spam folder.</span>
 		<div class = "ent">
 		<form action = "">
 			<input type = "number" name = "otp" id="otp" maxlength="6">
@@ -52,20 +59,6 @@
 			<button type="button" id="submit">Check OTP</button>
 		</form>
 		</div>
-	</div>
-
-	<div id="loading">
-		<div class="content">
-			<div class="load-wrapp">
-				<div class="load">
-					<p>Loading</p>
-					<div class="line"></div>
-					<div class="line"></div>
-					<div class="line"></div>
-				</div>
-			</div>
-		</div>
-		<!--Credits to @Manoz from CodePen for the loading screen-->
 	</div>
 
 </body>

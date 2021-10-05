@@ -7,8 +7,10 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
-
-	else if($_SESSION["market"] == ""){
+	if(isset($_GET["market"])){
+		$_SESSION["market"] = $_GET["market"];
+	}
+	if($_SESSION["market"] == ""){
 		header("Location: Research.php");
 	}
 
@@ -20,7 +22,11 @@
 	$pass = "";
 	$dbname = "user";
 	$conn = new mysqli($server, $usname, $pass, $dbname);
+	$admin = new mysqli($server, $usname, $pass, "admin");
 	if($conn -> connect_error){
+		die("Connection Failed: ".$conn -> connect_error);
+	}
+	if($admin -> connect_error){
 		die("Connection Failed: ".$conn -> connect_error);
 	}
 
@@ -30,7 +36,6 @@
 		$data = htmlspecialchars($data);
 		return $data;
 	}
-
 	$select = "SELECT * 
 				FROM `market` 
 				WHERE `market_name` = '$_SESSION[market]'";
@@ -50,7 +55,7 @@
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<link rel="stylesheet" type="text/css" href="SearchCSS.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="MarketEditJS.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
@@ -60,6 +65,15 @@
 
 </head>	
 <body>
+
+	<div id="wait">
+		<div class="wait">
+			<i class="fa fa-spinner fa-pulse"></i>
+			<h5>Loading...</h5>
+			<h5>Please Wait</h5>
+		</div>
+	</div>
+	
 	<header>
 		<nav>
 			<ul class="links">
@@ -71,25 +85,7 @@
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
 					<i class="fas fa-search"></i>
-					<div id="sres">
-						<?php
-						$selecto = "SELECT `username`, `fname`, `lname`, `pic`
-									FROM `credentials`
-									WHERE `username` != '$_SESSION[usern]'
-									ORDER BY `username` ASC";
-						$res = $conn -> query($selecto);
-						while($row = $res -> fetch_assoc()){
-							?>
-							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-								<h5>
-								<?php echo $row["fname"]." ".$row["lname"]; ?>
-								</h5>
-							</a>
-							<?php
-						}
-						?>
-					</div>
+					<div id="sres"></div>
 				</li>
 			</ul>
 		</nav>
@@ -190,29 +186,8 @@
 						?>
 						<div class = "filler">
 							<input id = "<?php echo $idname1; ?>" type = "number"  name = "<?php echo $temp_var1; ?>" value = "<?php echo $row["quantity"]; ?>" min = 0>
-							<button class = "minus" id = "minus1" type = "button" 
-								onclick = "function dec(){
-												document.getElementById('<?php echo $idname1; ?>').stepDown();
-												if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-												}
-												else{
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
-												}
-											}
-											dec();"
-											>-</button>
-							<button class = "plus" id = "plus1" type = "button"
-								onclick = "function inc(){
-												document.getElementById('<?php echo $idname1; ?>').stepUp();
-												if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-												}
-												else{
-													document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
-												}
-											}
-											inc();">+</button>
+							<button class = "minus" id = "minus1" type = "button" onclick = "dec('<?php echo $idname1; ?>');">-</button>
+							<button class = "plus" id = "plus1" type = "button" onclick = "inc('<?php echo $idname1; ?>');">+</button>
 							<script type="text/javascript">
 								function check_vals(){
 									if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
@@ -244,18 +219,8 @@
 						?>
 						<div class = "filler">
 							<input id = "<?php echo $idname2; ?>" type = "number"  name = "<?php echo $temp_var2; ?>" value = "<?php echo $row["price"]; ?>" min = 0>
-							<button class = "minus" id = "minus2" type = "button"
-								onclick = "function dec(){
-												document.getElementById('<?php echo $idname2; ?>').stepDown();
-											}
-											dec();">-
-							</button>
-							<button class = "plus" id = "plus2" type = "button"
-								onclick = "function inc(){
-												document.getElementById('<?php echo $idname2; ?>').stepUp();
-											}
-											inc();">+
-							</button>
+							<button class = "minus" id = "minus2" type = "button" onclick = "dec('<?php echo $idname2; ?>');">-</button>
+							<button class = "plus" id = "plus2" type = "button" onclick = "inc('<?php echo $idname2; ?>');">+</button>
 							<script type="text/javascript">
 								function check_vals(){
 									if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
@@ -290,23 +255,87 @@
 	</div>
 	<button type = "button" id = "show">Add Products</button>
 
-	<div id="loading">
-		<div class="content">
-			<div class="load-wrapp">
-				<div class="load">
-					<p>Loading</p>
-					<div class="line"></div>
-					<div class="line"></div>
-					<div class="line"></div>
-				</div>
-			</div>
-		</div>
-		<!--Credits to @Manoz from CodePen for the loading screen-->
-	</div>
-
 </body>
 </html>
 <?php 
+	if(isset($_GET["market"])){
+		$ok = 0;
+		if($_GET["market"] == "market1"){
+			$select = "SELECT `m1`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m1"];
+			}
+		}
+		else if($_GET["market"] == "market2"){
+			$select = "SELECT `m2`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m2"];
+			}		
+		}
+		else if($_GET["market"] == "market3"){
+			$select = "SELECT `m3`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m3"];
+			}
+		}
+		else if($_GET["market"] == "market4"){
+			$select = "SELECT `m4`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m4"];
+			}		
+		}
+		else if($_GET["market"] == "market5"){
+			$select = "SELECT `m5`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m5"];
+			}		
+		}
+		else if($_GET["market"] == "market6"){
+			$select = "SELECT `m6`
+						FROM `credentials`
+						WHERE `username` = '$_SESSION[usern]'";
+			$res = $conn -> query($select);
+			while($row = $res -> fetch_assoc()){
+				$ok = $row["m6"];
+			}		
+		}
+		if($ok == 1){
+			?>
+			<script type="text/javascript">
+				location.href = "MarketEdit.php";
+			</script>
+			<?php
+		}
+		else{
+			?>
+			<script type="text/javascript">
+				swal({
+					title: "Unauthorized Access", 
+					text: "You are currently unauthorized to access this market's editing page, please contact the website administrators to get access.", 
+					icon: "error"
+				})
+				.then(function(){
+					location.href = 'Help_and_Support.php';
+				});
+			</script>
+			<?php
+		}
+	}
 	$on = mysqli_fetch_array($conn -> query("SELECT COUNT(*)
 												FROM `credentials`
 												WHERE `username` = '$_SESSION[usern]' AND `user_type` = 1"))[0];
@@ -364,20 +393,24 @@
 				$conn -> query($insert);
 				echo $prodname." ".$quan." ".$price." ".$unit;																		 
 			}
+			$date = date("Y-m-d H:i:s");
 			while($row = $res -> fetch_assoc()){
 				if($_POST["b".$row["productname"]] != $row["price"] || $_POST["a".$row["productname"]] != $row["quantity"]){
 					$cnt++;
-					$temp_var = $_POST["a".$row["productname"]];
+					$newq = $_POST["a".$row["productname"]];
 					$update = "UPDATE `market` 
-								SET `quantity` = '$temp_var' 
+								SET `quantity` = '$newq' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
 					$conn -> query($update);
-					$temp_var = $_POST["b".$row["productname"]];
+					$newp = $_POST["b".$row["productname"]];
 					$update = "UPDATE `market` 
-								SET `price` = '$temp_var' 
+								SET `price` = '$newp' 
 								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
 					$conn -> query($update);
-					
+					$add = "INSERT INTO `edit_logs`
+							(`productname`, `market`, `username`, `oquantity`, `nquantity`, `unit`, `oprice`, `nprice`, `time`)
+							VALUES ('$row[productname]', '$_SESSION[market]', '$_SESSION[usern]', '$row[quantity]', '$newq', '$row[unit]', '$row[price]', '$newp', '$date')";
+					$admin -> query($add);
 				}
 				$i++;
 			}

@@ -6,15 +6,13 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
+	if(empty($_SESSION["buy_arr"])){
+		header("Location: Cart.php");
+	}
 
 	$_SESSION["market"] = "";
 	$_SESSION["product"] = "";
 	$_SESSION["visit_user"] = "";
-	$_SESSION["author"] = 0;
-
-	if(empty($_SESSION["buy_arr"])){
-		header("Location: Cart.php");
-	}
 
 	$server = "localhost";
 	$usname = "root";
@@ -48,13 +46,25 @@
 			}
 			else{
 				$contact = test_input($_POST["contact"]);
+				$flag = false;
+				$arr = str_split($contact);
 				if(strlen($contact) == 11){
-					if($contact[0] != '0' || $contact[1] != '9'){
+					for($i = 0; $i < sizeof($arr); $i++){
+						if(!is_numeric($arr[$i])){
+							$flag = true;
+						}
+					}
+					if($contact[0] != '0' || $contact[1] != '9' || $flag){
 						$contactErr = "Invalid contact number!";
 						$error = true;
 					}
 				}
 				else if(strlen($contact) == 13){
+					for($i = 1; $i < sizeof($arr); $i++){
+						if(!is_numeric($arr[$i])){
+							$flag = true;
+						}
+					}
 					if($contact[0] != '+' || $contact[1] != '6'){
 						$contactErr = "Invalid contact number!";
 						$error = true;
@@ -132,7 +142,7 @@
 	<link rel="stylesheet" type="text/css" href="Confirm_BuyCSS.css">
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<link rel="stylesheet" type="text/css" href="SearchCSS.css">
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script type="text/javascript" src="Confirm_BuyJS.js"></script>
@@ -142,6 +152,15 @@
 	<title>Transaction Confirmation</title>
 </head>
 <body>
+
+	<div id="wait">
+		<div class="wait">
+			<i class="fa fa-spinner fa-pulse"></i>
+			<h5>Loading...</h5>
+			<h5>Please Wait</h5>
+		</div>
+	</div>
+
 	<header>
 		<nav>
 			<ul class="links">
@@ -153,25 +172,7 @@
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
 					<i class="fas fa-search"></i>
-					<div id="sres">
-						<?php
-						$select = "SELECT `username`, `fname`, `lname`, `pic`
-									FROM `credentials`
-									WHERE `username` != '$_SESSION[usern]'
-									ORDER BY `username` ASC";
-						$res = $conn -> query($select);
-						while($row = $res -> fetch_assoc()){
-							?>
-							<a href = "Reroute(Dashboard_to_VisitUser).php?user=<?php echo $row["username"]; ?>">
-								<div class = "chaturc"><img src="<?php echo $row["pic"]; ?>" id="chatur" style="width:40px;height:40px"></div>
-								<h5>
-								<?php echo $row["fname"]." ".$row["lname"]; ?>
-								</h5>
-							</a>
-							<?php
-						}
-						?>
-					</div>
+					<div id="sres"></div>
 				</li>
 			</ul>
 		</nav>
@@ -593,20 +594,6 @@
 		</form>
 			<button type = "button" id = "show">Set Address <i class="fas fa-chevron-right"></i> </button>
 	</div>
-
-	<div id="loading">
-		<div class="content">
-			<div class="load-wrapp">
-				<div class="load">
-					<p>Loading</p>
-					<div class="line"></div>
-					<div class="line"></div>
-					<div class="line"></div>
-				</div>
-			</div>
-		</div>
-		<!--Credits to @Manoz from CodePen for the loading screen-->
-	</div>
 	
 </body>
 </html>
@@ -647,7 +634,7 @@
 					$conn -> query($update);
 
 					//Update Orders Table
-					$add = $town.", ".$brgy.", ".$add;
+					$add = $add.", ".$brgy.", ".$town;
 					$insert = "INSERT INTO `orders`
 								(`id`, `username`, `productname`, `order_quantity`, `unit`, `price_as_of_order`, `market`, `address`, `contact`, `date_time`, `state`)
 								VALUES ('$n', '$_SESSION[usern]', '$prod', '$ordr', '$unit', '$pric', '$mark', '$add', '$contact', '$date', 0)";

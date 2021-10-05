@@ -113,6 +113,15 @@
 	<title>Log In</title>
 </head>
 <body>
+
+	<div id="wait">
+		<div class="wait">
+			<i class="fa fa-spinner fa-pulse"></i>
+			<h5>Loading...</h5>
+			<h5>Please Wait</h5>
+		</div>
+	</div>
+
 	<header>
 		<nav>
 		<ul class = "links">
@@ -133,20 +142,6 @@
 			<br>
 			<input type = "submit" value = "Log In" class = "button" id="submit">
 		</form>
-	</div>
-
-	<div id="loading">
-		<div class="content">
-			<div class="load-wrapp">
-				<div class="load">
-					<p>Loading</p>
-					<div class="line"></div>
-					<div class="line"></div>
-					<div class="line"></div>
-				</div>
-			</div>
-		</div>
-		<!--Credits to @Manoz from CodePen for the loading screen-->
 	</div>
 
 </body>

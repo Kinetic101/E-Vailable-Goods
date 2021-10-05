@@ -79,7 +79,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	border-radius: 15px;
 	padding: 5px;
 	width: 50%;
-	background-color: #4A7C59;
+	background-color: gray;
 	text-align: center;
 	transition: all 0.3s ease 0s;
 	text-align: center;
@@ -90,7 +90,11 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
 	font-size: 14px;
 }
 
-#submit:hover{
+#submit:enabled{
+	background-color: #4A7C59;
+}
+
+#submit:enabled:hover{
 	opacity: 0.8;
 	cursor: pointer;
 }

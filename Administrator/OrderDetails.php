@@ -7,6 +7,9 @@
 	if($_SESSION["usern"] == ''){
 		header("Location: SignUp.php");
 	}
+	if(isset($_GET["id"])){
+		$_SESSION["order_id"] = $_GET["id"];
+	}
 	if($_SESSION["order_id"] == ""){
 		header("Orders.php");
 	}
@@ -38,7 +41,7 @@
 	<meta name="description" content="">
 	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css">
 	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -50,6 +53,14 @@
 	<title>Order Details - ID#<?php echo $_SESSION["order_id"]?></title>
 </head>
 <body>
+
+	<div id="wait">
+		<div class="wait">
+			<i class="fa fa-spinner fa-pulse"></i>
+			<h5>Loading...</h5>
+			<h5>Please Wait</h5>
+		</div>
+	</div>
 
 	<header>
 		<nav class="navbar navbar-expand-custom navbar-mainbg">
@@ -131,20 +142,6 @@
 				<span id = "tantamount">Php <?php echo $tot; ?></span>
 			</div>
 		</div>
-	</div>
-
-	<div id="loading">
-		<div class="content">
-			<div class="load-wrapp">
-				<div class="load">
-					<p>Loading</p>
-					<div class="line"></div>
-					<div class="line"></div>
-					<div class="line"></div>
-				</div>
-			</div>
-		</div>
-		<!--Credits to @Manoz from CodePen for the loading screen-->
 	</div>
 	
 </body>
