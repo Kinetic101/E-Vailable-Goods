@@ -185,20 +185,10 @@
 						$arr[$row["productname"]] = $row["quantity"];
 						?>
 						<div class = "filler">
-							<input id = "<?php echo $idname1; ?>" type = "number"  name = "<?php echo $temp_var1; ?>" value = "<?php echo $row["quantity"]; ?>" min = 0>
-							<button class = "minus" id = "minus1" type = "button" onclick = "dec('<?php echo $idname1; ?>');">-</button>
-							<button class = "plus" id = "plus1" type = "button" onclick = "inc('<?php echo $idname1; ?>');">+</button>
-							<script type="text/javascript">
-								function check_vals(){
-									if(document.getElementById('<?php echo $idname1; ?>').value != '<?php echo $arr[$row["productname"]]; ?>'){
-										document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-									}
-									else{
-										document.getElementById('<?php echo $idname1; ?>').style.cssText = 'box-shadow: none;';
-									}
-								}
-								setInterval(check_vals, 10);
-							</script>
+							<input id = "<?php echo $idname1; ?>" type = "number"  name = "<?php echo $temp_var1; ?>" value = "<?php echo $row["quantity"]; ?>" min = 0 
+								onchange = "check_vals('<?php echo $idname1; ?>', '<?php echo $arr[$row["productname"]]; ?>'); ">
+							<button class = "minus" id = "minus1" type = "button" onclick = "dec('<?php echo $idname1; ?>', '<?php echo $arr[$row["productname"]]; ?>');">-</button>
+							<button class = "plus" id = "plus1" type = "button" onclick = "inc('<?php echo $idname1; ?>', '<?php echo $arr[$row["productname"]]; ?>');">+</button>
 						</div>
 						<hr>
 						<?php
@@ -218,20 +208,10 @@
 						$arr2[$row["productname"]] = $row["price"];
 						?>
 						<div class = "filler">
-							<input id = "<?php echo $idname2; ?>" type = "number"  name = "<?php echo $temp_var2; ?>" value = "<?php echo $row["price"]; ?>" min = 0>
-							<button class = "minus" id = "minus2" type = "button" onclick = "dec('<?php echo $idname2; ?>');">-</button>
-							<button class = "plus" id = "plus2" type = "button" onclick = "inc('<?php echo $idname2; ?>');">+</button>
-							<script type="text/javascript">
-								function check_vals(){
-									if(document.getElementById('<?php echo $idname2; ?>').value != '<?php echo $arr2[$row["productname"]]; ?>'){
-										document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-									}
-									else{
-										document.getElementById('<?php echo $idname2; ?>').style.cssText = 'box-shadow: none;';
-									}
-								}
-								setInterval(check_vals, 10);
-							</script>
+							<input id = "<?php echo $idname2; ?>" type = "number"  name = "<?php echo $temp_var2; ?>" value = "<?php echo $row["price"]; ?>" min = 0 
+								onchange = "check_vals('<?php echo $idname2; ?>', '<?php echo $arr2[$row["productname"]]; ?>'); ">
+							<button class = "minus" id = "minus2" type = "button" onclick = "dec('<?php echo $idname2; ?>', '<?php echo $arr2[$row["productname"]]; ?>');">-</button>
+							<button class = "plus" id = "plus2" type = "button" onclick = "inc('<?php echo $idname2; ?>', '<?php echo $arr2[$row["productname"]]; ?>');">+</button>
 						</div>
 						<hr>
 						<?php

@@ -187,20 +187,9 @@
 							$temp_var = $row["productname"];
 							?>
 							<div class = filler>
-								<input id = "<?php echo $idname; ?>" type = "number" name = "<?php echo $row["productname"]; ?>" value = "<?php echo $arr[$temp_var]; ?>" min = 0 max = "<?php echo $row["quantity"]; ?>" />
+								<input id = "<?php echo $idname; ?>" type = "number" name = "<?php echo $row["productname"]; ?>" value = "<?php echo $arr[$temp_var]; ?>" min = 0 max = "<?php echo $row["quantity"]; ?>" onchange="check_vals('<?php echo $idname; ?>'); "/>
 								<button id = "minus" type = "button" onclick = "dec('<?php echo $idname; ?>');" >-</button>
 								<button id = "plus" type = "button" onclick = "inc('<?php echo $idname; ?>');">+</button>
-								<script type="text/javascript">
-									function check_vals(){
-										if(document.getElementById('<?php echo $idname; ?>').value > 0){
-											document.getElementById('<?php echo $idname; ?>').style.cssText = 'box-shadow: 0 0 0 4px #4A7C59;';
-										}
-										else{
-											document.getElementById('<?php echo $idname; ?>').style.cssText = 'box-shadow: none;';
-										}
-									}
-									setInterval(check_vals, 10);
-								</script>
 							</div>
 							<hr>
 							<?php

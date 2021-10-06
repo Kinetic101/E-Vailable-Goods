@@ -86,6 +86,7 @@
 	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script type="text/javascript" src="CartJS.js"></script>
 	<script type="text/javascript" src="GetNotificationsJS.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="SearchJS.js"></script>
@@ -173,44 +174,18 @@
 							<div class = "eman">
 								<label for = "<?php echo $idn; ?>"><?php echo $row["productname"]; ?></label>
 							</div>
-							<input type = "checkbox" id = "<?php echo $idn; ?>" name = "<?php echo $idn; ?>">
+							<input type = "checkbox" id = "<?php echo $idn; ?>" name = "<?php echo $idn; ?>" onclick="check('<?php echo $idn; ?>');">
 							<span class = "checkmark"></span>
 						</label>
-						<script type="text/javascript">
-							var x = "#"+'<?php echo $idn; ?>';
-							$(x).click(function(){
-								if(document.getElementById('<?php echo $idn; ?>').checked){
-									document.getElementById('<?php echo $idn."wow"; ?>').style.outline = "2px solid #4A7C59";
-								}
-								else{
-									document.getElementById('<?php echo $idn."wow"; ?>').style.outline = "none";
-								}
-							})
-						</script>
 						<div class = "orderq">
 							Quantity: 
 							<p id = "<?php echo $uni?>">
 								<?php echo $row["order_quantity"]; ?>
 							</p>
 							<?php echo " ".$row["unit"]." "; ?>
-							<button id = minus type = button 
-								onclick = "function dec(){
-												if(arr['<?php echo $temp; ?>'] > 0){
-													document.getElementById('<?php echo $num; ?>').value = 
-														document.getElementById('<?php echo $uni; ?>').innerHTML = --arr['<?php echo $temp; ?>'];
-												}
-											}	
-											dec();">-
-							</button>
+							<button id = minus type = button onclick = "dec('<?php echo $temp; ?>', '<?php echo $num; ?>', '<?php echo $uni; ?>');">-</button>
 							<button id = plus type = button 
-								onclick = "function inc(){
-												if(arr['<?php echo $temp; ?>'] < '<?php echo  $arr_max[$i]; ?>'){
-													document.getElementById('<?php echo $num; ?>').value = 
-														document.getElementById('<?php echo $uni; ?>').innerHTML = ++arr['<?php echo $temp; ?>'];
-												}
-											}	
-											inc();">+
-							</button>
+								onclick = "inc('<?php echo $temp; ?>', '<?php echo $num; ?>', '<?php echo $uni; ?>', '<?php echo  $arr_max[$i]; ?>');">+</button>
 						</div>
 						<input type = "hidden" id = "<?php echo $num; ?>" name = "<?php echo $num; ?>" value = <?php echo $row["order_quantity"]; ?>>
 						<input type = "hidden" name = "<?php echo $pro; ?>" value = <?php echo $row["productname"]; ?>>
