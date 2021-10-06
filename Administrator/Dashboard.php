@@ -21,6 +21,15 @@
 	}
 
 	$_SESSION["user"] = "";
+
+	$select_login = "SELECT *
+						FROM `login_logs`
+						ORDER BY `time` DESC";
+	$select_edit = "SELECT *
+					FROM `edit_logs`
+					ORDER BY `time` DESC";
+	$select_sugg = "SELECT *
+					FROM `suggestions`";
 ?>
 
 <!DOCTYPE html>
@@ -95,10 +104,18 @@
 			<th>IP Address</th>
 			<th>Time</th>
 		</tr>
+		<?php
+		$res = $conn_admin -> query($select_login);
+		while($row = $res -> fetch_assoc()){
+		?>
 		<tr>
-			<td><!--Insert necessary code-->127.0.0.1</td>
-			<td><!--Insert necessary code-->2021-08-31 21:14:35</td>
+
+			<td><?php echo $row["ip_add"]; ?></td>
+			<td><?php echo $row["time"]; ?></td>
 		</tr>
+		<?php
+		}
+		?>
 	</table>
 	</div>
 	<div class = "editLogs">
@@ -115,17 +132,24 @@
 			<th>New Price</th>
 			<th>Time</th>
 		</tr>
+		<?php
+		$res = $conn_admin -> query($select_edit);
+		while($row = $res -> fetch_assoc()){
+		?>
 		<tr>
-			<td><!--Insert necessary code-->Frosh</td>
-			<td><!--Insert necessary code-->Market 1</td>
-			<td><!--Insert necessary code-->Username</td>
-			<td><!--Insert necessary code-->900</td>
-			<td><!--Insert necessary code-->9</td>
-			<td><!--Insert necessary code-->sachet(s)</td>
-			<td><!--Insert necessary code-->Php2500</td>
-			<td><!--Insert necessary code-->Php2499</td>
-			<td><!--Insert necessary code-->2021-08-31 21:32:12</td>
+			<td><?php echo $row["productname"]; ?></td>
+			<td><?php echo $row["market"]; ?></td>
+			<td><?php echo ($row["username"] == 'Its_The_D3VS_That_Did_This') ? 'DEVELOPER' : $row["username"]; ?></td>
+			<td><?php echo $row["oquantity"]; ?></td>
+			<td><?php echo $row["nquantity"]; ?></td>
+			<td><?php echo $row["unit"]; ?></td>
+			<td><?php echo $row["oprice"]; ?></td>
+			<td><?php echo $row["nprice"]; ?></td>
+			<td><?php echo $row["time"]; ?></td>
 		</tr>
+		<?php
+		}
+		?>
 	</table>
 	</div>
 	</div>
@@ -133,9 +157,16 @@
 	<div class="row2">
 		<h2>Suggestions</h2>
 		<div id = "suggList">
+			<?php
+			$res = $conn_user -> query($select_sugg);
+			while($row = $res -> fetch_assoc()){
+			?>
 			<div id="suggBox">
-			<p><!--Insert necessary code-->Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod</p>
+			<p><?php echo $row["entry"]; ?></p>
 			</div>
+			<?php
+			}
+			?>
 		</div>
 	</div>
 	<!--Mga ilalagay sa page na to:
