@@ -175,7 +175,7 @@
 
 	<div class = "login"> 
 		<form method = "post" action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			Username: <span style="font-size: 10px;">(must consist of alphanumeric characters)</span> <br> <input type = "text" placeholder="Must be between 5 and 16 characters" name = "uname" class = "field" value = "<?php echo $uname?>" id="uname" maxlength="16"> <span class = "error" id="unameE">* <?php echo $unameErr;?></span> <br>
+			Username: <span style="font-size: 10px;" id="rmove">(must consist of alphanumeric characters)</span> <br> <input type = "text" placeholder="Must be between 5 and 16 characters" name = "uname" class = "field" value = "<?php echo $uname?>" id="uname" maxlength="16"> <span class = "error" id="unameE">* <?php echo $unameErr;?></span> <br>
 			E-Mail: <br>  <input type = "email" placeholder="Must not exceed 40 characters" name = "email" class = "field" value = "<?php echo $email?>"id="email" maxlength="45"> <span class = "error">* <?php echo $emailErr;?></span> <br>
 			Password: <br> <input type = "password" placeholder="Must be between 8 and 16 characters" name = "pword" class = "field" id="pword" maxlength="25"> <span class = "error">* <?php echo $pwordErr;?></span> <br>
 			First Name: <br> <input type = "text" placeholder="Must not exceed 16 characters" name = "fname" class = "field" value = "<?php echo $fname?>" id="fname" maxlength="16"> <span class = "error">* <?php echo $fnameErr;?></span> <br>

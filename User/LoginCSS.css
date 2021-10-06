@@ -7,14 +7,15 @@ body{
 
 .header{
 	font-family: "Verdana";
-	font-size: 3em;
+	font-size: 46px;
 	padding-left: 1%;
 	height: 11%;
-	text-align: left;
-	color: white;
-	margin-top: 15vh;
+	display: inline-block;
 	margin-left: 5vw;
+	margin-top: 15vh;
 	position: absolute;
+	color: white;
+	width: 55%;
 }
 
 .error{
@@ -27,11 +28,12 @@ body{
 
 form{
 	background-color: #211F1C;
-	margin-left: 55%;
-	margin-top: 16vh;
+	display: inline-block;
 	text-align: left;
+	margin-left: 60vw;
+	margin-top: 13vh;
 	color: white;
-	width: 23%;
+	width: 25%;
 	font-family: "Verdana";
 	font-size: 15px;
 	box-shadow: 20px;
@@ -137,3 +139,40 @@ nav{
 	margin: 0;
 	padding: 0;
 }
+
+@media (max-width: 800px) {
+
+	header{
+		height: 70px;
+	}
+	.links a{
+		font-size: 22px;
+		padding: 5px;
+	}
+	.header{
+		display: block;
+		text-align: center;
+		font-size: 23px;
+		margin: 5%;
+		margin: 5% 0;
+		position: relative;
+		width: 100%;
+	}
+	form{
+		display: block;
+		margin: 5% 5%;
+		width: 90%;
+		text-align: center;
+		font-size: 20px;
+	}
+	.field{
+		width: 80%;
+		font-size: 20px;
+	}
+	.error{
+		display: none;
+	}
+
+}
+
+
