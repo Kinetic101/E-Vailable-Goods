@@ -58,6 +58,7 @@
 	<link rel = "stylesheet" href = "SuggestCSS.css"> 
 	<link rel="stylesheet" type="text/css" href="LoadingCSS.css">
 	<link rel="stylesheet" type="text/css" href="SearchCSS.css">
+	<link rel="stylesheet" type="text/css" href="NavBarCSS.css">
 	<script src="https://kit.fontawesome.com/f463b44b8d.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -65,6 +66,7 @@
 	<script type="text/javascript" src="SuggestJS.js"></script>
 	<script type="text/javascript" src="LoadingJS.js"></script>
 	<script type="text/javascript" src="SearchJS.js"></script>
+	<script type="text/javascript" src="NavBarJS.js"></script>
 	<title>Suggest</title>
 
 </head>
@@ -79,12 +81,13 @@
 	</div>
 
 	<header>
-		<nav>
+		<i class="fas fa-bars" id ="burg"></i>
+			<div id="nav" ><nav>
 			<ul class="links">
 				<li><a href="Research.php">Buy</a></li>
 				<li id="here"><a href="Talk.php">Talk</a></li>
 				<li><a href="Edit.php">Edit</a></li>
-				<li><a href="Suggest.php" id = "press">Suggest</a></li>
+				<li id="press"><a href="Suggest.php" id="press">Suggest</a></li>
 				<li><a href="About.php">About</a></li>
 				<li class="search-bar">
 					<input type="text" placeholder="Search for others" class="inp">
@@ -92,7 +95,7 @@
 					<div id="sres"></div>
 				</li>
 			</ul>
-		</nav>
+		</nav></div>
 		<ul class="icons">
 			<li><a href="Cart.php" title="Cart"><i class="fas fa-shopping-cart" id="cart"></i></a></li>
 			<li><a href="Notifications.php" id="notifsss" title="Notifications"><i class="fas fa-bell" id="bell"></i></a></li>
@@ -100,18 +103,16 @@
 		</ul>
 		<a href = "Research.php" class = "evg">E-Vailable Goods</a>
 		<ul>
-		<li class = "dropdown"><a href = "Profile.php" class="pic">
-			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp">
+		<li class = "dropdown">
+			<div class="prof"><img src = "<?php echo $_SESSION["prof_pic"]?>" alt = "Avatar" class = "dp" id="disp">
 			</div>
-		</a>
-		<div class="dlinks">
+		<div class="dlinks" id="drop">
       			<a href="Profile.php">Profile</a>
       			<a href="Help_and_Support.php">Help & Support</a>
       			<a href="Logout.php">Logout</a>
     	</div>
     	</li>
 		</ul>
-
 	</header>
 
 	<div class = "suggest">
