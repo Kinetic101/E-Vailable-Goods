@@ -62,6 +62,7 @@
 		else{
 			$status = "error";
 			$response = "Server error: <br>".$mail -> ErrorInfo;
+			echo $response;
 		}
 	}
 ?>

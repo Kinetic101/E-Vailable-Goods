@@ -65,7 +65,7 @@
 </html>
 <script type="text/javascript" src="VerifyJS.js"></script>
 <?php
-	if($_SESSION["cnt_re"] >= 1){
+	if($_SESSION["cnt_re"] > 1){
 		?>
 		<script type="text/javascript">
 			swal({

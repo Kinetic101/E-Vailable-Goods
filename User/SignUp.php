@@ -205,7 +205,7 @@
 		$_SESSION["pword"] = $pword;
 		$_SESSION["user_type"] = $user;
 		$_SESSION["otp"] = "0";
-		$_SESSION["cnt_re"] = 0;
+		$_SESSION["cnt_re"] = "";
 		?>
 		<script type="text/javascript">
 			$("#wait1")[0].style.display = "grid";
@@ -222,6 +222,7 @@
 					lname: lname,
 				},
 				success: function(response){
+					console.log(response);
 					location.href = "Verify.php";
 				}
 			})
