@@ -375,22 +375,24 @@
 			}
 			$date = date("Y-m-d H:i:s");
 			while($row = $res -> fetch_assoc()){
-				if($_POST["b".$row["productname"]] != $row["price"] || $_POST["a".$row["productname"]] != $row["quantity"]){
-					$cnt++;
-					$newq = $_POST["a".$row["productname"]];
-					$update = "UPDATE `market` 
-								SET `quantity` = '$newq' 
-								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
-					$conn -> query($update);
-					$newp = $_POST["b".$row["productname"]];
-					$update = "UPDATE `market` 
-								SET `price` = '$newp' 
-								WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
-					$conn -> query($update);
-					$add = "INSERT INTO `edit_logs`
-							(`productname`, `market`, `username`, `oquantity`, `nquantity`, `unit`, `oprice`, `nprice`, `time`)
-							VALUES ('$row[productname]', '$_SESSION[market]', '$_SESSION[usern]', '$row[quantity]', '$newq', '$row[unit]', '$row[price]', '$newp', '$date')";
-					$admin -> query($add);
+				if(isset($_POST["a".$row["productname"]]) && isset($_POST["b".$row["productname"]])){
+					if($_POST["b".$row["productname"]] != $row["price"] || $_POST["a".$row["productname"]] != $row["quantity"]){
+						$cnt++;
+						$newq = $_POST["a".$row["productname"]];
+						$update = "UPDATE `market` 
+									SET `quantity` = '$newq' 
+									WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
+						$conn -> query($update);
+						$newp = $_POST["b".$row["productname"]];
+						$update = "UPDATE `market` 
+									SET `price` = '$newp' 
+									WHERE `market_name` = '$_SESSION[market]' AND `productname` = '$row[productname]'";
+						$conn -> query($update);
+						$add = "INSERT INTO `edit_logs`
+								(`productname`, `market`, `username`, `oquantity`, `nquantity`, `unit`, `oprice`, `nprice`, `time`)
+								VALUES ('$row[productname]', '$_SESSION[market]', '$_SESSION[usern]', '$row[quantity]', '$newq', '$row[unit]', '$row[price]', '$newp', '$date')";
+						$admin -> query($add);
+					}
 				}
 				$i++;
 			}

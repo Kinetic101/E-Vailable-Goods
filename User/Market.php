@@ -213,32 +213,34 @@
 			if($row["quantity"] == 0){
 				continue;
 			}
-			if($_POST[$row["productname"]] > 0){
-				$cnt++;
-				$temp_var = $_POST[$row["productname"]] ;
-				$check = "SELECT COUNT(*) 
-							FROM `cart`
-							WHERE `market` = '$_SESSION[market]' AND `username` = '$_SESSION[usern]' AND `productname` = '$row[productname]'";
+			if(isset($_POST[$row["productname"]])){
+				if($_POST[$row["productname"]] > 0){
+					$cnt++;
+					$temp_var = $_POST[$row["productname"]] ;
+					$check = "SELECT COUNT(*) 
+								FROM `cart`
+								WHERE `market` = '$_SESSION[market]' AND `username` = '$_SESSION[usern]' AND `productname` = '$row[productname]'";
 
-				if(mysqli_fetch_array($conn -> query($check))[0] == 0){
-					$insert = "INSERT INTO `cart` (`username`, `productname`, `order_quantity`, `unit`, `price`, `market`)
-								VALUES ('$_SESSION[usern]', '$row[productname]', '$temp_var', '$row[unit]', '$row[price]', '$_SESSION[market]')";
-					$conn -> query($insert);
-				}
-				else{
-					$new_order_q = 0;
-					$temp_q = "SELECT `order_quantity` 
-								FROM `cart` 
-								WHERE `market` = '$_SESSION[market]' AND `username` = '$_SESSION[usern]' AND `productname` = '$row[productname]'";
-					$res2 = $conn -> query($temp_q);
-					while($row2 = $res2 -> fetch_assoc()){
-						$new_order_q = $row2["order_quantity"];
+					if(mysqli_fetch_array($conn -> query($check))[0] == 0){
+						$insert = "INSERT INTO `cart` (`username`, `productname`, `order_quantity`, `unit`, `price`, `market`)
+									VALUES ('$_SESSION[usern]', '$row[productname]', '$temp_var', '$row[unit]', '$row[price]', '$_SESSION[market]')";
+						$conn -> query($insert);
 					}
-					$new_order_q += $temp_var;
-					$update = "UPDATE `cart` 
-								SET `order_quantity` = '$new_order_q' 
-								WHERE `market` = '$_SESSION[market]' AND `username` = '$_SESSION[usern]' AND `productname` = '$row[productname]'";
-					$conn -> query($update);
+					else{
+						$new_order_q = 0;
+						$temp_q = "SELECT `order_quantity` 
+									FROM `cart` 
+									WHERE `market` = '$_SESSION[market]' AND `username` = '$_SESSION[usern]' AND `productname` = '$row[productname]'";
+						$res2 = $conn -> query($temp_q);
+						while($row2 = $res2 -> fetch_assoc()){
+							$new_order_q = $row2["order_quantity"];
+						}
+						$new_order_q += $temp_var;
+						$update = "UPDATE `cart` 
+									SET `order_quantity` = '$new_order_q' 
+									WHERE `market` = '$_SESSION[market]' AND `username` = '$_SESSION[usern]' AND `productname` = '$row[productname]'";
+						$conn -> query($update);
+					}
 				}
 			}
 			$i++;
