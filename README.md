@@ -4,4 +4,4 @@ This is done for partial completion of requirements for Research 3 during our st
 
 Co-developers: \
 Julius Christian Namata \
-Cian Joseph Catimbang \
+Cian Joseph Catimbang 
